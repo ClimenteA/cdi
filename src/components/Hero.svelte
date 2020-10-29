@@ -1,5 +1,5 @@
 
-<header class="flex flex-col-reverse items-center lg:mt-20 mt-12 mx-auto sm:flex-row w-10/12">
+<header class="flex flex-col-reverse items-center lg:mt-20 mt-16 mx-auto sm:flex-row w-10/12">
 
 	<h1 class="leading-snug lg:text-4xl md:text-2xl mt-6 sm:mt-0 text-xl text-blue-900">
 		
