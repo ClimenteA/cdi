@@ -5,14 +5,15 @@ import Router from 'svelte-spa-router'
 import Navbar from "./components/Navbar.svelte"
 import Footer from "./components/Footer.svelte"
 import Landing from "./pages/Landing.svelte"
-import Cookies from './pages/Cookies.svelte';
-import Gdpr from './pages/Gdpr.svelte';
-import Terms from './pages/Terms.svelte';
-import Contact from './pages/Contact.svelte';
-import AdaugaCamera from './pages/AdaugaCamera.svelte';
-import Cont from './pages/Cont.svelte';
-import NotFound from './pages/NotFound.svelte';
-import Camere from './pages/Camere.svelte';
+import Cookies from './pages/Cookies.svelte'
+import Gdpr from './pages/Gdpr.svelte'
+import Terms from './pages/Terms.svelte'
+import Contact from './pages/Contact.svelte'
+import AdaugaCamera from './pages/AdaugaCamera.svelte'
+import Cont from './pages/Cont.svelte'
+import NotFound from './pages/NotFound.svelte'
+import Camere from './pages/Camere.svelte'
+
 
 const routes = {
 	"/": Landing,

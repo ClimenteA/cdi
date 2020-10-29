@@ -1,3 +1,3 @@
 
 
-<h1>Adauga Camera</h1>
+Adauga o camera

@@ -1,5 +1,8 @@
 <script>
 
+import {link} from 'svelte-spa-router'
+import active from 'svelte-spa-router/active'
+
 let menu = false
 
 function toggleMenu(){
@@ -9,13 +12,14 @@ function toggleMenu(){
 </script>
 
 
+
 <nav class="lg:text-xl lg:mt-6 mt-3 text-sm">
     
     <a href="#/" class="leading-10 px-3 py-4 font-semibold text-blue-900">cameredeinchiriat</a>
 
     <span class="hidden md:inline-block md:float-right text-center">
-        <a href="#/adauga-camera" class="leading-10 px-3 py-4">Adauga camera</a>
-        <a href="#/cont" class="leading-10 px-3 py-4">Intra in cont</a>
+        <a href="/adauga-camera" use:link use:active class="leading-10 px-3 py-4">Adauga camera</a>
+        <a href="/cont" use:link use:active class="leading-10 px-3 py-4">Intra in cont</a>
     </span> 
     
     <span class="md:hidden inline-block float-right h-5 w-5 mt-2">
@@ -46,3 +50,10 @@ function toggleMenu(){
     </span>
     
 </nav>
+
+
+<style>
+:global(a.active) {
+    border-bottom-width: 2px;
+}
+</style>
