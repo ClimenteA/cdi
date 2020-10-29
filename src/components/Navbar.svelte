@@ -11,11 +11,11 @@ function toggleMenu(){
 
 <nav class="lg:text-xl lg:mt-6 mt-3 text-sm">
     
-    <a href="#" class="leading-10 px-3 py-4 font-semibold text-blue-900">cameredeinchiriat</a>
+    <a href="#/" class="leading-10 px-3 py-4 font-semibold text-blue-900">cameredeinchiriat</a>
 
     <span class="hidden md:inline-block md:float-right text-center">
-        <a href="#" class="leading-10 px-3 py-4">Adauga camera</a>
-        <a href="#" class="leading-10 px-3 py-4">Intra in cont</a>
+        <a href="#/adauga-camera" class="leading-10 px-3 py-4">Adauga camera</a>
+        <a href="#/cont" class="leading-10 px-3 py-4">Intra in cont</a>
     </span> 
     
     <span class="md:hidden inline-block float-right h-5 w-5 mt-2">
@@ -28,8 +28,8 @@ function toggleMenu(){
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
                 
-                <a href="#" class="block mt-10 py-1 pr-10">Adauga camera</a>
-                <a href="#" class="block mb-5 py-1 pr-10">Intra in cont</a>
+                <a on:click={toggleMenu} href="#/adauga-camera" class="block mt-10 py-1 pr-10">Adauga camera</a>
+                <a on:click={toggleMenu} href="#/cont" class="block mb-5 py-1 pr-10">Intra in cont</a>
 
             </span> 
 
