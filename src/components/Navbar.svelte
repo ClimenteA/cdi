@@ -55,5 +55,6 @@ function toggleMenu(){
 <style>
 :global(a.active) {
     border-bottom-width: 2px;
+    font-weight: 600;
 }
 </style>
