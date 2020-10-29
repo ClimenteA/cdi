@@ -22,7 +22,7 @@ function toggleMenu(){
 
         {#if menu}
 
-            <span class="absolute bg-blue-200 flex flex-col h-auto mr-2 mt-4 pl-4 right-0 rounded-md top-0 w-1/2 z-10">
+            <span class="absolute bg-blue-100 shadow-md flex flex-col h-auto mr-2 mt-4 pl-4 right-0 rounded-md top-0 w-1/2 z-10">
                 
                 <svg on:click={toggleMenu} class="absolute h-5 mr-2 mt-2 right-0 top-0 w-5" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
