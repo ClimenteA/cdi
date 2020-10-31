@@ -1,15 +1,46 @@
 <script>
 
 import { get } from 'svelte/store'
-import { anunt } from '../stores.js'
+import { model } from '../stores.js'
 import InputBox from "../components/InputBox.svelte"
-import DotariAp from "../components/DotariAp.svelte"
-import FacilitatiAp from "../components/FacilitatiAp.svelte"
-import CerinteAp from "../components/CerinteAp.svelte"
+import DropCheck from "../components/DropCheck.svelte"
+
+let dotari = ["Aragaz", 
+"Frigider", 
+"Masina de spalat", 
+"Mobilat  complet",
+"Centrala termica",
+"Hota aragaz",
+"Masina de spalat vase",
+"Aer conditionat",
+"Wifi, cablu TV/Net"
+]
+
+
+let facilitati = ["Decomandat", 
+"Cu balcon", 
+"Apartament lux", 
+"Etaj 1-4",
+"Lift",
+"Magazin in apropiere",
+"Statie transport in apropiere",
+"Loc de parcare"
+]
+
+
+let cerinte = ["Fara studenti", 
+"Nu se fumeaza in camera",
+"Doar fete", 
+"Doar baieti", 
+"Doar o persoana in camera",
+"Fara animale de companie",
+"Se accepta doar caini",
+"Se accepta doar pisici"
+]
 
 
 function saveRoom(event){
-    let anunt_checklist = get(anunt)
+    let anunt_checklist = get(model)
     console.log(anunt_checklist)
     
     let form_data = new FormData(event.target)
@@ -26,7 +57,7 @@ function saveRoom(event){
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">Adauga o camera</h1>
 
-    <form on:submit|preventDefault={saveRoom}>
+    <form on:submit|preventDefault={saveRoom} class="flex flex-col gap-2">
 
         <InputBox name="oras-zona" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -55,12 +86,11 @@ function saveRoom(event){
         </InputBox>
 
         <div class="">
-            <DotariAp/>
-            <DotariAp/>
-            <DotariAp/>
 
-            <!-- <FacilitatiAp/> -->
-            <!-- <CerinteAp/> -->
+            <DropCheck name="Dotari apartament" options={dotari} field="dotari"/>
+            <DropCheck name="Facilitati apartament" options={facilitati} field="facilitati"/>
+            <DropCheck name="Cerinte chiriasi" options={cerinte} field="cerinte"/>
+
         </div>
 
         <button type="submit" class="table px-4 py-2 focus:outline-none outline-none text-xs lg:text-base rounded-md bg-blue-500 text-white">

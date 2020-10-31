@@ -1,22 +1,17 @@
 <script>
 
-import { anunt } from "../stores.js"
+import { model } from "../stores.js"
 
-let dotari = ["Aragaz", 
-"Frigider", 
-"Masina de spalat", 
-"Mobilat  complet",
-"Centrala termica",
-"Hota aragaz",
-"Masina de spalat vase",
-"Aer conditionat",
-"Wifi, cablu TV/Net"
-]
+export let name
+export let options
+export let field
+
 
 let show = false
 function toggle() {
     show = !show
 }
+
 
 </script>
 
@@ -25,7 +20,7 @@ function toggle() {
     
     <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs">
         
-        Dotari apartament
+        {name}
         
         {#if !show}
 
@@ -45,10 +40,10 @@ function toggle() {
 
     {#if show}
         
-        {#each dotari as item, ix}
-            <li class:mt-2={ix === 0} class:mb-4={ix === dotari.length-1}>
+        {#each options as item, ix}
+            <li class:mt-2={ix === 0} class:mb-4={ix === options.length-1}>
                 <label for="{item}" class="py-1">
-                    <input type="checkbox" bind:group={$anunt.dotari} value={item} id={item}>
+                    <input type="checkbox" bind:group={$model[field]} value={item} id={item}> 
                     <span>
                         <span class="text-gray-700 text-xs">{item}</span>           
                         <slot></slot>
