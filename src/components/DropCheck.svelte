@@ -8,6 +8,7 @@ export let field
 
 
 let show = false
+
 function toggle() {
     show = !show
 }
@@ -20,7 +21,7 @@ function toggle() {
     
     <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs">
         
-        {name}
+        {name} <sup>({$model[field].length})</sup>
         
         {#if !show}
 
