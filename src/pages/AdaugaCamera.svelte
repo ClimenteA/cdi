@@ -1,42 +1,9 @@
 <script>
 
 import { get } from 'svelte/store'
-import { model } from '../stores.js'
+import { model, criterii_camera } from '../stores.js'
 import InputBox from "../components/InputBox.svelte"
 import DropCheck from "../components/DropCheck.svelte"
-
-let dotari = ["Aragaz", 
-"Frigider", 
-"Masina de spalat", 
-"Mobilat  complet",
-"Centrala termica",
-"Hota aragaz",
-"Masina de spalat vase",
-"Aer conditionat",
-"Wifi, cablu TV/Net"
-]
-
-
-let facilitati = ["Decomandat", 
-"Cu balcon", 
-"Apartament lux", 
-"Etaj 1-4",
-"Lift",
-"Magazin in apropiere",
-"Statie transport in apropiere",
-"Loc de parcare"
-]
-
-
-let cerinte = ["Fara studenti", 
-"Nu se fumeaza in camera",
-"Doar fete", 
-"Doar baieti", 
-"Doar o persoana in camera",
-"Fara animale de companie",
-"Se accepta doar caini",
-"Se accepta doar pisici"
-]
 
 
 function saveRoom(event){
@@ -86,18 +53,14 @@ function saveRoom(event){
         </InputBox>
 
         <div>
-            <DropCheck name="Dotari apartament" options={dotari} field="dotari"/>
-            <DropCheck name="Facilitati apartament" options={facilitati} field="facilitati"/>
-            <DropCheck name="Cerinte chiriasi" options={cerinte} field="cerinte"/>
+            <DropCheck name="Dotari apartament" options={criterii_camera.dotari} field="dotari"/>
+            <DropCheck name="Facilitati apartament" options={criterii_camera.facilitati} field="facilitati"/>
+            <DropCheck name="Cerinte chiriasi" options={criterii_camera.cerinte} field="cerinte"/>
         </div>
 
         <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">
             ADAUGA CAMERA
         </button>
-
-        <p>
-            
-        </p>
 
     </form>
 

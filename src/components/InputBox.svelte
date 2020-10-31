@@ -30,7 +30,7 @@ if (type === "date") {
     </span>
 
     {#if type === "textarea"}
-        <textarea value="{value}" placeholder="{placeholder}" type="{type}" name="{name}" id="{id}" spellcheck="false" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="h-16 py-2 mt-1 px-3 rounded-md bg-white text-blue-900 text-sm w-full outline-none"></textarea>
+        <textarea value="{value}" placeholder="{placeholder}" type="{type}" name="{name}" id="{id}" required spellcheck="false" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="h-16 py-2 mt-1 px-3 rounded-md bg-white text-blue-900 text-sm w-full outline-none"></textarea>
     {:else}
         <input value="{value}" placeholder="{placeholder}" type="{type}" name="{name}" id="{id}" required spellcheck="false" class="h-8 mt-1 px-3 rounded-md bg-white text-blue-900 text-sm w-full outline-none">
     {/if}

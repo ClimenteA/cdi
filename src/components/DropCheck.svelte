@@ -6,16 +6,18 @@ export let name
 export let options
 export let field
 
+let size_of_selected
+$: size_of_selected = $model[field].length
 
 let show = false
-
 function toggle() {
     show = !show
 }
 
-
-let size_of_selected
-$: size_of_selected = $model[field].length
+function clearSelected(){
+    $model[field] = []
+    toggle()
+}
 
 
 </script>
@@ -38,9 +40,13 @@ $: size_of_selected = $model[field].length
             </svg>
 
         {:else}
-
+        
             <svg class="float-right ml-2 stroke-2 h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+            </svg>
+
+            <svg on:click={clearSelected} class="float-right ml-2 stroke-2 h-4 inline mb-1 text-green-500" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
             
         {/if}
