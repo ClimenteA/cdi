@@ -25,7 +25,7 @@ if (type === "date") {
 
 <label for="{id}" class="mt-2">
     <span>
-        <span class="text-gray-700 text-xs">{label}</span>           
+        <span class="text-gray-700 text-xs md:text-sm">{label}</span>           
         <slot></slot>
     </span>
 

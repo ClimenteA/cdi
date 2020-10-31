@@ -85,15 +85,13 @@ function saveRoom(event){
             </svg>
         </InputBox>
 
-        <div class="">
-
+        <div>
             <DropCheck name="Dotari apartament" options={dotari} field="dotari"/>
             <DropCheck name="Facilitati apartament" options={facilitati} field="facilitati"/>
             <DropCheck name="Cerinte chiriasi" options={cerinte} field="cerinte"/>
-
         </div>
 
-        <button type="submit" class="table mt-10 px-4 py-2 focus:outline-none outline-none text-xs lg:text-base rounded-md bg-blue-500 text-white">
+        <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">
             Adauga camera
         </button>
 

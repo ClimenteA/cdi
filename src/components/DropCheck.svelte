@@ -14,14 +14,22 @@ function toggle() {
 }
 
 
+let size_of_selected
+$: size_of_selected = $model[field].length
+
+
 </script>
 
 
 <ul class="bg-white flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
     
-    <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs">
+    <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs md:text-sm">
         
-        {name} <sup>({$model[field].length})</sup>
+        {name} 
+
+        <sup class:text-green-500={size_of_selected > 0}>
+            ({size_of_selected})
+        </sup>
         
         {#if !show}
 
@@ -46,7 +54,7 @@ function toggle() {
                 <label for="{item}" class="py-1">
                     <input type="checkbox" bind:group={$model[field]} value={item} id={item}> 
                     <span>
-                        <span class="text-gray-700 text-xs">{item}</span>           
+                        <span class="text-gray-700 text-xs md:text-sm">{item}</span>           
                         <slot></slot>
                     </span>
                 </label>
