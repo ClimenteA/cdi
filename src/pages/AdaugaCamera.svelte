@@ -91,6 +91,7 @@ function saveRoom(event){
             <DropCheck name="Facilitati apartament" options={facilitati} field="facilitati"/>
             <DropCheck name="Cerinte chiriasi" options={cerinte} field="cerinte"/>
 
+
         </div>
 
         <button type="submit" class="table px-4 py-2 focus:outline-none outline-none text-xs lg:text-base rounded-md bg-blue-500 text-white">
