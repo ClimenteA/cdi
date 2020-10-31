@@ -41,16 +41,16 @@ let cerinte = ["Fara studenti",
 
 function saveRoom(event){
     let anunt_checklist = get(model)
-    console.log(anunt_checklist)
-    
     let form_data = new FormData(event.target)
-    form_data = Object.fromEntries(form_data)
+    form_data = {...anunt_checklist, ...Object.fromEntries(form_data)}
+
+    form_data.buget = Number(form_data.buget)
+
     console.log(form_data)
 }
 
 
 </script>
-
 
 
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
@@ -92,8 +92,12 @@ function saveRoom(event){
         </div>
 
         <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">
-            Adauga camera
+            ADAUGA CAMERA
         </button>
+
+        <p>
+            
+        </p>
 
     </form>
 

@@ -21,7 +21,7 @@ $: size_of_selected = $model[field].length
 </script>
 
 
-<ul class="bg-white flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
+<ul class="bg-white lg:cursor-pointer flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
     
     <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs md:text-sm">
         
@@ -51,7 +51,7 @@ $: size_of_selected = $model[field].length
         
         {#each options as item, ix}
             <li class:mt-2={ix === 0} class:mb-4={ix === options.length-1}>
-                <label for="{item}" class="py-1">
+                <label for="{item}" class="py-1 lg:cursor-pointer">
                     <input type="checkbox" bind:group={$model[field]} value={item} id={item}> 
                     <span>
                         <span class="text-gray-700 text-xs md:text-sm">{item}</span>           
