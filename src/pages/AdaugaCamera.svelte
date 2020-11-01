@@ -9,9 +9,13 @@ import DropCheck from "../components/DropCheck.svelte"
 function saveRoom(event){
     let anunt_checklist = get(model)
     let form_data = new FormData(event.target)
-    form_data = {...anunt_checklist, ...Object.fromEntries(form_data)}
-
+    form_data = Object.fromEntries(form_data)
     form_data.buget = Number(form_data.buget)
+
+    // TODO link user and add data postarii
+    let owner = {proprietar: "Alin Climente", data:"2020-10-31"}
+
+    form_data = {...anunt_checklist, ...form_data, ...owner}
 
     console.log(form_data)
 }
@@ -26,7 +30,7 @@ function saveRoom(event){
 
     <form on:submit|preventDefault={saveRoom} class="flex flex-col gap-2">
 
-        <InputBox name="oras-zona" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
+        <InputBox name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>    
             </svg>    
@@ -38,7 +42,7 @@ function saveRoom(event){
                 <span class="font-semibold text-green-500">&euro;</span>
             </InputBox>
     
-            <InputBox name="data-liber" label="Liber de la" type="date">
+            <InputBox name="liber" label="Liber de la" type="date">
                 <svg class="stroke-2 h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>    
@@ -46,7 +50,7 @@ function saveRoom(event){
     
         </div>
     
-        <InputBox name="detalii" label="Alte detalii anunt" type="textarea" placeholder="ex: Cautam o persoana linistita si curata.">
+        <InputBox name="descriere" label="Descriere anunt" type="textarea" placeholder="ex: Cautam o persoana linistita si curata.">
             <svg class="stroke-2 h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
             </svg>

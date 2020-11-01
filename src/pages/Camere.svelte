@@ -4,6 +4,7 @@ import { get } from 'svelte/store'
 import { model, criterii_camera } from '../stores.js'
 import InputBox from "../components/InputBox.svelte"
 import DropCheck from "../components/DropCheck.svelte"
+import Anunt from "../components/Anunt.svelte"
 
 
 function searchRooms(event){
@@ -60,5 +61,12 @@ function searchRooms(event){
         </button>
 
     </form>
+
+</section>
+
+
+<section class="mt-16 border-t-2">
+
+    <Anunt/>
 
 </section>
