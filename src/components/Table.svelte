@@ -1,6 +1,17 @@
 <script>
 
-export let data
+// export let data
+
+let data = {
+    ignore1: 85,
+    ignore2: "2020-10-31",
+    ignore3: "some data",
+    ignore4: "another data",
+    ignore5: "../../assets/img/avatar.jpg",
+    col1: ["cell1", "cell1", "cell1", "cell1"],
+    col2: ["cell2", "cell2", "cell2", "cell2", "cell2", "cell2"],
+    col3: ["cell3", "cell3", "cell3"]
+}
 
 
 let columns = []
@@ -28,13 +39,11 @@ let rows = values.map(li => {
     return li
 })
 
-
 console.log(rows)
 
+let rows_range = Array.from({length: rows_len}).map(el => "")
 
 </script>
-
-
 
 
 <table class="w-full">
@@ -49,12 +58,8 @@ console.log(rows)
 
     <tbody>
 
-        {#each rows as row, i}
-            <tr id={i}>
-                {#each row as cell}
-                    <td>{cell}</td>
-                {/each}
-            </tr>
+        {#each rows[0] as row, i}
+            <td>{row}</td>
         {/each}
 
     </tbody>
