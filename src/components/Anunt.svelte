@@ -1,18 +1,8 @@
 <script>
 import Table from "./Table.svelte"
-// export let data
-let anunt = {
-    buget: 85,
-    cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
-    data: "23 Oct, 20:15",
-    descriere: "Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. ",
-    dotari: ["Aragaz", "Frigider", "Masina de spalat", "Mobilat  complet", "Centrala termica", "Wifi, cablu TV/Net"],
-    facilitati: ["Decomandat", "Cu balcon", "Etaj 1-4", "Magazin in apropiere", "Statie transport in apropiere"],
-    liber: "2020-10-31",
-    locatie: "Iasi, Nicolina",
-    proprietar: "Alin Climente",
-    foto: "../../assets/img/avatar.jpg"
-}
+
+export let anunt
+
 </script>
 
 
@@ -26,7 +16,7 @@ let anunt = {
             <span class="text-sm md:text-lg font-normal ml-2">{anunt.locatie}</span>
         </div>
     
-        <div class="border-b-2 md:border-b-0 cursor-pointer flex flex-col-reverse gap-2 items-center m-4 md:m-0 md:flex-row md:gap-4 pb-2 md:pb-0">
+        <div class="border-b-2 cursor-pointer flex flex-row-reverse gap-2 items-center m-4 md:border-b-0 md:flex-row md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
             <div class="flex flex-col flex-wrap">
                 <span class="font-semibold">{anunt.proprietar}</span>
                 <span class="md:text-right text-center text-xs text-gray-700">{anunt.data}</span>
