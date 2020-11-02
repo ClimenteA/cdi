@@ -1,9 +1,6 @@
 <script>
-
 import Table from "./Table.svelte"
-
 // export let data
-
 let anunt = {
     buget: 85,
     cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
@@ -16,8 +13,6 @@ let anunt = {
     proprietar: "Alin Climente",
     foto: "../../assets/img/avatar.jpg"
 }
-
-
 </script>
 
 
