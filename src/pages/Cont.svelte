@@ -1,16 +1,93 @@
+<script>
+
+import { account } from "../stores.js"
+import InputBox from "../components/InputBox.svelte"
+
+
+function toggle() {
+    account.logged = !account.logged 
+}
+
+let editable = false
+function toggleEdit() {
+    editable = !editable
+}
+
+
+let anunt = {
+    utilizator: "Alin Climente",
+    foto: "../../assets/img/avatar.jpg",
+    despre: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
+    email: "climente.alin@gmail.com"
+}
+
+</script>
+
 
 
 <section class="flex flex-col justify-center mt-10">
 
-    <h1 class="border-b-2 py-2 self-center text-sm md:text-base">Intra in cont</h1>
+    {#if !account.logged}
 
-    <button class="bg-blue-500 lg:text-base md:text-sm mt-6 px-4 py-2 rounded-md self-center table text-white text-xs">
-        LOGIN CU FACEBOOK
-    </button>
+        <h1 class="border-b-2 py-2 self-center text-sm md:text-base">Intra in cont</h1>
 
-    <p class="max-w-xs md:text-sm mt-2 self-center text-center text-gray-600 text-xs">
-        Click pe ‘LOGIN CU FACEBOOK’ pentru a te loga/crea un cont.
-    </p>
+        <button on:click={toggle} class="bg-blue-500 lg:text-base md:text-sm mt-6 px-4 py-2 rounded-md self-center table text-white text-xs">
+            LOGIN CU FACEBOOK
+        </button>
+
+        <p class="max-w-xs md:text-sm mt-2 self-center text-center text-gray-600 text-xs">
+            Click pe ‘LOGIN CU FACEBOOK’ pentru a te loga/crea un cont.
+        </p>
+
+    {:else}
+
+
+        <div class="border-b-2 flex flex-col gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
+
+            <figure>
+                <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" src="{anunt.foto}" alt="">
+            </figure>
+
+            <div class="flex flex-col flex-wrap">
+                <span class="font-semibold text-center">{anunt.utilizator}</span>
+                <span class="text-xs text-gray-700">
+                    {anunt.email}
+                </span>
+            </div>
+
+            <div class="bg-white md:p-8 p-4 mt-4 mb-6 md:text-sm relative max-w-md text-xs shadow-md rounded-md text-gray-800">
+
+                <h4 class="mt-2 font-semibold">Despre mine</h4>
+
+                {#if editable}
+
+                    <svg on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+                    </svg>
+
+                    <InputBox name="despre" type="textarea" placeholder=""/>
+                
+                {:else}
+
+                    <svg on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.207 2.207L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                    </svg>
+
+                    <p class="mt-2">
+                        {anunt.despre}
+                    </p>
+
+                {/if}
+
+            </div>
+           
+        </div>
+
+    {/if}
 
 
 </section>
+
+<style>
+
+</style>

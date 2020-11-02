@@ -17,7 +17,7 @@ function  toogleInteresat() {
 </script>
 
 
-<article class:bg-gray-100={interesat} class:bg-white={!interesat}  class="max-w-2xl md:p-4 mt-3 md:mt-6 mx-auto p-2 rounded-md shadow-md">
+<article class:bg-gray-100={interesat} class:bg-white={!interesat}  class="max-w-2xl md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md shadow-md">
 
     <div class:md:flex-col={show_user} class="flex md:flex-row flex-col justify-between">
 
@@ -30,7 +30,9 @@ function  toogleInteresat() {
         <div on:click={toggle} class:flex-col-reverse={show_user} class="border-b-2 cursor-pointer flex flex-row gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
             <div class="flex flex-col flex-wrap">
                 <span class="font-semibold">{anunt.proprietar}</span>
-                <span class:text-center={show_user} class:text-right={!show_user} class="text-xs text-gray-700">{anunt.data}</span>
+                <span class:text-center={show_user} class:text-right={!show_user} class="text-xs text-gray-700">
+                    {anunt.data}
+                </span>
             </div>
 
             <figure>
@@ -61,7 +63,7 @@ function  toogleInteresat() {
             
             <p class="mt-2 text-gray-800 text-xs md:text-sm">
                 {anunt.descriere}
-                <span class="text-green-500 font-semibold cursor-pointer py-2">mai mult</span>
+                <!-- <span class="text-green-500 font-semibold cursor-pointer py-2">mai mult</span> -->
             </p>
         
             <Table data={anunt}/>

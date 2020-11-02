@@ -82,7 +82,14 @@ let anunt = {
 </section>
 
 
-<section class="md:mt-16 mt-12 border-t-2">
+<section class="md:mt-12 mt-10 border-t-2">
+
+    <p class="max-w-xl mt-6 mx-auto text-gray-600 md:text-sm text-xs">
+        Click pe butonul "SUNT INTERESAT(A)" la anunturile de care esti interesat.
+        Completeaza sectiunea "Despre mine" din contul tau, 
+        pentru a creste sansele de a fi contactat. 
+        Atunci cand imparti locuinta cu altcineva e bine sa fiti pe aceeasi lungime de unda. 
+    </p>
 
     <Anunt {anunt}/>
 

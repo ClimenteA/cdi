@@ -1,12 +1,16 @@
 import { writable } from 'svelte/store'
 
 
+export const account = {
+    logged: true
+}
+
+
 export const model = writable({
     dotari: [],
     facilitati: [],
     cerinte: []
 })
-
 
 
 export const criterii_camera = {
