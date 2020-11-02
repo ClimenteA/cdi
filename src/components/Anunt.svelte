@@ -8,6 +8,12 @@ function toggle() {
     show_user = !show_user
 }
 
+let interesat = false
+function  toogleInteresat() {
+    interesat = !interesat
+}
+
+
 </script>
 
 
@@ -80,8 +86,12 @@ function toggle() {
         {:else}
 
             <span class="flex flex-col-reverse md:flex-row mt-2 text-right">
-                <button class="bg-blue-500 focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
-                    SUNT INTERESAT(A) ✋
+                <button on:click={toogleInteresat} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+                    {#if interesat}
+                        ESTI INTERESAT(A)👍
+                    {:else}
+                        SUNT INTERESAT(A) ✋
+                    {/if}
                 </button>
                 <sup class="mt-4 text-gray-700">(0 interesati)</sup>
             </span>
