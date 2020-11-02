@@ -30,7 +30,8 @@ let anunt = {
     liber: "2020-10-31",
     locatie: "Iasi, Nicolina",
     proprietar: "Alin Climente",
-    foto: "../../assets/img/avatar.jpg"
+    foto: "../../assets/img/avatar.jpg",
+    despre: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie."
 }
 
 
