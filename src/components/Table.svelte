@@ -1,17 +1,6 @@
 <script>
 
-// export let data
-
-let data = {
-    ignore1: 85,
-    ignore2: "2020-10-31",
-    ignore3: "some data",
-    ignore4: "another data",
-    ignore5: "../../assets/img/avatar.jpg",
-    col1: ["cell1", "cell1", "cell1", "cell1"],
-    col2: ["cell2", "cell2", "cell2", "cell2", "cell2", "cell2"],
-    col3: ["cell3", "cell3", "cell3"]
-}
+export let data
 
 
 let columns = []
@@ -23,8 +12,8 @@ for (const [col, val] of Object.entries(data)) {
   }
 }
 
-console.log(columns)
-console.log(values)
+// console.log(columns)
+// console.log(values)
 
 
 // From the list of values get the max len of a list 
@@ -39,9 +28,31 @@ let rows = values.map(li => {
     return li
 })
 
-console.log(rows)
 
+// console.log(rows)
+
+
+// Make 2 dummy lists with the length of cols and rows
+let cols_range = Array.from({length: columns.length}).map(el => "")
 let rows_range = Array.from({length: rows_len}).map(el => "")
+
+
+// console.log(`${rows_range.length}rows, ${cols_range.length}cols`)
+
+
+let html_rows = []
+for (let ir = 0; ir < rows_range.length; ir++) {
+
+    let html_row = []
+    for (let ic = 0; ic < cols_range.length; ic++) {
+        // console.log(ic, ir, rows[ic][ir])
+        html_row.push(rows[ic][ir])
+    }
+
+    html_rows.push(html_row)
+}
+
+// console.log(html_rows)
 
 </script>
 
@@ -57,11 +68,13 @@ let rows_range = Array.from({length: rows_len}).map(el => "")
     </thead>
 
     <tbody>
-
-        {#each rows[0] as row, i}
-            <td>{row}</td>
+        {#each html_rows as row}
+          <tr>
+            {#each row as cell}
+              <td>{cell}</td>
+            {/each}
+          </tr>
         {/each}
-
     </tbody>
 
 </table>

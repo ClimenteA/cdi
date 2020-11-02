@@ -54,7 +54,7 @@ let anunt = {
 
     <h1 class="text-lg">Tabel</h1>
 
-    <Table/>
+    <Table data={anunt}/>
 
 
 
