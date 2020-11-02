@@ -17,11 +17,11 @@ function  toogleInteresat() {
 </script>
 
 
-<article class="bg-white max-w-2xl md:p-4 mt-4 mx-auto p-2 rounded-md shadow-md">
+<article class:bg-gray-100={interesat} class:bg-white={!interesat}  class="max-w-2xl md:p-4 mt-3 md:mt-6 mx-auto p-2 rounded-md shadow-md">
 
     <div class:md:flex-col={show_user} class="flex md:flex-row flex-col justify-between">
 
-        <div on:click={toggle} class="font-semibold">
+        <div on:click={toggle} class="font-semibold cursor-pointer">
             <span class="text-xl md:text-2xl text-green-500">&euro;</span>
             <span class="text-xl md:text-2xl">{anunt.buget}</span>
             <span class="text-sm md:text-lg font-normal ml-2">{anunt.locatie}</span>
@@ -75,7 +75,7 @@ function  toogleInteresat() {
         {#if show_user}
         
             <span class="flex flex-col-reverse md:flex-row mt-2 text-right">
-                <button on:click={toggle} class="bg-blue-500 focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+                <button on:click={toggle} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
                     <svg class="inline mr-2 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>

@@ -82,7 +82,17 @@ let anunt = {
 </section>
 
 
-<section class="mt-16 border-t-2">
+<section class="md:mt-16 mt-12 border-t-2">
+
+    <Anunt {anunt}/>
+
+    <Anunt {anunt}/>
+
+    <Anunt {anunt}/>
+
+    <Anunt {anunt}/>
+
+    <Anunt {anunt}/>
 
     <Anunt {anunt}/>
 
