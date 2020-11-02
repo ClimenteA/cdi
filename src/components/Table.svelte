@@ -56,10 +56,10 @@ for (let ir = 0; ir < rows_range.length; ir++) {
 
 </script>
 
+<div class="overflow-x-auto p-2 text-xs md:text-sm">
 
-<table class="w-full">
-    
-    <thead class="capitalize border-b-2">
+<table class="w-full mt-4">
+    <thead class="capitalize border-b-2 font-semibold">
         <tr>
             {#each columns as col}
                 <td>{col}</td>
@@ -67,7 +67,7 @@ for (let ir = 0; ir < rows_range.length; ir++) {
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="text-gray-800">
         {#each html_rows as row}
           <tr>
             {#each row as cell}
@@ -76,5 +76,15 @@ for (let ir = 0; ir < rows_range.length; ir++) {
           </tr>
         {/each}
     </tbody>
-
 </table>
+
+</div>
+
+
+
+<style>
+    table {
+        min-width: 470px;
+    }
+
+</style>
