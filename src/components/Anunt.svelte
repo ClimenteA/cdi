@@ -13,6 +13,12 @@ function  toogleInteresat() {
     interesat = !interesat
 }
 
+// Connect firebase
+let sterge = false
+function stergeAnuntul(){
+    sterge = !sterge
+}
+
 
 </script>
 
@@ -100,7 +106,17 @@ function  toogleInteresat() {
 
         {/if}
 
-        <span class="md:text-sm mt-4 text-center text-gray-700 text-xs">Liber de la 23 Oct.</span>
+        <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
+            
+            {#if sterge}
+                <button class="self-center focus:outline-none lg:text-base md:text-sm outline-none px-2 py-1 rounded-md table text-white text-xs bg-red-500">
+                    STERGE
+                </button>
+            {/if}
+
+            <span>Liber de la 23 Oct.</span>
+
+        </div>
 
     </div>
 

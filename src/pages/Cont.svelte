@@ -2,6 +2,7 @@
 
 import { account } from "../stores.js"
 import InputBox from "../components/InputBox.svelte"
+import Anunt from "../components/Anunt.svelte"
 
 
 function toggle() {
@@ -19,12 +20,23 @@ function toggleTab(){
     tab_interested = !tab_interested
 }
 
+
 let anunt = {
+    buget: 85,
+    cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
+    data: "23 Oct, 20:15",
+    descriere: "Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. ",
+    dotari: ["Aragaz", "Frigider", "Masina de spalat", "Mobilat  complet", "Centrala termica", "Wifi, cablu TV/Net"],
+    facilitati: ["Decomandat", "Cu balcon", "Etaj 1-4", "Magazin in apropiere", "Statie transport in apropiere"],
+    liber: "2020-10-31",
+    locatie: "Iasi, Nicolina",
+    proprietar: "Alin Climente",
     utilizator: "Alin Climente",
+    email: "climente.alin@gmail.com",
     foto: "../../assets/img/avatar.jpg",
-    despre: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
-    email: "climente.alin@gmail.com"
+    despre: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie."
 }
+
 
 </script>
 
@@ -65,18 +77,21 @@ let anunt = {
 
                 {#if editable}
 
-                    <button on:click={toggleEdit}>
-                        <svg class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <button on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
                         </svg>    
                     </button>
                     
-                    <InputBox name="despre" type="textarea" placeholder=""/>
+                    <InputBox 
+                    name="despre" 
+                    type="textarea" 
+                    placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"/>
                 
                 {:else}
 
-                    <button on:click={toggleEdit} >
-                        <svg class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <button on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.207 2.207L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
                         </svg>
                     </button>
@@ -84,13 +99,11 @@ let anunt = {
                     <p>
                         {anunt.despre}
                     </p>
-
-                    
                     
                     {/if}
-                    
+
                 </div>
-                
+            
             <span class="text-gray-600 text-xs lg:text-sm text-center">Stabileste o intalnire video inainte de a te muta.</span>
         
         </div>
@@ -103,7 +116,7 @@ let anunt = {
 <section class="mt-6">
 
 
-    <button on:click={toggleTab} class="bg-gray-300 text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
+    <button on:click={toggleTab} class="bg-gray-300 shadow-md text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
         
         {#if tab_interested}
             Anunturi de care esti interesant(a)
@@ -122,20 +135,26 @@ let anunt = {
 
         {#if tab_interested}
 
-            <div id="interesat">
-                Anunturi de care esti interesant(a)
-            </div>
+            <section>
+                <Anunt {anunt}/>
+            </section>
             
         {:else}
 
-            <div id="postate">
-                Anunturile postate
-            </div>
-
+            <section>
+                <Anunt {anunt}/>
+            </section>
+            
         {/if}
         
     </div>
 
-            
-
 </section>
+
+
+
+
+
+<button class="bg-red-500 focus:outline-none mt-12 mx-auto outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+    STERGE CONTUL
+</button>
