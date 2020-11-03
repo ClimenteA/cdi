@@ -17,11 +17,11 @@ function  toogleInteresat() {
 </script>
 
 
-<article class:bg-gray-100={interesat} class:bg-white={!interesat}  class="max-w-2xl md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md shadow-md">
+<article class:bg-gray-100={interesat} class:bg-white={!interesat} class:shadow-md={!interesat} class="max-w-2xl md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md">
 
     <div class:md:flex-col={show_user} class="flex md:flex-row flex-col justify-between">
 
-        <div on:click={toggle} class="font-semibold cursor-pointer">
+        <div class="font-semibold cursor-pointer">
             <span class="text-xl md:text-2xl text-green-500">&euro;</span>
             <span class="text-xl md:text-2xl">{anunt.buget}</span>
             <span class="text-sm md:text-lg font-normal ml-2">{anunt.locatie}</span>

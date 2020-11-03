@@ -14,6 +14,11 @@ function toggleEdit() {
 }
 
 
+let tab_interested = true
+function toggleTab(){
+    tab_interested = !tab_interested
+}
+
 let anunt = {
     utilizator: "Alin Climente",
     foto: "../../assets/img/avatar.jpg",
@@ -41,7 +46,6 @@ let anunt = {
 
     {:else}
 
-
         <div class="border-b-2 flex flex-col gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
 
             <figure>
@@ -55,39 +59,83 @@ let anunt = {
                 </span>
             </div>
 
-            <div class="bg-white md:p-8 p-4 mt-4 mb-6 md:text-sm relative max-w-md text-xs shadow-md rounded-md text-gray-800">
+            <div class:shadow-md={editable} class="bg-white md:p-8 p-4 mt-4 mb-6 md:text-sm relative max-w-md text-xs rounded-md text-gray-800">
 
                 <h4 class="mt-2 font-semibold">Despre mine</h4>
 
                 {#if editable}
 
-                    <svg on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
-                    </svg>
-
+                    <button on:click={toggleEdit}>
+                        <svg class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+                        </svg>    
+                    </button>
+                    
                     <InputBox name="despre" type="textarea" placeholder=""/>
                 
                 {:else}
 
-                    <svg on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.207 2.207L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
-                    </svg>
+                    <button on:click={toggleEdit} >
+                        <svg class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zm-2.207 2.207L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                        </svg>
+                    </button>
 
-                    <p class="mt-2">
+                    <p>
                         {anunt.despre}
                     </p>
 
-                {/if}
-
-            </div>
-           
+                    
+                    
+                    {/if}
+                    
+                </div>
+                
+            <span class="text-gray-600 text-xs lg:text-sm text-center">Stabileste o intalnire video inainte de a te muta.</span>
+        
         </div>
 
     {/if}
 
-
 </section>
 
-<style>
 
-</style>
+<section class="mt-6">
+
+
+    <button on:click={toggleTab} class="bg-gray-300 text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
+        
+        {#if tab_interested}
+            Anunturi de care esti interesant(a)
+        {:else}
+            Anunturile postate de tine 
+        {/if}
+
+        <svg class="inline ml-2 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+        </svg>
+
+    </button>
+
+
+    <div class="mt-4">
+
+        {#if tab_interested}
+
+            <div id="interesat">
+                Anunturi de care esti interesant(a)
+            </div>
+            
+        {:else}
+
+            <div id="postate">
+                Anunturile postate
+            </div>
+
+        {/if}
+        
+    </div>
+
+            
+
+</section>
