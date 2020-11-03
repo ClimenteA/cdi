@@ -152,9 +152,6 @@ let anunt = {
 </section>
 
 
-
-
-
 <button class="bg-red-500 focus:outline-none mt-12 mx-auto outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
     STERGE CONTUL
 </button>

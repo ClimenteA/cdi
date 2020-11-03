@@ -65,9 +65,9 @@ let anunt = {
         </div>
     
         <div>
-            <DropCheck name="Dotari apartament" options={criterii_camera.dotari} field="dotari"/>
-            <DropCheck name="Facilitati apartament" options={criterii_camera.facilitati} field="facilitati"/>
-            <DropCheck name="Cerinte chiriasi" options={criterii_camera.cerinte} field="cerinte"/>
+            <DropCheck name="Dotari apartament" options={criterii_camera.dotari} field="filtre_dotari"/>
+            <DropCheck name="Facilitati apartament" options={criterii_camera.facilitati} field="filtre_facilitati"/>
+            <DropCheck name="Cerinte chiriasi" options={criterii_camera.cerinte} field="filtre_cerinte"/>
         </div>
 
         <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">

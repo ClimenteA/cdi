@@ -9,7 +9,10 @@ export const account = {
 export const model = writable({
     dotari: [],
     facilitati: [],
-    cerinte: []
+    cerinte: [],
+    filtre_dotari: [],
+    filtre_facilitati: [],
+    filtre_cerinte: []
 })
 
 
