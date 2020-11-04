@@ -1,4 +1,6 @@
 <script>
+import StergeAnunt from "./StergeAnunt.svelte";
+
 import Table from "./Table.svelte"
 
 export let anunt
@@ -11,12 +13,6 @@ function toggle() {
 let interesat = false
 function  toogleInteresat() {
     interesat = !interesat
-}
-
-// Connect firebase
-let sterge = false
-function stergeAnuntul(){
-    sterge = !sterge
 }
 
 
@@ -106,17 +102,8 @@ function stergeAnuntul(){
 
         {/if}
 
-        <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
-            
-            {#if sterge}
-                <button class="self-center focus:outline-none lg:text-base md:text-sm outline-none px-2 py-1 rounded-md table text-white text-xs bg-red-500">
-                    STERGE
-                </button>
-            {/if}
 
-            <span>Liber de la 23 Oct.</span>
-
-        </div>
+        <StergeAnunt/>
 
     </div>
 
