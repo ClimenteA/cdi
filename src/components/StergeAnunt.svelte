@@ -13,8 +13,6 @@ function stergeAnuntul(){
 
 
 
-
-
 <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
     
     {#if account.logged}

@@ -21,13 +21,13 @@ function searchRooms(event){
 
 // Model anunt postat
 let anunt = {
-    postat_de: "Utilizator",
+    postat_de: "Alin Climente",
     foto_utilizator: "../../assets/img/avatar.jpg",
     despre_utilizator: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
     data_postarii: "23 Oct, 20:15",
     locatie: "Iasi, Nicolina",
-    buget_lunar: 85,
-    cerinte_locatari: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
+    buget: 85,
+    cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
     descriere: "Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. ",
     dotari: ["Aragaz", "Frigider", "Masina de spalat", "Mobilat  complet", "Centrala termica", "Wifi, cablu TV/Net"],
     facilitati: ["Decomandat", "Cu balcon", "Etaj 1-4", "Magazin in apropiere", "Statie transport in apropiere"],
@@ -47,7 +47,7 @@ let message_utilizator = {
     mesaje_cu_utilizator_x: {
         mesaje: [
             {
-                
+
             },
         ]
 
