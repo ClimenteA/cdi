@@ -1,7 +1,9 @@
 <script>
 
 import { get } from 'svelte/store'
-import { model, criterii_camera } from '../stores.js'
+import { model } from '../stores.js'
+import { criterii_camera } from "../criterii-camera.js"
+
 import InputBox from "../components/InputBox.svelte"
 import DropCheck from "../components/DropCheck.svelte"
 

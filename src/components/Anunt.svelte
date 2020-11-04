@@ -1,18 +1,19 @@
 <script>
-import StergeAnunt from "./StergeAnunt.svelte";
-
-import Table from "./Table.svelte"
+import StergeAnunt from "./anunt/StergeAnunt.svelte"
+//import BugetUserAnunt from "./anunt/BugetUserAnunt.svelte"
+import Table from "./anunt/Table.svelte"
 
 export let anunt
-
-let show_user = false
-function toggle() {
-    show_user = !show_user
-}
 
 let interesat = false
 function  toogleInteresat() {
     interesat = !interesat
+}
+
+
+let show_user = false
+function toggle() {
+    show_user = !show_user
 }
 
 
@@ -31,20 +32,20 @@ function  toogleInteresat() {
     
         <div on:click={toggle} class:flex-col-reverse={show_user} class="border-b-2 cursor-pointer flex flex-row gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
             <div class="flex flex-col flex-wrap">
-                <span class="font-semibold">{anunt.postat_de}</span>
+                <span class="font-semibold">{anunt.utilizator}</span>
                 <span class:text-center={show_user} class:text-right={!show_user} class="text-xs text-gray-700">
                     {anunt.data_postarii}
                 </span>
             </div>
-
+    
             <figure>
                 <img class:md:h-24={show_user} class:md:w-24={show_user} class="border-green-500 border-2 h-16 w-16 object-cover rounded-full" src="{anunt.foto_utilizator}" alt="">
             </figure>
         </div>
-
-    </div>
     
+    </div>
 
+    
     {#if show_user}
 
         <div class="md:border-t-2 md:px-6 md:mt-4 px-3">

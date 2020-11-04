@@ -20,21 +20,20 @@ function toggleTab(){
     tab_interested = !tab_interested
 }
 
-
+// Model anunt postat
 let anunt = {
+    utilizator: "Alin Climente",
+    email: "climente.alin@gmail.com",
+    foto_utilizator: "../../assets/img/avatar.jpg",
+    despre_utilizator: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
+    data_postarii: "23 Oct, 20:15",
+    locatie: "Iasi, Nicolina",
     buget: 85,
     cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
-    data: "23 Oct, 20:15",
     descriere: "Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. ",
     dotari: ["Aragaz", "Frigider", "Masina de spalat", "Mobilat  complet", "Centrala termica", "Wifi, cablu TV/Net"],
     facilitati: ["Decomandat", "Cu balcon", "Etaj 1-4", "Magazin in apropiere", "Statie transport in apropiere"],
-    liber: "2020-10-31",
-    locatie: "Iasi, Nicolina",
-    proprietar: "Alin Climente",
-    utilizator: "Alin Climente",
-    email: "climente.alin@gmail.com",
-    foto: "../../assets/img/avatar.jpg",
-    despre: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie."
+    liber_la_data: "2020-10-31",
 }
 
 
@@ -61,7 +60,7 @@ let anunt = {
         <div class="border-b-2 flex flex-col gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
 
             <figure>
-                <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" src="{anunt.foto}" alt="">
+                <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" src="{anunt.foto_utilizator}" alt="">
             </figure>
 
             <div class="flex flex-col flex-wrap">
@@ -97,7 +96,7 @@ let anunt = {
                     </button>
 
                     <p>
-                        {anunt.despre}
+                        {anunt.despre_utilizator}
                     </p>
                     
                     {/if}
@@ -113,45 +112,50 @@ let anunt = {
 </section>
 
 
-<section class="mt-6">
+{#if account.logged}
+
+    <section class="mt-6">
 
 
-    <button on:click={toggleTab} class="bg-gray-300 shadow-md text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
-        
-        {#if tab_interested}
-            Anunturi de care esti interesant(a)
-        {:else}
-            Anunturile postate de tine 
-        {/if}
+        <button on:click={toggleTab} class="bg-gray-300 shadow-md text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
+            
+            {#if tab_interested}
+                Anunturi de care esti interesant(a)
+            {:else}
+                Anunturile postate de tine 
+            {/if}
 
-        <svg class="inline ml-2 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-        </svg>
+            <svg class="inline ml-2 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
 
+        </button>
+
+
+        <div class="mt-4">
+
+            {#if tab_interested}
+
+                <section>
+                    <Anunt {anunt}/>
+                </section>
+                
+            {:else}
+
+                <section>
+                    <Anunt {anunt}/>
+                </section>
+                
+            {/if}
+            
+        </div>
+
+    </section>
+
+
+    <button class="bg-red-500 focus:outline-none mt-12 mx-auto outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+        STERGE CONTUL
     </button>
 
 
-    <div class="mt-4">
-
-        {#if tab_interested}
-
-            <section>
-                <Anunt {anunt}/>
-            </section>
-            
-        {:else}
-
-            <section>
-                <Anunt {anunt}/>
-            </section>
-            
-        {/if}
-        
-    </div>
-
-</section>
-
-
-<button class="bg-red-500 focus:outline-none mt-12 mx-auto outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
-    STERGE CONTUL
-</button>
+{/if}

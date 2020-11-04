@@ -1,7 +1,8 @@
 <script>
 
 import { get } from 'svelte/store'
-import { model, criterii_camera } from '../stores.js'
+import { model } from '../stores.js'
+import { criterii_camera } from "../criterii-camera.js"
 import InputBox from "../components/InputBox.svelte"
 import DropCheck from "../components/DropCheck.svelte"
 import Anunt from "../components/Anunt.svelte"
@@ -18,10 +19,9 @@ function searchRooms(event){
 }
 
 
-
 // Model anunt postat
 let anunt = {
-    postat_de: "Alin Climente",
+    utilizator: "Alin Climente",
     foto_utilizator: "../../assets/img/avatar.jpg",
     despre_utilizator: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
     data_postarii: "23 Oct, 20:15",

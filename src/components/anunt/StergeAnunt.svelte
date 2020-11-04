@@ -1,6 +1,6 @@
 <script>
 
-import { account } from "../stores.js"
+import { account } from "../../stores.js"
 
 
 
