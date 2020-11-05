@@ -21,5 +21,4 @@ let show_user = false
         <ActiuniCamera bind:interesat {...camera.bottom_data}/>
     {/if}
 
-
 </article>
