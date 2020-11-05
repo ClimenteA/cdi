@@ -2,7 +2,9 @@
 
 import { account } from "../stores.js"
 import InputBox from "../components/InputBox.svelte"
-import Anunt from "../components/Anunt.svelte"
+import ListaCamere from "../components/ListaCamere.svelte"
+
+import { lista_camere } from "../mock-data.js"
 
 
 function toggle() {
@@ -20,25 +22,8 @@ function toggleTab(){
     tab_interested = !tab_interested
 }
 
-// Model anunt postat
-let anunt = {
-    utilizator: "Alin Climente",
-    email: "climente.alin@gmail.com",
-    foto_utilizator: "../../assets/img/avatar.jpg",
-    despre_utilizator: "Lucrez mai tot timpul. Pun muzica tare, doar la casti. Nu las vasele in chiuveta pana a doua zi. Nu beau decat ocazional si fumez doar in balcon/bucatarie.",
-    data_postarii: "23 Oct, 20:15",
-    locatie: "Iasi, Nicolina",
-    buget: 85,
-    cerinte: ["Fara studenti", "Nu se fumeaza in camera", "Doar o persoana in camera", "Fara animale de companie"],
-    descriere: "Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. Inchiriez o camera mobilata complet pentru o persoana, intr-un apartament lux mobilat si utilat complet in care locuiesc alte fete, fiecare fata are cheie individuala la camera ei, in Oradea zona Nufarul vis-a -vis de LOTUS, aproape de statia de tramvai. ",
-    dotari: ["Aragaz", "Frigider", "Masina de spalat", "Mobilat  complet", "Centrala termica", "Wifi, cablu TV/Net"],
-    facilitati: ["Decomandat", "Cu balcon", "Etaj 1-4", "Magazin in apropiere", "Statie transport in apropiere"],
-    liber_la_data: "2020-10-31",
-}
-
 
 </script>
-
 
 
 <section class="flex flex-col justify-center mt-10">
@@ -60,13 +45,16 @@ let anunt = {
         <div class="border-b-2 flex flex-col gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
 
             <figure>
-                <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" src="{anunt.foto_utilizator}" alt="">
+                <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" 
+                src="{account.foto}" alt="">
             </figure>
 
             <div class="flex flex-col flex-wrap">
-                <span class="font-semibold text-center">{anunt.utilizator}</span>
+                <span class="font-semibold text-center">
+                    {account.nume}
+                </span>
                 <span class="text-xs text-gray-700">
-                    {anunt.email}
+                    {account.email}
                 </span>
             </div>
 
@@ -96,7 +84,7 @@ let anunt = {
                     </button>
 
                     <p>
-                        {anunt.despre_utilizator}
+                        {account.despre}
                     </p>
                     
                     {/if}
@@ -137,13 +125,13 @@ let anunt = {
             {#if tab_interested}
 
                 <section>
-                    <Anunt {anunt}/>
+                    <ListaCamere {lista_camere}/>
                 </section>
                 
             {:else}
 
                 <section>
-                    <Anunt {anunt}/>
+                    <ListaCamere {lista_camere}/>
                 </section>
                 
             {/if}
