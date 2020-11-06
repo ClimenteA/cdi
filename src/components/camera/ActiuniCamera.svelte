@@ -42,7 +42,7 @@ function showStergeBtn(){
     <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
         
         {#if account.logged}
-            <button on:click={stergeAnuntul} class="self-center focus:outline-none text-xs md:text-sm outline-none px-2 py-1 rounded-md table text-white bg-red-500">
+            <button on:click={stergeAnuntul} class="bg-red-500 focus:outline-none mb-2 mt-3 outline-none px-3 py-1 rounded-md self-center table text-white text-xs">
                 STERGE
             </button>
         {/if}
