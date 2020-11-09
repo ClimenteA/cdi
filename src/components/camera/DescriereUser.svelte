@@ -10,6 +10,7 @@ export let despre_utilizator
 export let interesat
 export let show_user
 
+
 function toggle() {
     show_user = !show_user
 }

@@ -7,8 +7,7 @@ import ListaCamere from "../components/ListaCamere.svelte"
 import { lista_camere } from "../mock-data.js"
 
 
-function logger() {
-    
+function logger() {   
     account.logged = !account.logged 
 }
 

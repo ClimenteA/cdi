@@ -11,6 +11,11 @@ function toogle(){
     // console.error("In development")
 }
 
+export let show_msg 
+function toggleMsg() {
+    show_msg = !show_msg
+}
+
 
 function stergeAnuntul(){
     console.error("In development")
@@ -21,7 +26,6 @@ function showStergeBtn(){
     console.error("In development")
 }
 
-
 </script>
 
 
@@ -31,7 +35,7 @@ function showStergeBtn(){
         
         {#if account.logged}
             
-            <button on:click={toogle} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+            <button on:click={toggleMsg} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
                 Vezi mesaje
                 <svg class="inline ml-2 w-3" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>

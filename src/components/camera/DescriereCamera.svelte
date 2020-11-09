@@ -5,7 +5,6 @@ import Table from "./Table.svelte"
 export let descriere_camera
 export let criterii_camera
 
-
 </script>
 
 

@@ -8,7 +8,7 @@ export let lista_camere
 
 let interesat = false
 let show_user = false
-
+let show_msg = false
 
 </script>
 
@@ -23,11 +23,20 @@ let show_user = false
     class="max-w-2xl md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md"
     >
 
-        <DescriereUser bind:interesat bind:show_user {...camera.top_data}/>
-
+        {#if show_msg}
+            Mesaje de la cei interesati
+        {:else}
+            <DescriereUser bind:interesat bind:show_user {...camera.top_data}/>
+        {/if}
+        
+        
         {#if !show_user}
-            <DescriereCamera {...camera.center_data}/>
-            <ActiuniCamera bind:interesat {...camera.bottom_data}/>
+            
+            {#if !show_msg}
+                <DescriereCamera {...camera.center_data}/>
+            {/if}
+
+            <ActiuniCamera bind:show_msg bind:interesat {...camera.bottom_data}/>
         {/if}
 
     </article>
