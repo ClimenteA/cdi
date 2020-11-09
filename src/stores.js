@@ -1,6 +1,6 @@
-import { writable } from 'svelte/store'
+import { writable, readable } from 'svelte/store'
 
-
+// readable(
 export const account = {
     logged: false,
     nume: "Alin Climente",

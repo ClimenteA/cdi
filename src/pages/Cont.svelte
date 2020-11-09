@@ -7,9 +7,12 @@ import ListaCamere from "../components/ListaCamere.svelte"
 import { lista_camere } from "../mock-data.js"
 
 
-function toggle() {
+function logger() {
+    
     account.logged = !account.logged 
 }
+
+
 
 let editable = false
 function toggleEdit() {
@@ -32,7 +35,7 @@ function toggleTab(){
 
         <h1 class="border-b-2 py-2 self-center text-sm md:text-base">Intra in cont</h1>
 
-        <button on:click={toggle} class="bg-blue-500 lg:text-base md:text-sm mt-6 px-4 py-2 rounded-md self-center table text-white text-xs">
+        <button on:click={logger} class="bg-blue-500 lg:text-base md:text-sm mt-6 px-4 py-2 rounded-md self-center table text-white text-xs">
             LOGIN CU FACEBOOK
         </button>
 
