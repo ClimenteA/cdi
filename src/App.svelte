@@ -1,40 +1,37 @@
 <script>
-	
-import Router from 'svelte-spa-router'
 
-import Navbar from "./NavBar/Navbar.svelte"
-import Footer from "./Footer/Footer.svelte"
-import Landing from "./Pages/Landing.svelte"
-import Cookies from './Pages/Cookies.svelte'
-import Gdpr from './Pages/Gdpr.svelte'
-import Terms from './Pages/Terms.svelte'
-import Contact from './Pages/Contact.svelte'
-import AdaugaCamera from './Pages/AdaugaCamera.svelte'
-import Cont from './Pages/Cont.svelte'
-import NotFound from './Pages/NotFound.svelte'
-import Camere from './Pages/Camere.svelte'
+// SPA Router and the main nav footer layout
+import Router from 'svelte-spa-router'
+import Layout from './Layout/Layout.svelte'
+
+// Footer components and routes
+import Gdpr from './Others/Gdpr.svelte'
+import Cookies from './Others/Cookies.svelte'
+import Terms from './Others/Terms.svelte'
+import Contact from './Others/Contact.svelte'
+
+const footer_routes = {
+    '/politica-de-confidentilitate':Gdpr,
+    '/politica-cookies': Cookies,
+    '/termeni-si-conditii': Terms,
+    '/sugestii-si-reclamatii': Contact
+}
+
+// Main components and routes
+import Landing from './Landing/Landing.svelte'
+import NotFound from './Others/NotFound.svelte'
 
 
 const routes = {
-	"/": Landing,
-	"/adauga-camera": AdaugaCamera,
-	"/cont": Cont,
-	"/politica-cookies": Cookies,
-	"/politica-de-confidentilitate": Gdpr,
-	"/termeni-si-conditii": Terms,
-	"/sugestii-si-reclamatii": Contact,
-	"/camere-libere": Camere,
-	"*": NotFound
+    "/": Landing,
+    ...footer_routes,
+
+    "*": NotFound
 }
 
 </script>
 
 
-<Navbar/>
-<main class="min-h-screen">
-	<Router {routes}/>
-</main>
-<Footer/>
-
-
-
+<Layout>
+    <Router {routes}/>
+</Layout>
