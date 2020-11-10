@@ -1,8 +1,10 @@
 <script>
-
+    
 // SPA Router and the main nav footer layout
 import Router from 'svelte-spa-router'
 import Layout from './Layout/Layout.svelte'
+import Test from './Test/Test.svelte'
+
 
 // Footer components and routes
 import Gdpr from './Others/Gdpr.svelte'
@@ -26,6 +28,7 @@ const routes = {
     "/": Landing,
     ...footer_routes,
 
+    "/test": Test,
     "*": NotFound
 }
 
