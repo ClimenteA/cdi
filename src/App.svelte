@@ -2,17 +2,17 @@
 	
 import Router from 'svelte-spa-router'
 
-import Navbar from "./components/Navbar.svelte"
-import Footer from "./components/Footer.svelte"
-import Landing from "./pages/Landing.svelte"
-import Cookies from './pages/Cookies.svelte'
-import Gdpr from './pages/Gdpr.svelte'
-import Terms from './pages/Terms.svelte'
-import Contact from './pages/Contact.svelte'
-import AdaugaCamera from './pages/AdaugaCamera.svelte'
-import Cont from './pages/Cont.svelte'
-import NotFound from './pages/NotFound.svelte'
-import Camere from './pages/Camere.svelte'
+import Navbar from "./NavBar/Navbar.svelte"
+import Footer from "./Footer/Footer.svelte"
+import Landing from "./Pages/Landing.svelte"
+import Cookies from './Pages/Cookies.svelte'
+import Gdpr from './Pages/Gdpr.svelte'
+import Terms from './Pages/Terms.svelte'
+import Contact from './Pages/Contact.svelte'
+import AdaugaCamera from './Pages/AdaugaCamera.svelte'
+import Cont from './Pages/Cont.svelte'
+import NotFound from './Pages/NotFound.svelte'
+import Camere from './Pages/Camere.svelte'
 
 
 const routes = {
