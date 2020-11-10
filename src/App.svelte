@@ -22,13 +22,15 @@ const footer_routes = {
 // Main components and routes
 import Landing from './Landing/Landing.svelte'
 import NotFound from './Others/NotFound.svelte'
-
+import Account from './Account/Account.svelte'
 
 const routes = {
-    "/": Landing,
-    ...footer_routes,
-
     "/test": Test,
+    
+    "/": Landing,
+    "/cont": Account,
+
+    ...footer_routes,
     "*": NotFound
 }
 
