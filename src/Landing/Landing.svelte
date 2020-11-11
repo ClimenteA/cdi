@@ -1,5 +1,5 @@
 <script>
-    
+
 import Hero from "./Hero.svelte"
 import Features from "./Features.svelte"
 
