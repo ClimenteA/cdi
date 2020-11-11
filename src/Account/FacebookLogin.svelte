@@ -1,12 +1,8 @@
 <script>
 // https://codechips.me/firebase-authentication-with-svelte/
 
-
-// import { account } from "../stores.js"
 import Btn from "../widgets/Btn/Btn.svelte"
-
 import firebase from "firebase/app"
-
 
 function login() {   
     let provider = new firebase.auth.FacebookAuthProvider()
@@ -14,6 +10,7 @@ function login() {
         console.log("logged in")
     })
 }
+
            
 </script>
 

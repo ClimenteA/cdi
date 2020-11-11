@@ -5,6 +5,7 @@ import firebase from "firebase/app"
 
 let user = firebase.auth().currentUser
 
+
 function logout(){
     firebase.auth().signOut().then(
         console.log("logged out")
