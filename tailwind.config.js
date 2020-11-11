@@ -8,7 +8,11 @@ module.exports = {
     './src/**/*.svelte'
   ],
   theme: {
-    extend: {},
+    extend: {
+      minHeight: {
+        '32': '8rem',
+      },
+    },
   },
   variants: {},
   plugins: [],
