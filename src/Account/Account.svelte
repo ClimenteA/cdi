@@ -8,6 +8,8 @@ import { logged } from '../Stores/auth.js'
 
 </script>
 
+
+
 {#if $logged}
     <UserPage/>    
 {:else}
