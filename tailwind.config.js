@@ -5,7 +5,8 @@ module.exports = {
   },
   purge: [
     './src/**/*.html',
-    './src/**/*.svelte'
+    './src/**/*.svelte',
+    './src/*.svelte'
   ],
   theme: {
     extend: {

@@ -60,8 +60,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)   
 
-
-
 </script>
 
 
