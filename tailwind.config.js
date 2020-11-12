@@ -6,7 +6,8 @@ module.exports = {
   purge: [
     './src/**/*.html',
     './src/**/*.svelte',
-    './src/*.svelte'
+    './src/*.svelte',
+    './public/index.html'
   ],
   theme: {
     extend: {
