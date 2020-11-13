@@ -18,13 +18,13 @@ const firebaseConfig = {
 }
 
 // On load init firebase and set db auth variables
-var db, auth
+var db, auth, fire
 window.onload = () => {
-    firebase.initializeApp(firebaseConfig)   
-    db = firebase.firestore()
-    auth = firebase.auth()
-}
 
+firebase.initializeApp(firebaseConfig)   
+db = firebase.firestore()
+auth = firebase.auth()
+fire = firebase
 
 // Detect if we develop on local 
 // Change port if needed in firebase.json
@@ -35,9 +35,19 @@ if (window.location.hostname === "localhost") {
     })
 }
 
+// End onload
+}
+
 
 // Make db, auth variables available for all components
-export const db = readable(db)
-export const auth = readable(auth)
-export const firebase = readable(firebase)
+db = readable(db)
+auth = readable(auth)
+fire = readable(firebase)
+
+
+export {
+    db,
+    auth,
+    fire
+}
 

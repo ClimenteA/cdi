@@ -1,7 +1,7 @@
 <script>
 
 import Btn from "../Widgets/Btn/Btn.svelte"
-import { logout } from "../Utilities/auth.js"
+import { logout } from "../Utils/auth.js"
 
 </script>
 

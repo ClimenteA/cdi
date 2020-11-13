@@ -1,8 +1,7 @@
 <script>
 
 import Btn from "../Widgets/Btn/Btn.svelte"
-import { login } from "../Utilities/auth.js" 
-
+import { login } from "../Utils/auth.js" 
            
 </script>
 

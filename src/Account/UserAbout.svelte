@@ -1,45 +1,42 @@
 <script>
 
-import firebase from "firebase/app"
-import InputBox from "../Widgets/InputBox/InputBox.svelte"
-import UserFooter from "./UserFooter.svelte"
+import Box from "../Widgets/Box/Box.svelte"
+import { db } from "../Utils/fire.js"
 
-let user = firebase.auth().currentUser
-
-
-let despre
+let about_me
 let editable = false
 function toggleEdit() {
     
     if (editable) {
-        console.log("save to firebase", despre)
+        console.log("save to firebase", about_me)
+        
+        db.collection("users").add({
+            first: "Ada",
+            last: "Lovelace",
+            born: 1815
+        })
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+    
     } 
+
     else {
-        console.log("clear", despre)
+        console.log("clear", about_me)
     }
     
     editable = !editable
-    
 } 
 
 
-function addData(){
-
-    const db = firebase.firestore();
-
-    if (window.location.hostname === "localhost") {
-        console.log("localhost detected!");
-        db.settings({
-            host: "localhost:5002",
-            ssl: false
-        });
-    }
+function updateAbout(user_self_description){
 
     // Add a new document with a generated id.
-    db.collection("cities").add({
-        name: "Tokyo",
-        country: "Japan"
-    })
+    db.collection("users").add({about: user_self_description})
     .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id)
     })
@@ -53,27 +50,6 @@ function addData(){
 </script>
 
 
-<!-- User header -->
-<div class="flex flex-col gap-2 items-center m-4 md:gap-4 md:m-0 md:pb-0 pb-2">
-
-    <figure class="mt-10">
-        <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" 
-        src="{user.photoURL}" alt="">
-    </figure>
-
-    <div class="flex flex-col flex-wrap">
-        <span class="font-semibold text-center">
-            {user.displayName}
-        </span>
-        <span class="text-xs text-gray-700">
-            {user.email}
-        </span>
-    </div>
-
-</div>
-
-
-<!-- User about -->
 <div class:shadow-md={editable} 
 class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relative rounded-md text-gray-800 text-xs">
 
@@ -88,8 +64,8 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
         </button>
 
 
-        <InputBox 
-        bind:value={despre}
+        <Box 
+        bind:value={about_me}
         name="despre" 
         type="textarea" 
         placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"
@@ -104,7 +80,8 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
         </button>
 
         <p>
-            {user.despre}
+            TODO
+            <!-- {user.despre} -->
         </p>
 
     {/if}
@@ -112,13 +89,11 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
 </div>
 
 
-<UserFooter/>
 
 
-
-<button on:click={addData} class="mt-12 mx-auto py-4 px-6 bg-gray-600 text-white">
+<!-- <button on:click={addData} class="mt-12 mx-auto py-4 px-6 bg-gray-600 text-white">
     Add data
-</button>
+</button> -->
 
 
 

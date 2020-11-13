@@ -1,16 +1,20 @@
 <script>
-
-
+    
+import { logged } from '../Utils/auth.js'
+    
+import UserHeader from "./UserHeader.svelte"
+import UserAbout from "./UserAbout.svelte"
+import UserDeleteLogout from "./UserDeleteLogout.svelte"
 import FacebookLogin from "./FacebookLogin.svelte"
-import UserPage from "./UserPage.svelte"
-import { logged } from '../Utilites/auth.js'
 
 
 </script>
 
 
 {#if $logged}
-    <UserPage/>    
+    <UserHeader/>
+    <UserAbout/>   
+    <UserDeleteLogout/> 
 {:else}
     <FacebookLogin/>
 {/if}
