@@ -1,40 +1,49 @@
 <script>
-	
+// https://firebase.google.com/docs/samples
+// https://github.com/firebase/quickstart-js
+// https://codelabs.developers.google.com/firebase-emulator#0
+// Rules
+// https://github.com/u12206050/firestore-rules-starter
+// https://github.com/OleksiiBrylin/firestore-rules/blob/master/firestore.rules
+
+// SPA Router and the main nav footer layout
 import Router from 'svelte-spa-router'
+import Layout from './Layout/Layout.svelte'
+import Test from './Test/Test.svelte'
 
-import Navbar from "./components/Navbar.svelte"
-import Footer from "./components/Footer.svelte"
-import Landing from "./pages/Landing.svelte"
-import Cookies from './pages/Cookies.svelte'
-import Gdpr from './pages/Gdpr.svelte'
-import Terms from './pages/Terms.svelte'
-import Contact from './pages/Contact.svelte'
-import AdaugaCamera from './pages/AdaugaCamera.svelte'
-import Cont from './pages/Cont.svelte'
-import NotFound from './pages/NotFound.svelte'
-import Camere from './pages/Camere.svelte'
 
+// Footer components and routes
+import Gdpr from './Others/Gdpr.svelte'
+import Cookies from './Others/Cookies.svelte'
+import Terms from './Others/Terms.svelte'
+import Contact from './Others/Contact.svelte'
+
+const footer_routes = {
+    '/politica-de-confidentilitate':Gdpr,
+    '/politica-cookies': Cookies,
+    '/termeni-si-conditii': Terms,
+    '/sugestii-si-reclamatii': Contact
+}
+
+// Main components and routes
+import Landing from './Landing/Landing.svelte'
+import NotFound from './Others/NotFound.svelte'
+import Account from './Account/Account.svelte'
 
 const routes = {
-	"/": Landing,
-	"/adauga-camera": AdaugaCamera,
-	"/cont": Cont,
-	"/politica-cookies": Cookies,
-	"/politica-de-confidentilitate": Gdpr,
-	"/termeni-si-conditii": Terms,
-	"/sugestii-si-reclamatii": Contact,
-	"/camere-libere": Camere,
-	"*": NotFound
+    "/test": Test,
+    
+    "/": Landing,
+    "/cont": Account,
+
+    ...footer_routes,
+    "*": NotFound
 }
+
 
 </script>
 
 
-<Navbar/>
-<main class="min-h-screen">
-	<Router {routes}/>
-</main>
-<Footer/>
-
-
-
+<Layout>
+    <Router {routes}/>
+</Layout>

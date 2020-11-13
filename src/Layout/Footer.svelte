@@ -1,5 +1,4 @@
-<script>
-</script>
+
 
 <footer class="border-t-2 md:gap-8 gap-4 grid justify-center md:grid-cols-2 mt-32 py-12">
 
