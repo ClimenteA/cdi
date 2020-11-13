@@ -1,17 +1,7 @@
 <script>
 
 import Btn from "../Widgets/Btn/Btn.svelte"
-import firebase from "firebase/app"
-
-function login() {   
-    let provider = new firebase.auth.FacebookAuthProvider()
-    firebase.auth().signInWithPopup(provider).then( result => {
-        console.log("logged in")
-
-        console.log(result.user)
-
-    })
-}
+import { login } from "../Utilities/auth.js" 
 
            
 </script>

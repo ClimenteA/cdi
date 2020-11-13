@@ -1,14 +1,7 @@
 <script>
 
-import firebase from "firebase/app"
 import Btn from "../Widgets/Btn/Btn.svelte"
-
-
-function logout(){
-    firebase.auth().signOut().then(
-        console.log("logged out")
-    )
-}
+import { logout } from "../Utilities/auth.js"
 
 </script>
 
