@@ -1,5 +1,11 @@
 <script>
-    
+// https://firebase.google.com/docs/samples
+// https://github.com/firebase/quickstart-js
+// https://codelabs.developers.google.com/firebase-emulator#0
+// Rules
+// https://github.com/u12206050/firestore-rules-starter
+// https://github.com/OleksiiBrylin/firestore-rules/blob/master/firestore.rules
+
 // SPA Router and the main nav footer layout
 import Router from 'svelte-spa-router'
 import Layout from './Layout/Layout.svelte'
@@ -36,14 +42,12 @@ const routes = {
 
 
 
-// Add Sveltefire and Firebase to the mix
-
-import { FirebaseApp, User, Doc, Collection } from 'sveltefire'
+// Add Sveltefire and Firebase to the mix maybe
+// import { FirebaseApp, User, Doc, Collection } from 'sveltefire'
 
 import firebase from "firebase/app"
 import 'firebase/firestore'
 import 'firebase/auth'
-import 'firebase/performance'
 import 'firebase/analytics'
 
 
@@ -58,13 +62,17 @@ const firebaseConfig = {
     measurementId: "G-YRBTWP52ZP"
 }
 
-firebase.initializeApp(firebaseConfig)   
+
+window.onload = () => {
+    firebase.initializeApp(firebaseConfig)   
+    const db = firebase.firestore()
+    const auth = firebase.auth()
+    
+}
 
 </script>
 
 
-<FirebaseApp {firebase}>
-    <Layout>
-        <Router {routes}/>
-    </Layout>
-</FirebaseApp>
+<Layout>
+    <Router {routes}/>
+</Layout>

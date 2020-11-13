@@ -23,6 +23,33 @@ function toggleEdit() {
 } 
 
 
+function addData(){
+
+    const db = firebase.firestore();
+
+    if (window.location.hostname === "localhost") {
+        console.log("localhost detected!");
+        db.settings({
+            host: "localhost:5002",
+            ssl: false
+        });
+    }
+
+    // Add a new document with a generated id.
+    db.collection("cities").add({
+        name: "Tokyo",
+        country: "Japan"
+    })
+    .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id)
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error)
+    })
+
+}
+
+
 </script>
 
 
@@ -85,9 +112,14 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
 </div>
 
 
-
-
 <UserFooter/>
+
+
+
+<button on:click={addData} class="mt-12 mx-auto py-4 px-6 bg-gray-600 text-white">
+    Add data
+</button>
+
 
 
     

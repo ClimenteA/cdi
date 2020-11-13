@@ -3,7 +3,7 @@
 
 import FacebookLogin from "./FacebookLogin.svelte"
 import UserPage from "./UserPage.svelte"
-import { logged } from '../Stores/auth.js'
+import { logged } from '../Stores/account.js'
 
 
 </script>
