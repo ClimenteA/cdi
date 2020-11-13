@@ -6,6 +6,9 @@
 // https://github.com/u12206050/firestore-rules-starter
 // https://github.com/OleksiiBrylin/firestore-rules/blob/master/firestore.rules
 
+// Icons
+// https://tablericons.com/
+
 // SPA Router and the main nav footer layout
 import Router from 'svelte-spa-router'
 import Layout from './Layout/Layout.svelte'
