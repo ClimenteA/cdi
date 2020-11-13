@@ -1,7 +1,7 @@
 <script>
 
 import firebase from "firebase/app"
-import Btn from "../widgets/Btn/Btn.svelte"
+import Btn from "../Widgets/Btn/Btn.svelte"
 
 
 function logout(){

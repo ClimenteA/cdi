@@ -1,7 +1,7 @@
 <script>
 
 import firebase from "firebase/app"
-import InputBox from "../widgets/InputBox/InputBox.svelte"
+import InputBox from "../Widgets/InputBox/InputBox.svelte"
 import UserFooter from "./UserFooter.svelte"
 
 let user = firebase.auth().currentUser

@@ -1,7 +1,6 @@
 <script>
-// https://codechips.me/firebase-authentication-with-svelte/
 
-import Btn from "../widgets/Btn/Btn.svelte"
+import Btn from "../Widgets/Btn/Btn.svelte"
 import firebase from "firebase/app"
 
 function login() {   

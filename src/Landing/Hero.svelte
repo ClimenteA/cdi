@@ -1,6 +1,6 @@
 <script>
 
-import Btn from "../widgets/Btn/Btn.svelte"
+import Btn from "../Widgets/Btn/Btn.svelte"
 
 </script>
 
