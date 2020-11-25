@@ -21,7 +21,7 @@ function clearSelected(){
 </script>
 
 
-<ul class="bg-white lg:cursor-pointer flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md max-w-xs">
+<ul class="bg-white lg:cursor-pointer flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
     
     <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs md:text-sm">
         
