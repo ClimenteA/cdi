@@ -2,50 +2,64 @@
 
 import Box from "../Widgets/Box/Box.svelte"
 import { db } from "../Utils/fire.js"
+import { current_user } from "../Utils/auth.js"
 
-let about_me
-let editable = false
-function toggleEdit() {
-    
-    if (editable) {
-        console.log("save to firebase", about_me)
+
+
+async function getUserData() {
+
+    try {
         
-        db.collection("users").add({
-            first: "Ada",
-            last: "Lovelace",
-            born: 1815
-        })
-        .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
+        let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
 
-    
-    } 
-
-    else {
-        console.log("clear", about_me)
+        let user_data
+        if (!user_ref.exists){
+            user_data = user_ref.docs[0].data()
+        } else {
+            user_data = "Sectiune necompletata."
+        }
+        
+        console.log(user_data)
+        
+    } catch (error) {
+        console.error("Sectiunea 'Despre mine' necompletata: ", error)   
     }
     
+}
+
+
+getUserData()
+
+
+let about_me 
+let editable = false
+async function toggleEdit() {
+    if (editable) await updateAbout(about_me)
     editable = !editable
 } 
 
 
-function updateAbout(user_self_description){
+async function updateAbout(about_me){
+    try {
+        
+        let user_ref = db.collection("users").where("uid", "==", $current_user.uid)
+        
+        await user_ref.update({about_me})    
 
-    // Add a new document with a generated id.
-    db.collection("users").add({about: user_self_description})
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id)
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error)
-    })
+        // try {
 
+
+        // } catch (error) {
+        //     await db.collection("users").add({
+        //         about_me: about_me,
+        //         uid: $current_user.uid
+        //     })
+        // }
+
+    } catch (error) {
+        console.error("Error updating about me section: ", error)
+    }
 }
-
 
 </script>
 
