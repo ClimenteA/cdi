@@ -94,16 +94,9 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
 
 </div>
 
+<p class="text-gray-600 text-xs lg:text-sm text-center">
+    Stabileste o intalnire video inainte de a te muta.
+</p>
 
 
-
-<!-- <button on:click={addData} class="mt-12 mx-auto py-4 px-6 bg-gray-600 text-white">
-    Add data
-</button> -->
-
-
-
-    
-    
-    
     
