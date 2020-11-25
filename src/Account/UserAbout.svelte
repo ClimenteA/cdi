@@ -8,53 +8,49 @@ import { current_user } from "../Utils/auth.js"
 
 async function getUserData() {
 
-    try {
-        
-        let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
+    let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
 
-        let user_data
-        if (!user_ref.exists){
-            user_data = user_ref.docs[0].data()
-        } else {
-            user_data = "Sectiune necompletata."
-        }
-        
-        console.log(user_data)
-        
-    } catch (error) {
-        console.error("Sectiunea 'Despre mine' necompletata: ", error)   
+    let user_data
+    if (!user_ref.empty){
+        user_data = user_ref.docs[0].data()
+    } else {
+        user_data = "Sectiune necompletata."
     }
-    
+
+    // console.log(user_data)
+    return user_data
 }
+ 
+let about_me
+getUserData().then(user_data => {
+    about_me = user_data.about_me
+})
 
-
-getUserData()
-
-
-let about_me 
 let editable = false
 async function toggleEdit() {
     if (editable) await updateAbout(about_me)
     editable = !editable
 } 
 
-
 async function updateAbout(about_me){
     try {
         
-        let user_ref = db.collection("users").where("uid", "==", $current_user.uid)
-        
-        await user_ref.update({about_me})    
+        let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
 
-        // try {
-
-
-        // } catch (error) {
-        //     await db.collection("users").add({
-        //         about_me: about_me,
-        //         uid: $current_user.uid
-        //     })
-        // }
+        if (!user_ref.empty) {
+            // console.log("Updating about section.")
+            user_ref.forEach(doc => {
+                const docRef = db.collection("users").doc(doc.id)
+                docRef.update({about_me})
+            })
+        }
+        else {
+            // console.log("Adding about section.")
+            await db.collection("users").add({
+                about_me: about_me,
+                uid: $current_user.uid
+            })  
+        }
 
     } catch (error) {
         console.error("Error updating about me section: ", error)
@@ -77,7 +73,6 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
             </svg>   
         </button>
 
-
         <Box 
         bind:value={about_me}
         name="despre" 
@@ -93,10 +88,7 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
             </svg>
         </button>
 
-        <p>
-            TODO
-            <!-- {user.despre} -->
-        </p>
+        <p>{about_me}</p>
 
     {/if}
 
