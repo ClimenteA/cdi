@@ -1,25 +1,13 @@
 <script>
 
+import Options from "../Widgets/Options/Options.svelte"
+import { criterii_camera } from "../Stores/criterii-camera.js"
 
-import Btn from "../Widgets/Btn/Btn.svelte"
+let dotari = criterii_camera.dotari
 
-let active = true
-function toggle(){
-    active = !active
-}
 
 
 </script>
 
 
-<div class="flex flex-col gap-8">
-
-<Btn bind:active on:click={toggle} text="toggle" icon="arrow-right"/>
-
-<Btn text="cauta camera" icon="search"/>
-
-<Btn text="inapoi" icon="arrow-left"/>
-
-<Btn text="home" url="#/"/>
-
-</div>
+<Options name="Dotari" bind:data_list={dotari}/>

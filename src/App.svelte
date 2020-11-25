@@ -32,12 +32,15 @@ const footer_routes = {
 import Landing from './Landing/Landing.svelte'
 import NotFound from './Others/NotFound.svelte'
 import Account from './Account/Account.svelte'
+import AddRoom from './AddRoom/AddRoom.svelte'
+
 
 const routes = {
     "/test": Test,
     
     "/": Landing,
     "/cont": Account,
+    "/adauga-camera": AddRoom,
 
     ...footer_routes,
     "*": NotFound
