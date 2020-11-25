@@ -1,6 +1,6 @@
 # Camere de inchiriat
 
-Rent rooms for cheaper, save money for trips.
+Share rooms, save money for trips.
 
 
 ### Quickstart
