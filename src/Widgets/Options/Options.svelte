@@ -1,7 +1,7 @@
 <script>
 
 export let name
-export let data_list
+export let data
 
 
 let show = false
@@ -9,10 +9,10 @@ function toggle() {
     show = !show
 }
 
-$: size_of_selected = data_list.filter(d => d.isChecked).length
+$: size_of_selected = data.filter(d => d.isChecked).length
 
 function clearSelected(){
-    data_list = data_list.map(d => {
+    data = data.map(d => {
         return {text:d.text, isChecked:false}
     })
     toggle()
@@ -53,8 +53,8 @@ function clearSelected(){
 
     {#if show}
         
-        {#each data_list as item, ix}
-            <li class:mt-2={ix === 0} class:mb-4={ix === data_list.length-1}>
+        {#each data as item, ix}
+            <li class:mt-2={ix === 0} class:mb-4={ix === data.length-1}>
                 <label for="{item.text}" class="py-1 lg:cursor-pointer">
                     <input type="checkbox" bind:checked={item.isChecked} bind:value={item.text} id={item.text}> 
                     <span>

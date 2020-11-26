@@ -3,7 +3,12 @@
 import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 
+import { db, fire } from "../Utils/fire.js"
+import { current_user } from "../Utils/auth.js"
 import { criterii_camera } from "../Stores/criterii-camera.js"
+import { localitati } from "../Stores/judete-localitati.js"
+
+console.log(localitati)
 
 let dotari = criterii_camera.dotari
 let facilitati = criterii_camera.facilitati
@@ -22,14 +27,19 @@ function getSelected(selectedItems){
 }
 
 
-function saveRoom(event){
+async function saveRoom(event){
     
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
     form_data.buget = Number(form_data.buget)
+    form_data.liber = new Date(form_data.liber)
 
-    // TODO link user and add data postarii
-    let owner = {proprietar: "Alin Climente", data:"2020-10-31"}
+    let owner = {
+        proprietar: $current_user.displayName,
+        email: $current_user.email,
+        foto: $current_user.photoURL,
+        data: fire.firestore.FieldValue.serverTimestamp()
+    }
 
     form_data = {
         ...form_data, 
@@ -38,6 +48,8 @@ function saveRoom(event){
         facilitati: getSelected(facilitati),
         cerinte: getSelected(cerinte),   
     }
+
+    await db.collection("anunturi").add(form_data)
 
     console.log(form_data)
 }
@@ -79,9 +91,9 @@ function saveRoom(event){
         </Box>
 
         <div>
-            <Options name="Dotari apartament" bind:data_list={dotari}/>
-            <Options name="Facilitati apartament" bind:data_list={facilitati}/>
-            <Options name="Cerinte chiriasi" bind:data_list={cerinte}/>
+            <Options name="Dotari apartament" bind:data={dotari}/>
+            <Options name="Facilitati apartament" bind:data={facilitati}/>
+            <Options name="Cerinte chiriasi" bind:data={cerinte}/>
         </div>
 
         <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">
