@@ -23,7 +23,7 @@ function getSelected(selectedItems){
         }       
     })
     
-    return filtered_items
+    return fillocalitatitered_items
 }
 
 
