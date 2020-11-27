@@ -1,36 +1,37 @@
 <script>
-// https://tarekraafat.github.io/autoComplete.js/#/
-// import autoComplete from "../Utils/autoComplete.min.js"
-import { localitati } from "../Stores/judete-localitati.js"
-// console.log(localitati)
 
-const autoComplete = require("@tarekraafat/autocomplete.js/dist/js/autoComplete")
+// https://github.com/kraaden/autocomplete
+import autocomplete from 'autocompleter'
 
-
-let key_list_obj =  {"key1": ['el1', 'el2', 'el3'], "key2": ['el1', 'el2', 'el3']}
-let simplelist = ['banana', 'kiwi', 'ananas']
+import { onMount } from 'svelte'
+import { localitati } from "../Stores/kraaden-localitati.js"
+import Box from "../Widgets/Box/Box.svelte"
 
 
-new autoComplete({
-    data: {
-        src: simplelist,
-        // key: Object.keys(key_list_obj),
-        // key: simplelist,
-        // cache: true
-    },
-    selector: "#autoComplete",           
-    threshold: 1,
-    searchEngine: "strict"    
+onMount(() => {
+    
+    let input = document.getElementById("locatie")
+    autocomplete({
+        input: input,
+        fetch: function(text, update) {
+            text = text.toLowerCase()
+            let suggestions = localitati.filter(n => n.label.toLowerCase().startsWith(text))
+            update(suggestions)
+        },
+        onSelect: function(item) {
+            input.value = item.label + ", zona?"
+        }
+    })
 })
 
-// TypeError: n.filter is not a function
+
 
 </script>
 
-<svelte:head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
-</svelte:head>
 
+<Box name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
+    <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>    
+    </svg>    
+</Box>
 
-
-<input id=autoComplete tabindex=1> 

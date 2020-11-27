@@ -1,11 +1,39 @@
 <script>
 
+// https://github.com/kraaden/autocomplete
+import autocomplete from 'autocompleter'
+import { onMount } from 'svelte'
+
+
 export let name
 export let id = name
 export let label = undefined
 export let type = "text"
 export let placeholder = ""
 export let value = ""
+export let autoCompleteList = undefined
+export let autoCompleteSuffix = ""
+
+
+if (autoCompleteList) {
+    
+    onMount(() => {
+        
+        let input = document.getElementById(id)
+        autocomplete({
+            input: input,
+            fetch: function(text, update) {
+                text = text.toLowerCase()
+                let suggestions = autoCompleteList.filter(n => n.label.toLowerCase().startsWith(text))
+                update(suggestions)
+            },
+            onSelect: function(item) {
+                input.value = item.value + autoCompleteSuffix
+            },
+            preventSubmit: true
+        })
+    })
+}
 
 
 function today() {

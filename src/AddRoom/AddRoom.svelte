@@ -6,9 +6,8 @@ import Box from "../Widgets/Box/Box.svelte"
 import { db, fire } from "../Utils/fire.js"
 import { current_user } from "../Utils/auth.js"
 import { criterii_camera } from "../Stores/criterii-camera.js"
-import { localitati } from "../Stores/judete-localitati.js"
+import { localitati } from "../Stores/kraaden-localitati.js"
 
-console.log(localitati)
 
 let dotari = criterii_camera.dotari
 let facilitati = criterii_camera.facilitati
@@ -23,7 +22,7 @@ function getSelected(selectedItems){
         }       
     })
     
-    return fillocalitatitered_items
+    return filtered_items
 }
 
 
@@ -64,7 +63,7 @@ async function saveRoom(event){
 
     <form on:submit|preventDefault={saveRoom} class="flex flex-col gap-2">
 
-        <Box name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
+        <Box autoCompleteList={localitati} autoCompleteSuffix=", zona?" name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>    
             </svg>    
