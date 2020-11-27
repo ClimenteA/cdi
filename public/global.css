@@ -34,7 +34,7 @@ html {
 }
 
 .autocomplete .group {
-    background: #eee;
+    background: #e2e8f0;
 }
 
 .autocomplete > div:hover:not(.group),

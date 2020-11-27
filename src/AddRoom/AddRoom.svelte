@@ -1,10 +1,11 @@
 <script>
-
+    
+import { push } from 'svelte-spa-router'   
 import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 
 import { db, fire } from "../Utils/fire.js"
-import { current_user } from "../Utils/auth.js"
+import { current_user, logged } from "../Utils/auth.js"
 import { criterii_camera } from "../Stores/criterii-camera.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 
@@ -57,6 +58,11 @@ async function saveRoom(event){
 </script>
 
 
+{#if $logged === false}
+    {push("/cont")}
+{/if}
+
+
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">Adauga o camera</h1>
@@ -102,6 +108,5 @@ async function saveRoom(event){
     </form>
 
 </section>
-
 
 

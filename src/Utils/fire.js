@@ -34,7 +34,6 @@ if (window.location.hostname === "localhost") {
         ssl: false
     })
 }
-
 // End onload
 }
 

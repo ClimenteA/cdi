@@ -17,15 +17,15 @@ export const current_user = derived(logged, $logged => auth.currentUser)
 export function login() {   
     let provider = new fire.auth.FacebookAuthProvider()
     auth.signInWithPopup(provider).then( result => {
-        console.log("logged in")
-        console.log(result.user)
+        // console.log("logged in")
+        // console.log(result.user)
     })
 }
 
 
 export function logout(){
     auth.signOut().then(
-        console.log("logged out")
+        // console.log("logged out")
     )
 }
 
