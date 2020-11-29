@@ -54,13 +54,14 @@ async function saveRoom(event){
     console.log(form_data)
 }
 
+console.log($logged)
 
 </script>
 
 
-<!-- {#if $logged === false}
+{#if $logged === false}
     {push("/cont")}
-{/if} -->
+{/if}
 
 
 <section class="flex flex-col max-w-xl mt-10 mx-auto">

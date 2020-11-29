@@ -1,8 +1,8 @@
 import { readable, derived } from 'svelte/store'
 import { auth, fire } from "./fire.js"
 
-
-export const logged = readable(false, function isLogged(set) {
+const initial_logged_state = true ? auth.currentUser : false
+export const logged = readable(initial_logged_state, function isLogged(set) {
     let unsubscribe = auth.onAuthStateChanged(function(user) {
         if (user) return set(true)
         else return set(false)
