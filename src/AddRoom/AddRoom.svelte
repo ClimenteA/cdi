@@ -58,9 +58,9 @@ async function saveRoom(event){
 </script>
 
 
-{#if $logged === false}
+<!-- {#if $logged === false}
     {push("/cont")}
-{/if}
+{/if} -->
 
 
 <section class="flex flex-col max-w-xl mt-10 mx-auto">

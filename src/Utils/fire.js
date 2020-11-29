@@ -22,6 +22,7 @@ var db, auth, fire
 window.onload = () => {
 
 firebase.initializeApp(firebaseConfig)   
+
 db = firebase.firestore()
 auth = firebase.auth()
 fire = firebase
@@ -34,6 +35,9 @@ if (window.location.hostname === "localhost") {
         ssl: false
     })
 }
+
+console.log("firebase initialized")
+
 // End onload
 }
 
@@ -49,4 +53,8 @@ export {
     auth,
     fire
 }
+
+
+
+console.log("fire.js")
 
