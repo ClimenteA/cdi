@@ -3,6 +3,8 @@
 import { push } from 'svelte-spa-router'   
 import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
+import Btn from "../Widgets/Btn/Btn.svelte"
+
 
 import { db, fire } from "../Utils/fire.js"
 import { current_user, logged } from "../Utils/auth.js"
@@ -28,11 +30,16 @@ function getSelected(selectedItems){
 
 
 async function saveRoom(event){
+
     
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
+    
+    event.target.innerHTML = "Anuntul se salveaza..."
+
+
     form_data.buget = Number(form_data.buget)
-    form_data.liber = new Date(form_data.liber)
+    form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
 
     let owner = {
         proprietar: $current_user.displayName,
@@ -40,7 +47,7 @@ async function saveRoom(event){
         foto: $current_user.photoURL,
         data: fire.firestore.FieldValue.serverTimestamp()
     }
-
+    
     form_data = {
         ...form_data, 
         ...owner,
@@ -49,12 +56,31 @@ async function saveRoom(event){
         cerinte: getSelected(cerinte),   
     }
 
-    await db.collection("anunturi").add(form_data)
 
+    let anunt_ref = await db.collection("anunturi").add(form_data)
+    let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
+    
+    if (!user_ref.empty) {
+        user_ref.forEach(doc => {
+            const docRef = db.collection("users").doc(doc.id)
+            docRef.update({
+                anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+            })
+        })
+    } else {
+        await db.collection("users").add({
+            about_me: "Sectiune necompletata.",
+            uid: $current_user.uid,
+            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+        })  
+    }
+
+    event.target.innerHTML = "Gata..."
     console.log(form_data)
+
 }
 
-console.log($logged)
+
 
 </script>
 
@@ -96,16 +122,14 @@ console.log($logged)
             </svg>
         </Box>
 
-        <div>
+        <div class="mb-6">
             <Options name="Dotari apartament" bind:data={dotari}/>
             <Options name="Facilitati apartament" bind:data={facilitati}/>
             <Options name="Cerinte chiriasi" bind:data={cerinte}/>
         </div>
 
-        <button type="submit" class="table mt-10 px-4 py-2 self-center focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md bg-blue-500 text-white">
-            ADAUGA CAMERA
-        </button>
-
+        <Btn text="ADAUGA CAMERA" type="submit"/>
+            
     </form>
 
 </section>

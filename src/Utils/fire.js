@@ -36,7 +36,7 @@ if (window.location.hostname === "localhost") {
     })
 }
 
-console.log("firebase initialized")
+// console.log("firebase initialized")
 
 // End onload
 }
@@ -54,7 +54,5 @@ export {
     fire
 }
 
-
-
-console.log("fire.js")
+// console.log("fire.js")
 

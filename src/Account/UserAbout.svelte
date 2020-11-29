@@ -14,9 +14,9 @@ async function getUserData() {
     if (!user_ref.empty){
         user_data = user_ref.docs[0].data()
     } else {
-        user_data = "Sectiune necompletata."
+        user_data = {about_me: "Sectiune necompletata."}
     }
-
+    
     // console.log(user_data)
     return user_data
 }

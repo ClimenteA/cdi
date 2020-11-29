@@ -29,4 +29,4 @@ export function logout(){
     )
 }
 
-console.log("auth.js")
+// console.log("auth.js")
