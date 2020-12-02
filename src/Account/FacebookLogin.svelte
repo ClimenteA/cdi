@@ -15,7 +15,7 @@ import { login } from "../Utils/auth.js"
     <Btn on:click={login} text="INTRA CU FACEBOOK" />
     
     <p class="max-w-xs md:text-sm mt-2 self-center text-center text-gray-600 text-xs">
-        Click pe ‘LOGIN CU FACEBOOK’ pentru a te loga/crea un cont.
+        Click pe 'INTRA CU FACEBOOK' pentru a te loga/crea un cont.
     </p>
 
 </section>
