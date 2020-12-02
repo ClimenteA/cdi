@@ -3,7 +3,6 @@ import { readable } from 'svelte/store'
 import firebase from "firebase/app"
 import 'firebase/firestore'
 import 'firebase/auth'
-import 'firebase/analytics'
 
 
 const firebaseConfig = {
@@ -26,7 +25,6 @@ firebase.initializeApp(firebaseConfig)
 db = firebase.firestore()
 auth = firebase.auth()
 fire = firebase
-
 // Detect if we develop on local 
 // Change port if needed in firebase.json
 if (window.location.hostname === "localhost") {

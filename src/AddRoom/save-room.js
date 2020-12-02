@@ -1,4 +1,4 @@
-import { db, fire } from "../Utils/fire.jsfire.js"
+import { db, fire } from "../Utils/fire.js"
 
 
 function getSelected(selectedItems){

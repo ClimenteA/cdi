@@ -14,6 +14,10 @@
 // https://github.com/microsoft/playwright-pytest#readme
 // https://github.com/microsoft/playwright-python
 
+// Testing with jest and playwright E2E testing
+// https://playwright.dev/
+// https://github.com/playwright-community/expect-playwright
+// https://playwright.tech/blog/using-jest-with-playwright
 
 
 // SPA Router and the main nav footer layout

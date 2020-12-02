@@ -7,7 +7,8 @@
     "build": "npm run build:tailwind && rollup -c",
     "start": "sirv public",
     "serve": "sirv public -p 80",
-    "dev": "concurrently \"rollup -c -w\" \"npm run watch:tailwind\""
+    "dev": "concurrently \"rollup -c -w\" \"npm run watch:tailwind\"",
+    "test": "jest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^14.0.0",
@@ -15,6 +16,9 @@
     "autoprefixer": "^9.8.6",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
+    "jest": "^26.6.3",
+    "jest-playwright-preset": "^1.4.1",
+    "playwright": "^1.6.2",
     "postcss-cli": "^8.1.0",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^2.0.0",
