@@ -9,6 +9,13 @@
 // Icons
 // https://tablericons.com/
 
+// Python frontend testing 
+// https://github.com/assertpy/assertpy
+// https://github.com/microsoft/playwright-pytest#readme
+// https://github.com/microsoft/playwright-python
+
+
+
 // SPA Router and the main nav footer layout
 import Router from 'svelte-spa-router'
 import Layout from './Layout/Layout.svelte'

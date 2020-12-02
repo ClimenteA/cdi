@@ -51,7 +51,7 @@ fire = readable(firebase)
 export {
     db,
     auth,
-    fire
+    fire,
 }
 
 // console.log("fire.js")
