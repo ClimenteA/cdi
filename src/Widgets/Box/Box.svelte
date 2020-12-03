@@ -48,6 +48,8 @@ if (type === "date") {
     value = today()
 }
 
+// TODO - type doesn't work with bind, figure out how to add input type and keep bind
+
 </script>
 
 

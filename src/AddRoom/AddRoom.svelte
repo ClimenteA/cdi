@@ -36,6 +36,7 @@ function isDate(dateStr) {
   return !isNaN(new Date(dateStr).getDate())
 }
 
+// TODO - figure out how to make saveRoom function more clean
 
 let error = false
 let success = false
@@ -86,7 +87,6 @@ async function saveRoom(event){
         facilitati: getSelected(facilitati),
         cerinte: getSelected(cerinte),   
     }
-
 
     let anunt_ref = await db.collection("anunturi").add(form_data)
     let user_ref = await db.collection("users").doc($current_user.uid)
