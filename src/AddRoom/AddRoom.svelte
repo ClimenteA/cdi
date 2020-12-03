@@ -4,13 +4,14 @@ import { push } from 'svelte-spa-router'
 import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 import Btn from "../Widgets/Btn/Btn.svelte"
+import Loader from "../Widgets/Loader/Loader.svelte"
+import Toast from "../Widgets/Toast/Toast.svelte"
 
 import { current_user, logged } from "../Utils/auth.js"
 import { criterii_camera } from "../Stores/criterii-camera.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 
 import { db, fire } from "../Utils/fire.js"
-
 
 
 let dotari = criterii_camera.dotari
@@ -31,16 +32,46 @@ function getSelected(selectedItems){
 }
 
 
+function isDate(dateStr) {
+  return !isNaN(new Date(dateStr).getDate())
+}
+
+
+let error = false
+let success = false
+let saving = false
 async function saveRoom(event){
 
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
     
-    event.target.innerHTML = "Anuntul se salveaza..."
+    saving = true
 
     form_data.buget = Number(form_data.buget)
-    form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
+    
+    if (isNaN(form_data.buget)) {
+        saving = false   
+        error = "'Buget lunar' trebuie sa fie un numar pozitiv"
+        setTimeout(_ => {
+            error = false
+        }, 2500)
+        throw error
+    }
 
+    if (!isDate(form_data.liber)){
+        
+        console.log(form_data.liber)
+
+        saving = false   
+        error = "'Liber de la' trebuie sa fie in formatul: YYYY-MM-DD"
+        setTimeout(_ => {
+            error = false
+        }, 2500)
+        throw error
+    }
+
+    form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
+    
     let owner = {
         proprietar: $current_user.displayName,
         uid: $current_user.uid,
@@ -56,35 +87,62 @@ async function saveRoom(event){
         cerinte: getSelected(cerinte),   
     }
 
+
     let anunt_ref = await db.collection("anunturi").add(form_data)
-    let user_ref = await db.collection("users").doc($current_user.uid).get()
-    
-    // console.log(user_ref)
-    
-    if (!user_ref.exists) {
-        // console.log("Adding about section.")
+    let user_ref = await db.collection("users").doc($current_user.uid)
+    let user_doc = await user_ref.get()
+
+    if (!user_doc.exists) {
+        console.log("Adding user data.")
         await db.collection("users").doc($current_user.uid).set({
             anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
         })  
     }
     else {
-        // console.log("Updating about section.")
+        console.log("Updating user data.")
         await user_ref.update({
             anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
         })
     }
-    
-    event.target.innerHTML = "Gata..."
+
+    saving = false
+    success = true
+    setTimeout(_ => {
+        success = false
+    }, 2500)
+
+    setTimeout(_ => {
+        push("/cont")
+    }, 2500)
+
     console.log(form_data)
 
 }
 
+$: {
+    if (saving) {
+        document.body.style.overflow = "hidden"
+    } else {
+        document.body.style.overflow = "auto"
+    }  
+}
 
 </script>
 
-
 {#if $logged === false}
     {push("/cont")}
+{/if}
+
+{#if saving}
+    <Loader/>
+{/if}
+
+{#if error}
+    <Toast message={error} info={false}/>
+{/if}
+
+{#if success}
+    <Toast message="Anuntul a fost salvat!"/>
 {/if}
 
 
@@ -103,7 +161,7 @@ async function saveRoom(event){
         <div class="grid grid-cols-2 gap-2">
             
             <Box name="buget" label="Buget lunar" type="number" placeholder="ex: 85">
-                <span class="font-semibold text-green-500">&euro;</span>
+                <span class="font-semibold text-green-500">&euro</span>
             </Box>
     
             <Box name="liber" label="Liber de la" type="date">
