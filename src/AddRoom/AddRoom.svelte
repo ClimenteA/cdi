@@ -8,12 +8,76 @@ import Btn from "../Widgets/Btn/Btn.svelte"
 import { current_user, logged } from "../Utils/auth.js"
 import { criterii_camera } from "../Stores/criterii-camera.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
-import { saveRoom } from "./save-room.js"
- 
+
+import { db, fire } from "../Utils/fire.js"
+
+
 
 let dotari = criterii_camera.dotari
 let facilitati = criterii_camera.facilitati
 let cerinte = criterii_camera.cerinte
+
+
+function getSelected(selectedItems){
+
+    let filtered_items = []
+    selectedItems.forEach(obj => {
+        if (obj.isChecked) {
+            filtered_items.push(obj.text)
+        }       
+    })
+    
+    return filtered_items
+}
+
+
+async function saveRoom(event){
+
+    let form_data = new FormData(event.target)
+    form_data = Object.fromEntries(form_data)
+    
+    event.target.innerHTML = "Anuntul se salveaza..."
+
+    form_data.buget = Number(form_data.buget)
+    form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
+
+    let owner = {
+        proprietar: $current_user.displayName,
+        uid: $current_user.uid,
+        foto: $current_user.photoURL,
+        data: fire.firestore.FieldValue.serverTimestamp()
+    }
+    
+    form_data = {
+        ...form_data, 
+        ...owner,
+        dotari: getSelected(dotari),
+        facilitati: getSelected(facilitati),
+        cerinte: getSelected(cerinte),   
+    }
+
+    let anunt_ref = await db.collection("anunturi").add(form_data)
+    let user_ref = await db.collection("users").doc($current_user.uid).get()
+    
+    // console.log(user_ref)
+    
+    if (!user_ref.exists) {
+        // console.log("Adding about section.")
+        await db.collection("users").doc($current_user.uid).set({
+            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+        })  
+    }
+    else {
+        // console.log("Updating about section.")
+        await user_ref.update({
+            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+        })
+    }
+    
+    event.target.innerHTML = "Gata..."
+    console.log(form_data)
+
+}
 
 
 </script>
@@ -28,10 +92,7 @@ let cerinte = criterii_camera.cerinte
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">Adauga o camera</h1>
 
-    <form 
-        on:submit|preventDefault={event => saveRoom(event, $current_user, dotari, facilitati, cerinte)} 
-        class="flex flex-col gap-2"
-    >
+    <form on:submit|preventDefault={saveRoom} class="flex flex-col gap-2">
 
         <Box autoCompleteList={localitati} name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
