@@ -7,10 +7,10 @@ export const criterii_camera = {
         {text: "Masina de spalat", isChecked: false},
         {text: "Mobilat complet", isChecked: false},
         {text: "Centrala termica", isChecked: false},
+        {text: "Wifi, cablu TV/Net", isChecked: false},
         {text: "Hota aragaz", isChecked: false},
         {text: "Masina de spalat vase", isChecked: false},
         {text: "Aer conditionat", isChecked: false},
-        {text: "Wifi, cablu TV/Net", isChecked: false},
     ],
 
     facilitati : [
