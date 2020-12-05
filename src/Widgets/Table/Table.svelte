@@ -5,12 +5,14 @@ export let data
 
 let columns = []
 let values = []
+
 for (const [col, val] of Object.entries(data)) {  
   if (Array.isArray(val)) {
     columns.push(col)
     values.push(val)
   }
 }
+
 
 // console.log(columns)
 // console.log(values)
@@ -56,27 +58,28 @@ for (let ir = 0; ir < rows_range.length; ir++) {
 
 </script>
 
-<div class="overflow-x-auto p-2 text-xs md:text-sm">
 
-<table class="w-full mt-4">
-    <thead class="capitalize border-b-2 font-semibold">
-        <tr>
-            {#each columns as col}
-                <td>{col}</td>
-            {/each}
-        </tr>
-    </thead>
+<div class="overflow-x-auto p-2 text-xs md:text-sm px-4">
 
-    <tbody class="text-gray-800">
-        {#each html_rows as row}
+  <table class="w-full mt-4">
+      <thead class="capitalize border-b-2 font-semibold">
           <tr>
-            {#each row as cell}
-              <td>{cell}</td>
-            {/each}
+              {#each columns as col}
+                  <td>{col}</td>
+              {/each}
           </tr>
-        {/each}
-    </tbody>
-</table>
+      </thead>
+
+      <tbody class="text-gray-800">
+          {#each html_rows as row}
+            <tr>
+              {#each row as cell}
+                <td>{cell}</td>
+              {/each}
+            </tr>
+          {/each}
+      </tbody>
+  </table>
 
 </div>
 

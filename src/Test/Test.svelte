@@ -1,8 +1,8 @@
 <script>
 
 import { db, fire } from "../Utils/fire.js"
-import { current_user } from "../Utils/auth.js"
-import Table from "../Widgets/Table/Table.svelte"
+import { current_user, logged } from "../Utils/auth.js"
+import Room from "../Room/Room.svelte"
 
 
 async function postedByUser(){
@@ -21,14 +21,17 @@ async function postedByUser(){
 }
 
 
-let user_posts 
-postedByUser().then(data => {
-    user_posts = data
-})
-
-
-$: console.log("Results: ", user_posts)
-
-
 </script>
 
+
+{#await postedByUser()}
+
+	<p>...waiting</p>
+
+{:then listings}    
+    {#each listings as camera }
+        <Room {camera}/>
+    {/each}
+{:catch error}
+	<p style="color: red">{error.message}</p>
+{/await}
