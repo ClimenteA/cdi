@@ -1,14 +1,10 @@
 <script>
 
-import { logged } from "../Utils/auth.js"
-
 export let data_liber
 
 
 let options = {day: 'numeric', month:'short'}
-data_liber = new Intl.DateTimeFormat('ro-RO', options).format(data_liber)
-
-console.log(data_liber)
+data_liber = new Intl.DateTimeFormat('ro-RO', options).format(data_liber.toDate())
 
 
 function toggleMesaje() {
@@ -16,15 +12,11 @@ function toggleMesaje() {
 }
 
 
-let interesat = false
-function toogleInterest(){
-    console.log("show/hide interest")
-    interesat = !interesat
-}
-
-function stergeAnuntul(){
-    console.log("sterge anuntul")
-}
+// let interesat = false
+// function toogleInterest(){
+//     console.log("show/hide interest")
+//     interesat = !interesat
+// }
 
 </script>
 
@@ -35,43 +27,21 @@ function stergeAnuntul(){
 
     <span class="flex flex-col-reverse md:flex-row mt-2 text-right">
         
-        {#if $logged}
-            
-            <button on:click={toggleMesaje} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
-                Vezi mesaje
-                <svg class="inline ml-2 w-3" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-            </button>
-            
-        {:else}
-
-            <button on:click={toogleInterest} class:bg-gray-700={interesat} class:bg-blue-500={!interesat} class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
-                {#if interesat}
-                    ESTI INTERESAT(A) 👍
-                {:else}
-                    SUNT INTERESAT(A) ✋
-                {/if}
-            </button>
-
-        {/if}
-
+        <button on:click={toggleMesaje} class="focus:outline-none outline-none bg-blue-500 lg:text-base md:text-sm md:mt-4 mt-1 px-4 py-2 rounded-md self-center table text-white text-xs">
+            Vezi mesaje
+            <svg class="inline ml-2 w-3" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+        </button>
+        
         <sup class="mt-4 text-gray-700">
-            (0 interesati)
+            (0 mesaje)
         </sup>
 
     </span>
 
     <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
-        
-        {#if $logged}
-            <button on:click={stergeAnuntul} class="bg-red-500 focus:outline-none mb-2 mt-3 outline-none px-3 py-1 rounded-md self-center table text-white text-xs">
-                STERGE
-            </button>
-        {/if}
-
         <span>Liber de la {data_liber}</span>
-
     </div>
 
 </div>
