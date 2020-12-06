@@ -1,22 +1,15 @@
 <script>
 
-export let data_liber
+export let camera
 
 
 let options = {day: 'numeric', month:'short'}
-data_liber = new Intl.DateTimeFormat('ro-RO', options).format(data_liber.toDate())
-
+let data_liber = new Intl.DateTimeFormat('ro-RO', options).format(camera.liber.toDate())
 
 function toggleMesaje() {
     console.log("show/hide messages")
 }
 
-
-// let interesat = false
-// function toogleInterest(){
-//     console.log("show/hide interest")
-//     interesat = !interesat
-// }
 
 </script>
 

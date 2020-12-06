@@ -21,8 +21,8 @@ dotari: [
     {text: "Frigider", isChecked: false},
     {text: "Masina de spalat", isChecked: false},
     {text: "Mobilat complet", isChecked: false},
-    {text: "Centrala termica", isChecked: false},
     {text: "Wifi, cablu TV/Net", isChecked: false},
+    {text: "Centrala termica", isChecked: false},
     {text: "Hota aragaz", isChecked: false},
     {text: "Masina de spalat vase", isChecked: false},
     {text: "Aer conditionat", isChecked: false},
@@ -132,13 +132,11 @@ async function saveRoom(event){
     let user_doc = await user_ref.get()
 
     if (!user_doc.exists) {
-        // console.log("Adding user data.")
         await db.collection("users").doc($current_user.uid).set({
             anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
         })  
     }
     else {
-        // console.log("Updating user data.")
         await user_ref.update({
             anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
         })
@@ -148,10 +146,6 @@ async function saveRoom(event){
     success = true
     setTimeout(_ => {
         success = false
-    }, 2500)
-
-    setTimeout(_ => {
-        push("/cont")
     }, 2500)
 
     console.log(form_data)
@@ -189,7 +183,7 @@ $: {
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">Adauga o camera</h1>
 
-    <form on:submit|preventDefault={saveRoom} class="flex flex-col gap-2">
+    <form on:submit|preventDefault|once={saveRoom} class="flex flex-col gap-2">
 
         <Box autoCompleteList={localitati} name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

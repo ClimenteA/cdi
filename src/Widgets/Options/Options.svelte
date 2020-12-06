@@ -21,7 +21,7 @@ function clearSelected(){
 </script>
 
 
-<ul class="bg-white lg:cursor-pointer flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
+<ul class="bg-white cursor-pointer flex flex-col gap-1 mt-4 place-self-center justify-self-start px-2 rounded-md">
     
     <caption on:click={toggle} class:border-b-2="{show}" class="text-gray-700 text-left py-2 text-xs md:text-sm">
         
@@ -55,7 +55,7 @@ function clearSelected(){
         
         {#each data as item, ix}
             <li class:mt-2={ix === 0} class:mb-4={ix === data.length-1}>
-                <label for="{item.text}" class="py-1 lg:cursor-pointer">
+                <label for="{item.text}" class="py-1 cursor-pointer">
                     <input type="checkbox" bind:checked={item.isChecked} bind:value={item.text} id={item.text}> 
                     <span>
                         <span class="text-gray-700 text-xs md:text-sm">{item.text}</span>           

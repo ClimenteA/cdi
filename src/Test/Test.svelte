@@ -14,7 +14,9 @@ async function postedByUser(){
     for (let ref of listingsRefs) {
         let post = await ref.get()
         let post_data = await post.data() 
-        user_posts.push(post_data)
+        if (post_data) {
+            user_posts.push({...post_data, listingRef:ref})
+        } 
     }
 
     return user_posts
@@ -26,12 +28,14 @@ async function postedByUser(){
 
 {#await postedByUser()}
 
-	<p>...waiting</p>
+	<p>Se incarca...</p>
 
-{:then listings}    
+{:then listings}   
+
     {#each listings as camera }
         <Room {camera}/>
     {/each}
+
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
