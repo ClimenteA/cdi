@@ -5,14 +5,11 @@ import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 import Btn from "../Widgets/Btn/Btn.svelte"
 import Loader from "../Widgets/Loader/Loader.svelte"
-import Toast from "../Widgets/Toast/Toast.svelte"
 
 import { current_user, logged } from "../Utils/auth.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 import { db, fire } from "../Utils/fire.js"
 
-// If called from another file keeps state between routes..
-// import { criterii_camera } from "../Stores/criterii-camera.js"
 
 const criterii_camera = {
 
@@ -40,14 +37,14 @@ facilitati : [
 ], 
 
 cerinte: [
-    {text: "Fara studenti", isChecked: false},
-    {text: "Nu se fumeaza in camera", isChecked: false},
-    {text: "Doar fete", isChecked: false},
-    {text: "Doar baieti", isChecked: false},
-    {text: "Doar o persoana in camera", isChecked: false},
     {text: "Fara animale de companie", isChecked: false},
     {text: "Se accepta doar caini", isChecked: false},
     {text: "Se accepta doar pisici", isChecked: false},
+    {text: "Nu se fumeaza in camera", isChecked: false},
+    {text: "Doar o persoana in camera", isChecked: false},
+    {text: "Fara studenti", isChecked: false},
+    {text: "Doar fete", isChecked: false},
+    {text: "Doar baieti", isChecked: false},
 ],
  
 }
@@ -71,14 +68,12 @@ function getSelected(selectedItems){
 }
 
 
-function isDate(dateStr) {
-  return !isNaN(new Date(dateStr).getDate())
-}
+// function isDate(dateStr) {
+//   return !isNaN(new Date(dateStr).getDate())
+// }
 
 // TODO - figure out how to make saveRoom function more clean
 
-let error = false
-let success = false
 let saving = false
 async function saveRoom(event){
 
@@ -88,28 +83,6 @@ async function saveRoom(event){
     saving = true
 
     form_data.buget = Number(form_data.buget)
-    
-    if (isNaN(form_data.buget)) {
-        saving = false   
-        error = "'Buget lunar' trebuie sa fie un numar pozitiv"
-        setTimeout(_ => {
-            error = false
-        }, 2500)
-        throw error
-    }
-
-    if (!isDate(form_data.liber)){
-        
-        console.log(form_data.liber)
-
-        saving = false   
-        error = "'Liber de la' trebuie sa fie in formatul: YYYY-MM-DD"
-        setTimeout(_ => {
-            error = false
-        }, 2500)
-        throw error
-    }
-
     form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
     
     let owner = {
@@ -143,12 +116,8 @@ async function saveRoom(event){
     }
 
     saving = false
-    success = true
-    setTimeout(_ => {
-        success = false
-    }, 2500)
 
-    console.log(form_data)
+    // console.log(form_data)
 
 }
 
@@ -174,20 +143,20 @@ $: {
     <Loader/>
 {/if}
 
-{#if error}
-    <Toast message={error} info={false}/>
-{/if}
-
-{#if success}
-    <Toast message="Anuntul a fost salvat!"/>
-{/if}
-
 
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
 
-    <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">Adauga o camera</h1>
+    <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">
+        Adauga o camera
+    </h1>
 
-    <form on:submit|preventDefault|once={saveRoom} class="flex flex-col gap-2">
+    {#if !show_btn}
+        <p class="text-center mt-12 text-green-500">
+            Camera a fost adaugata!
+        </p>
+    {/if}
+
+    <form class:hidden={!show_btn} on:submit|preventDefault|once={saveRoom} class="flex flex-col gap-2">
 
         <Box autoCompleteList={localitati} name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -221,9 +190,8 @@ $: {
             <Options name="Cerinte chiriasi" bind:data={cerinte}/>
         </div>
 
-        {#if show_btn}
-            <Btn text="ADAUGA CAMERA" type="submit"/>
-        {/if}
+
+        <Btn text="ADAUGA CAMERA" type="submit"/>
             
     </form>
 
