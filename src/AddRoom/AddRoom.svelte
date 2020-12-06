@@ -152,8 +152,12 @@ async function saveRoom(event){
 
 }
 
+let show_btn = true
+
 $: {
+
     if (saving) {
+        show_btn = false
         document.body.style.overflow = "hidden"
     } else {
         document.body.style.overflow = "auto"
@@ -217,7 +221,9 @@ $: {
             <Options name="Cerinte chiriasi" bind:data={cerinte}/>
         </div>
 
-        <Btn text="ADAUGA CAMERA" type="submit"/>
+        {#if show_btn}
+            <Btn text="ADAUGA CAMERA" type="submit"/>
+        {/if}
             
     </form>
 

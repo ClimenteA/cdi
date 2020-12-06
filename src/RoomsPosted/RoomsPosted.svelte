@@ -2,7 +2,7 @@
 
 import { db } from "../Utils/fire.js"
 import { current_user } from "../Utils/auth.js"
-import Room from "../RoomsPosted/Room.svelte"
+import Room from "./Room.svelte"
 
 
 async function postedByUser(){
@@ -28,14 +28,22 @@ async function postedByUser(){
 
 {#await postedByUser()}
 
-	<p>Se incarca...</p>
+    <p class="text-center mt-12">Se incarca...</p>
 
 {:then listings}   
 
-    {#each listings as camera }
-        <Room {camera}/>
-    {/each}
+    {#if listings.length > 0}
+
+        {#each listings as camera }
+            <Room {camera}/>
+        {/each}
+    
+    {:else}
+        
+        <p class="text-center mt-12">Nu ai postat nici un anunt</p>
+
+    {/if}
 
 {:catch error}
-	<p style="color: red">{error.message}</p>
+    <p style="color: red">{error.message}</p>
 {/await}

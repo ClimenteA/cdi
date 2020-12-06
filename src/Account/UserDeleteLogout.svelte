@@ -6,9 +6,7 @@ import { logout } from "../Utils/auth.js"
 </script>
 
 
-<!-- User delete account or sign out -->
-
-<div class="flex justify-center">
+<div class="flex justify-center mt-32">
     <Btn on:click={logout} text="iesi din cont"/>
 </div>
 
