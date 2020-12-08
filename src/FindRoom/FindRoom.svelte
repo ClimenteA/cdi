@@ -68,66 +68,64 @@ function getSelected(selectedItems){
 }
 
 
-// function isDate(dateStr) {
-//   return !isNaN(new Date(dateStr).getDate())
+// let owner = {
+//     proprietar: $current_user.displayName,
+//     uid: $current_user.uid,
+//     foto: $current_user.photoURL,
+//     data: fire.firestore.FieldValue.serverTimestamp()
 // }
-
-// TODO - figure out how to make saveRoom function more clean
+    
 
 let saving = false
-async function saveRoom(event){
+async function findRoom(event){
 
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
-    
-    saving = true
-
     form_data.buget = Number(form_data.buget)
     form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
     
     form_data.locatie = form_data.locatie.replace(", zona?", "")
     let locatie = form_data.locatie.trim().split(",")
-
     form_data.localitate = locatie[0].trim()
     form_data.judet = locatie = locatie[1].replace("jud.", "").trim()
-
     if (locatie.length === 3) {
         form_data.zona = locatie[2].trim()
     }
     
-    let owner = {
-        proprietar: $current_user.displayName,
-        uid: $current_user.uid,
-        foto: $current_user.photoURL,
-        data: fire.firestore.FieldValue.serverTimestamp()
-    }
-    
     form_data = {
         ...form_data, 
-        ...owner,
         dotari: getSelected(dotari),
         facilitati: getSelected(facilitati),
         cerinte: getSelected(cerinte),   
     }
 
-    let anunt_ref = await db.collection("anunturi").add(form_data)
-    let user_ref = await db.collection("users").doc($current_user.uid)
-    let user_doc = await user_ref.get()
+    
 
-    if (!user_doc.exists) {
-        await db.collection("users").doc($current_user.uid).set({
-            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-        })  
-    }
-    else {
-        await user_ref.update({
-            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-        })
-    }
+
+
+
+
+
+
+
+    // let anunt_ref = await db.collection("anunturi").add(form_data)
+    // let user_ref = await db.collection("users").doc($current_user.uid)
+    // let user_doc = await user_ref.get()
+
+    // if (!user_doc.exists) {
+    //     await db.collection("users").doc($current_user.uid).set({
+    //         anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+    //     })  
+    // }
+    // else {
+    //     await user_ref.update({
+    //         anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+    //     })
+    // }
 
     saving = false
 
-    // console.log(form_data)
+    console.log(form_data)
 
 }
 
@@ -157,16 +155,10 @@ $: {
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">
-        Adauga o camera
+        Gaseste o camera
     </h1>
 
-    {#if !show_btn}
-        <p class="md:text-lg text-sm text-center mt-12 text-green-500 p-8 bg-white rounded-md">
-            Camera a fost adaugata!
-        </p>
-    {/if}
-
-    <form class:hidden={!show_btn} on:submit|preventDefault|once={saveRoom} class="flex flex-col gap-2">
+    <form class:hidden={!show_btn} on:submit|preventDefault|once={findRoom} class="flex flex-col gap-2">
 
         <Box autoCompleteList={localitati} name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -188,12 +180,6 @@ $: {
     
         </div>
     
-        <Box name="descriere" label="Descriere anunt" type="textarea" placeholder="ex: Cautam o persoana linistita si curata.">
-            <svg class="stroke-2 h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-            </svg>
-        </Box>
-
         <div class="mb-6">
             <Options name="Dotari apartament" bind:data={dotari}/>
             <Options name="Facilitati apartament" bind:data={facilitati}/>
@@ -201,8 +187,10 @@ $: {
         </div>
 
 
-        <Btn text="ADAUGA CAMERA" type="submit"/>
+        <Btn text="CAUTA CAMERA" type="submit"/>
             
     </form>
 
 </section>
+
+
