@@ -1,5 +1,7 @@
 <script>
 
+import { fly } from 'svelte/transition'
+
 
 let menu = false
 function toggleMenu(){
@@ -23,12 +25,16 @@ function toggleAdd(){
     <span class="text-sm lg:text-base hidden md:inline-block md:float-right text-center">
 
         {#if add_room}
-            <a on:click={toggleAdd} href="#/adauga-camera" class="leading-10 px-3 py-4">
+            <a
+            transition:fly="{{ y: 200, duration: 2000 }}" 
+            on:click={toggleAdd} href="#/adauga-camera" class="font-semibold leading-10 px-3 py-4">
                 <span class="font-semibold text-green-500">Adauga</span> camera
             </a>
         {:else}
-            <a on:click={toggleAdd} href="#/camere-libere" class="leading-10 px-3 py-4">
-                <span class="font-semibold text-blue-500">Cauta</span> camera
+            <a 
+            transition:fly="{{ y: 200, duration: 2000 }}"
+            on:click={toggleAdd} href="#/camere-libere" class="font-semibold leading-10 px-3 py-4">
+                <span class="text-blue-500">Cauta</span> camera
             </a>
         {/if}
 
