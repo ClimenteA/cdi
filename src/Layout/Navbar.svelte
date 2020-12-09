@@ -24,11 +24,11 @@ function toggleAdd(){
 
         {#if add_room}
             <a on:click={toggleAdd} href="#/adauga-camera" class="leading-10 px-3 py-4">
-                Adauga camera
+                <span class="font-semibold text-green-500">Adauga</span> camera
             </a>
         {:else}
             <a on:click={toggleAdd} href="#/camere-libere" class="leading-10 px-3 py-4">
-                Gaseste camera
+                <span class="font-semibold text-blue-500">Cauta</span> camera
             </a>
         {/if}
 
@@ -52,7 +52,7 @@ function toggleAdd(){
                     </a>
                 {:else}
                     <a on:click={() => {toggleAdd();toggleMenu()}} href="#/camere-libere" class="block mt-10 py-1 pr-10">
-                        Gaseste camera
+                        Cauta camera
                     </a>
                 {/if}
         

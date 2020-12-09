@@ -5,10 +5,12 @@ import Options from "../Widgets/Options/Options.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 import Btn from "../Widgets/Btn/Btn.svelte"
 import Loader from "../Widgets/Loader/Loader.svelte"
+import RoomsList from "./RoomsList.svelte" 
 
 import { current_user, logged } from "../Utils/auth.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 import { db, fire } from "../Utils/fire.js"
+import { found_rooms } from "../Stores/rooms-found.js"
 
 
 const criterii_camera = {
@@ -99,33 +101,31 @@ async function findRoom(event){
         cerinte: getSelected(cerinte),   
     }
 
+    let query = await db.collection("anunturi")
+                .where("localitate", "==", form_data.localitate)
+                .where("judet", "==", form_data.judet)
+                .where("buget", "<=", form_data.buget)
+                .get()
     
+    if (query.empty){
+        console.error("Query has no results.")
+        console.log(query)
+    } else {
+        console.info("Query has results.")
+        let query_results = []
+        query.forEach(doc => {
+            console.log(doc.data())
+            query_results.push(doc.data())
+        })
 
+        found_rooms.update(() => query_results)
+    }
 
-
-
-
-
-
-
-    // let anunt_ref = await db.collection("anunturi").add(form_data)
-    // let user_ref = await db.collection("users").doc($current_user.uid)
-    // let user_doc = await user_ref.get()
-
-    // if (!user_doc.exists) {
-    //     await db.collection("users").doc($current_user.uid).set({
-    //         anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-    //     })  
-    // }
-    // else {
-    //     await user_ref.update({
-    //         anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-    //     })
-    // }
+    console.log($found_rooms)
 
     saving = false
 
-    console.log(form_data)
+    // console.log(form_data)
 
 }
 
@@ -155,7 +155,7 @@ $: {
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
 
     <h1 class="border-b-2 py-2 self-center text-sm md:text-base mb-4">
-        Gaseste o camera
+        Cauta o camera
     </h1>
 
     <form class:hidden={!show_btn} on:submit|preventDefault|once={findRoom} class="flex flex-col gap-2">
@@ -194,3 +194,5 @@ $: {
 </section>
 
 
+
+<RoomsList/>

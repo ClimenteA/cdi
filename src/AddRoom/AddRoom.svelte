@@ -112,18 +112,10 @@ async function saveRoom(event){
 
     let anunt_ref = await db.collection("anunturi").add(form_data)
     let user_ref = await db.collection("users").doc($current_user.uid)
-    let user_doc = await user_ref.get()
 
-    if (!user_doc.exists) {
-        await db.collection("users").doc($current_user.uid).set({
-            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-        })  
-    }
-    else {
-        await user_ref.update({
-            anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
-        })
-    }
+    await user_ref.update({
+        anunturi_postate: fire.firestore.FieldValue.arrayUnion(anunt_ref)
+    })
 
     saving = false
 
