@@ -34,7 +34,7 @@ async function toggleEdit() {
 
 async function updateAbout(about_me){
     try {
-        await db.collection("users").doc($current_user.uid).set({about_me})
+        await db.collection("users").doc($current_user.uid).update({about_me})
     } catch (error) {
         console.error("Error updating about me section: ", error)
     }
