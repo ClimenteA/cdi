@@ -11,9 +11,6 @@ import { localitati } from "../Stores/kraaden-localitati.js"
 import { db, fire } from "../Utils/fire.js"
 
 
-console.log(localitati)
-
-
 const criterii_camera = {
 
 dotari: [

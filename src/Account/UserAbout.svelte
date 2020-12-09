@@ -5,36 +5,29 @@ import { db } from "../Utils/fire.js"
 import { current_user } from "../Utils/auth.js"
 
 
-
 async function getUserData() {
-
-    let user_ref = await db.collection("users").where("uid", "==", $current_user.uid).get()
-
-    let user_data
-    if (!user_ref.empty){
-        user_data = user_ref.docs[0].data()
-    } else {
-        user_data = {about_me: "Sectiune necompletata."}
+    try {
+        let user_ref = await db.collection("users").doc($current_user.uid).get()
+        return user_ref.data()
+    } catch (error) {
+        console.error("", error)
     }
-    
-    // console.log(user_data)
-    return user_data
 }
  
-let about_me
+let despre_mine
 getUserData().then(user_data => {
-    about_me = user_data.about_me
+    despre_mine = user_data.despre_mine
 })
 
 let editable = false
 async function toggleEdit() {
-    if (editable) await updateAbout(about_me)
+    if (editable) await updateAbout(despre_mine)
     editable = !editable
 } 
 
-async function updateAbout(about_me){
+async function updateAbout(despre_mine){
     try {
-        await db.collection("users").doc($current_user.uid).update({about_me})
+        await db.collection("users").doc($current_user.uid).update({despre_mine})
     } catch (error) {
         console.error("Error updating about me section: ", error)
     }
@@ -57,7 +50,7 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
         </button>
 
         <Box 
-        bind:value={about_me}
+        bind:value={despre_mine}
         name="despre" 
         type="textarea" 
         placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"
@@ -71,7 +64,7 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
             </svg>
         </button>
 
-        <p>{about_me}</p>
+        <p>{despre_mine}</p>
 
     {/if}
 
