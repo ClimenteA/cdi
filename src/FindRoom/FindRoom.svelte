@@ -158,7 +158,7 @@ $: {
         Cauta o camera
     </h1>
 
-    <form class:hidden={!show_btn} on:submit|preventDefault|once={findRoom} class="flex flex-col gap-2">
+    <form class:hidden={!show_btn} on:submit|preventDefault={findRoom} class="flex flex-col gap-2">
 
         <Box autoCompleteList={localitati} name="locatie" label="Oras si zona" placeholder="ex: Iasi, Cantemir">
             <svg class="fill-current h-4 inline mb-1 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
