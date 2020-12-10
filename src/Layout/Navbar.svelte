@@ -1,15 +1,23 @@
 <script>
 
-import { fly } from 'svelte/transition'
-
-
 let menu = false
 function toggleMenu(){
     menu = !menu
 }
 
+
+let home = false
+function toggleHome(){
+    home = !home
+}
+
 let add_room = true
 function toggleAdd(){
+    if (home) {
+        add_room = true
+        home = false
+        return
+    } 
     add_room = !add_room
 }
 
@@ -20,20 +28,18 @@ function toggleAdd(){
 
 <nav class="lg:text-xl lg:mt-6 mt-3">
     
-    <a href="#/" class="leading-10 px-3 py-4 font-semibold text-blue-900">cameredeinchiriat</a>
+    <a on:click={() => {toggleHome();toggleAdd()}} href="#/" class="leading-10 px-3 py-4 font-semibold text-blue-900">cameredeinchiriat</a>
 
     <span class="text-sm lg:text-base hidden md:inline-block md:float-right text-center">
 
         {#if add_room}
             <a
-            transition:fly="{{ y: 200, duration: 2000 }}" 
-            on:click={toggleAdd} href="#/adauga-camera" class="font-semibold leading-10 px-3 py-4">
-                <span class="font-semibold text-green-500">Adauga</span> camera
+            on:click={toggleAdd} href="#/adauga-camera" class="inline-block font-semibold leading-10 px-3 py-4">
+                <span class="text-green-500">Adauga</span> camera
             </a>
         {:else}
             <a 
-            transition:fly="{{ y: 200, duration: 2000 }}"
-            on:click={toggleAdd} href="#/camere-libere" class="font-semibold leading-10 px-3 py-4">
+            on:click={toggleAdd} href="#/camere-libere" class="inline-block font-semibold leading-10 px-3 py-4">
                 <span class="text-blue-500">Cauta</span> camera
             </a>
         {/if}
