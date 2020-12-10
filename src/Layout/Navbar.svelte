@@ -1,5 +1,7 @@
 <script>
 
+import { pop } from "svelte-spa-router"
+
 let menu = false
 function toggleMenu(){
     menu = !menu
@@ -13,6 +15,7 @@ function toggleHome(){
 
 let add_room = true
 function toggleAdd(){
+    in_cont = false
     if (home) {
         add_room = true
         home = false
@@ -21,6 +24,10 @@ function toggleAdd(){
     add_room = !add_room
 }
 
+let in_cont = false
+function toggleCont(){
+    in_cont = !in_cont
+}
 
 </script>
 
@@ -34,17 +41,30 @@ function toggleAdd(){
 
         {#if add_room}
             <a
-            on:click={toggleAdd} href="#/adauga-camera" class="inline-block font-semibold leading-10 px-3 py-4">
+            on:click={toggleAdd} href="#/adauga-camera" class:font-semibold={!in_cont} class="leading-10 px-3 py-4">
                 <span class="text-green-500">Adauga</span> camera
             </a>
         {:else}
             <a 
-            on:click={toggleAdd} href="#/camere-libere" class="inline-block font-semibold leading-10 px-3 py-4">
+            on:click={toggleAdd} href="#/camere-libere" class:font-semibold={!in_cont} class="leading-10 px-3 py-4">
                 <span class="text-blue-500">Cauta</span> camera
             </a>
         {/if}
 
-        <a href="#/cont" class="leading-10 px-3 py-4">Intra in cont</a>
+        {#if in_cont}
+        
+            <a on:click={() => {pop();toggleCont()}} class:font-semibold={in_cont} href="#/cont" class="leading-10 px-3 py-4">
+                Contul tau
+            </a>
+
+        {:else}
+
+            <a on:click={toggleCont} class:font-semibold={in_cont} href="#/cont" class="leading-10 px-3 py-4">
+                Intra in cont
+            </a>
+
+        {/if}
+
 
     </span> 
     
@@ -73,7 +93,7 @@ function toggleAdd(){
             </span> 
 
             <div on:click={toggleMenu} class="absolute inset-0"></div>
-
+  
         {:else}
 
             <svg on:click={toggleMenu} fill="none" viewBox="0 0 24 24" stroke="currentColor">

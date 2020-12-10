@@ -1,12 +1,14 @@
 <script>
 
-import {link} from 'svelte-spa-router'
+import {link, location} from 'svelte-spa-router'
 import active from 'svelte-spa-router/active'
 
 let menu = false
 function toggleMenu(){
     menu = !menu
 }
+
+console.log(location)
 
 </script>
 
