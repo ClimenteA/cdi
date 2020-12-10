@@ -5,15 +5,15 @@ import { current_user } from "../Utils/auth.js"
 </script>
 
 
-<header class="flex flex-col gap-2 items-center m-4 md:gap-4 md:m-0 md:pb-0 pb-2">
+<header class="flex flex-col mt-12">
 
-    <figure class="mt-10">
-        <img class="border-green-500 border-2 h-24 w-24 object-cover rounded-full" 
+    <figure class="mx-auto">
+        <img class="h-24 w-24 object-cover rounded-full" 
         src="{$current_user.photoURL}" alt="">
     </figure>
 
-    <div class="flex flex-col flex-wrap">
-        <span class="font-semibold text-center">
+    <div class="flex flex-col items-center">
+        <span class="font-semibold">
             {$current_user.displayName}
         </span>
         <span class="text-xs text-gray-700">
