@@ -58,15 +58,19 @@ $: {
 
     {:else}
 
-    <div class="flex md:flex-row flex-col justify-between">
+    <div class="flex md:flex-row flex-col-reverse justify-between">
         
-        <div class="font-semibold cursor-pointer">
-            <span class="text-xl md:text-2xl text-green-500">&euro;</span>
-            <span class="text-xl md:text-2xl">{camera.buget}</span>
-            <span class="text-sm md:text-lg font-normal ml-2">{camera.locatie}</span>
+        <div class="flex md:flex-row flex-col font-semibold">
+            
+            <span class="text-xl md:text-2xl">
+                <span class="text-green-500">&euro;</span>{camera.buget}   
+            </span>
+
+            <span class="text-sm md:text-lg font-normal ml-4 break-words">{camera.locatie}</span>
+
         </div>
 
-        <button on:click={stergeAnuntul} class="bg-red-500 focus:outline-none mb-2 mt-3 outline-none px-3 py-1 rounded-md self-center table text-white text-xs">
+        <button on:click={stergeAnuntul} class="bg-red-500 px-3 py-1 self-end rounded-md text-white text-xs">
             STERGE
         </button>
     

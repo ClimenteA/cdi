@@ -21,7 +21,7 @@ function toggle() {
 </script>
 
 
-<article class="min-w-full bg-white shadow-md md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md">
+<article class="min-w-2xl bg-white shadow-md md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md">
     
     <div class="flex md:flex-row flex-col justify-between">
         

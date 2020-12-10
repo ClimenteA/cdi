@@ -61,7 +61,7 @@ for (let ir = 0; ir < rows_range.length; ir++) {
 
 {#if html_rows.length > 0 }
 
-  <div class="overflow-x-auto p-2 text-xs md:text-sm px-4">
+  <div class="md:text-sm overflow-x-auto px-6 py-2 text-xs">
 
     <table class="w-full mt-4">
         <thead class="capitalize border-b-2 font-semibold">
