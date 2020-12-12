@@ -1,20 +1,41 @@
 <script>
 
+import { db, fire } from "../Utils/fire.js"
+import { current_user } from "../Utils/auth.js"
+
 export let camera
 
 
 let interesat = false
-function toggleInterested() {
-    interesat = !interesat
+async function toggleInterested() {
+
+    try {
+    
+        let ref = await db.collection("anunturi").doc(camera.id)
+        
+        interesat = !interesat
+            
+        if (interesat) {
+            
+            console.log('add', camera.id)
+
+            await ref.update({
+                interesati: fire.firestore.FieldValue.arrayUnion($current_user.uid) 
+            })
+        } else {
+
+            console.log('rem', camera.id)
+
+            await ref.update({
+                interesati: fire.firestore.FieldValue.arrayRemove($current_user.uid) 
+            })
+        }
+
+            
+    } catch (error) {
+        console.error("Can't update field!", error)   
+    }
 }
-
-
-
-
-
-
-
-
 
 
 

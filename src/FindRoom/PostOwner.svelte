@@ -24,23 +24,33 @@ getUserData().then(user_data => {
 </script>
 
 
-<div on:click class:flex-col-reverse={show_user} class="border-b-2 cursor-pointer flex flex-row gap-2 items-center m-4 md:border-b-0 md:gap-4 md:m-0 md:pb-0 pb-2 self-center">
+<div on:click 
+class:flex-col-reverse={show_user} 
+class="cursor-pointer flex flex-row gap-2 items-center md:mt-0 mt-4 md:self-center self-end">
     <div class="flex flex-col flex-wrap">
-        <span class="font-semibold">{camera.proprietar}</span>
-        <span class:text-center={show_user} class:text-right={!show_user} class="text-xs text-gray-700">
+        <span class="font-semibold text-sm">{camera.proprietar}</span>
+        <span 
+        class:text-center={show_user} 
+        class:text-right={!show_user} 
+        class="text-xs text-gray-700">
             {camera.data}
         </span>
     </div>
 
     <figure>
-        <img class:md:h-24={show_user} class:md:w-24={show_user} class="border-green-500 border-2 h-16 w-16 object-cover rounded-full" src="{camera.foto}" alt="">
+        <img 
+        class:md:h-24={show_user} 
+        class:md:w-24={show_user} 
+        class="border-green-500 border-2 h-12 w-12 object-cover rounded-full" 
+        src="{camera.foto}" 
+        alt=""/>
     </figure>
 </div>
 
 
 {#if show_user}
 
-    <div class="md:px-6 px-3">  
+    <div class="md:px-6 px-3 mt-4">  
         <p class="md:text-sm md:py-6 text-center text-gray-800 text-xs">
             {despre_proprietar}
         </p>

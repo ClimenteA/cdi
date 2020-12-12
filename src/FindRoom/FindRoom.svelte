@@ -14,6 +14,7 @@ import { current_user, logged } from "../Utils/auth.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 import { db, fire } from "../Utils/fire.js"
 import { found_rooms } from "../Stores/rooms-found.js"
+import Account from '../Account/Account.svelte';
 
 
 const criterii_camera = {
@@ -117,14 +118,13 @@ async function findRoom(event){
         console.info("Query has results.")
         let query_results = []
         query.forEach(doc => {
-            console.log(doc.data())
-            query_results.push(doc.data())
+            query_results.push({...doc.data(), "id":doc.id})
         })
 
         found_rooms.update(() => query_results)
     }
 
-    console.log($found_rooms)
+    // console.log($found_rooms)
 
     saving = false
 

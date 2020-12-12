@@ -110,6 +110,7 @@ async function saveRoom(event){
         dotari: getSelected(dotari),
         facilitati: getSelected(facilitati),
         cerinte: getSelected(cerinte),   
+        interesati: []
     }
 
     let anunt_ref = await db.collection("anunturi").add(form_data)
