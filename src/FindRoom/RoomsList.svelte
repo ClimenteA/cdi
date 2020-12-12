@@ -6,7 +6,7 @@ import Room from "./Room.svelte"
 </script>
 
 
-<section class="flex flex-col max-w-3xl mt-10 mx-auto">
+<section class="mt-10">
 
     {#if $found_rooms.length > 0}
 

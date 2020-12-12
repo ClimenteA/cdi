@@ -88,8 +88,11 @@ for (let ir = 0; ir < rows_range.length; ir++) {
 
 {/if}
 
+
 <style>
+
 table {
-    min-width: 470px;
+  min-width: 470px;
 }
+
 </style>

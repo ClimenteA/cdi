@@ -50,7 +50,7 @@ $: {
 
 
 
-<article class:hidden={hide} class="max-w-2xl bg-white shadow-md md:p-4 mt-4 md:mt-6 mx-auto p-2 rounded-md">
+<article class:hidden={hide} class="mx-auto max-w-2xl bg-white shadow-md md:p-4 mt-4 md:mt-6 p-2 rounded-md">
     
     {#if anunt_sters}
         
