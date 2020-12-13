@@ -5,38 +5,52 @@ import { current_user } from "../Utils/auth.js"
 
 export let camera
 
+let anunt_ref = db.collection("anunturi").doc(camera.id)
+let user_ref = db.collection("users").doc($current_user.uid)
+
+
+let interesati_len = camera.interesati.length
 
 let interesat = false
-async function toggleInterested() {
-
-    try {
-    
-        let ref = await db.collection("anunturi").doc(camera.id)
-        
-        interesat = !interesat
-            
-        if (interesat) {
-            
-            console.log('add', camera.id)
-
-            await ref.update({
-                interesati: fire.firestore.FieldValue.arrayUnion($current_user.uid) 
-            })
-        } else {
-
-            console.log('rem', camera.id)
-
-            await ref.update({
-                interesati: fire.firestore.FieldValue.arrayRemove($current_user.uid) 
-            })
-        }
-
-            
-    } catch (error) {
-        console.error("Can't update field!", error)   
-    }
+if (camera.interesati.includes($current_user.uid)){
+    interesat = true
 }
 
+async function toggleInterested(){
+    try {
+
+        interesat = !interesat
+
+        if (interesat) {
+            await anunt_ref.update({
+                interesati: fire.firestore.FieldValue.arrayUnion($current_user.uid) 
+            })
+
+            await user_ref.update({
+                anunturi_interesat: fire.firestore.FieldValue.arrayUnion(camera.id) 
+            })
+
+            interesati_len += 1
+
+        }
+
+        else {
+            
+            await anunt_ref.update({
+                interesati: fire.firestore.FieldValue.arrayRemove($current_user.uid) 
+            })
+
+            await user_ref.update({
+                anunturi_interesat: fire.firestore.FieldValue.arrayRemove(camera.id) 
+            })
+
+            interesati_len -= 1
+        }
+        
+    } catch (error) {
+        interesat = !interesat   
+    }
+}
 
 
 </script>
@@ -59,7 +73,7 @@ async function toggleInterested() {
         </button>
         
         <sup class="mt-4 text-gray-700">
-            (0 interesati)
+            ({interesati_len} {interesati_len === 1 ? 'interesat' : 'interesati'})
         </sup>
 
     </span>

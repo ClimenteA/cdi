@@ -22,6 +22,12 @@ function toggleUser() {
     show_user = !show_user
 }
 
+let table_data = {}
+for (const [col, val] of Object.entries(camera)) {  
+  if (['dotari', 'cerinte', 'facilitati'].includes(col)){
+      table_data[col] = val
+  }
+}
 
 </script>
 
@@ -51,7 +57,7 @@ function toggleUser() {
         </div>
 
         <Description descriere={camera.descriere} />
-        <Table data={camera}/> 
+        <Table data={table_data}/> 
         
         <Interested {camera}>
             <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">

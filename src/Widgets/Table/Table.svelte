@@ -2,7 +2,6 @@
 
 export let data
 
-
 let columns = []
 let values = []
 
@@ -91,8 +90,6 @@ for (let ir = 0; ir < rows_range.length; ir++) {
 
 <style>
 
-table {
-  min-width: 470px;
-}
+table { min-width: 470px; }
 
 </style>
