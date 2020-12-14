@@ -10,11 +10,17 @@ import Interested from "./Interested.svelte"
 
 export let camera
 
-camera.liber = new Intl.DateTimeFormat('ro-RO', 
-{day: 'numeric', month:'short'}).format(camera.liber.toDate())
 
-camera.data = new Intl.DateTimeFormat('ro-RO', 
-{day: 'numeric', month:'short', year:'numeric'}).format(camera.data.toDate())
+function makeDate(value, short=true){
+    if (short){
+        return new Intl.DateTimeFormat('ro-RO', {day: 'numeric', month:'short'})
+        .format(value.toDate())
+
+    } else {
+        return new Intl.DateTimeFormat('ro-RO', {day: 'numeric', month:'short', year:'numeric'})
+        .format(value.toDate())
+    }
+}
 
 
 let show_user = false
@@ -38,7 +44,7 @@ for (const [col, val] of Object.entries(camera)) {
 
         <PostOwner on:click={toggleUser} bind:show_user {camera}>
             <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
-                <span>Liber de la {camera.liber}</span>
+                <span>Liber de la {makeDate(camera.liber)}</span>
             </div>
         </PostOwner>
 
@@ -61,7 +67,7 @@ for (const [col, val] of Object.entries(camera)) {
         
         <Interested {camera}>
             <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
-                <span>Liber de la {camera.liber}</span>
+                <span>Liber de la {makeDate(camera.liber)}</span>
             </div>
         </Interested>
         

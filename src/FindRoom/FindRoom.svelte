@@ -10,11 +10,10 @@ import Btn from "../Widgets/Btn/Btn.svelte"
 import Loader from "../Widgets/Loader/Loader.svelte"
 import RoomsList from "./RoomsList.svelte" 
 
-import { current_user, logged } from "../Utils/auth.js"
+import { logged } from "../Utils/auth.js"
 import { localitati } from "../Stores/kraaden-localitati.js"
 import { db, fire } from "../Utils/fire.js"
 import { found_rooms } from "../Stores/rooms-found.js"
-import Account from '../Account/Account.svelte';
 
 
 const criterii_camera = {
@@ -72,14 +71,6 @@ function getSelected(selectedItems){
     
     return filtered_items
 }
-
-
-// let owner = {
-//     proprietar: $current_user.displayName,
-//     uid: $current_user.uid,
-//     foto: $current_user.photoURL,
-//     data: fire.firestore.FieldValue.serverTimestamp()
-// }
     
 
 let saving = false
@@ -105,12 +96,18 @@ async function findRoom(event){
         cerinte: getSelected(cerinte),   
     }
 
+
     let query = await db.collection("anunturi")
                 .where("localitate", "==", form_data.localitate)
                 .where("judet", "==", form_data.judet)
-                .where("buget", "<=", form_data.buget)
+                .where("buget", ">=", form_data.buget)
+                // .where("dotari", "array-contains-any", criterii_camera.dotari)
+                // .where("facilitati", "array-contains-any", criterii_camera.facilitati)
+                // .where("cerinte", "array-contains-any", criterii_camera.cerinte)
+                // .where("liber", ">=", form_data.liber)
                 .get()
-    
+
+
     if (query.empty){
         console.error("Query has no results.")
         console.log(query)
@@ -124,11 +121,11 @@ async function findRoom(event){
         found_rooms.update(() => query_results)
     }
 
-    // console.log($found_rooms)
+    console.log($found_rooms)
 
     saving = false
 
-    // console.log(form_data)
+    console.log(form_data)
 
 }
 

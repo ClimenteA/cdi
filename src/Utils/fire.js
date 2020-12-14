@@ -52,5 +52,5 @@ export {
     fire,
 }
 
-// console.log("fire.js")
+console.log("fire.js")
 

@@ -2,7 +2,7 @@
 
 // https://github.com/kraaden/autocomplete
 import autocomplete from 'autocompleter'
-import { onMount } from 'svelte'
+import { onMount, onDestroy } from 'svelte'
 
 
 export let name
@@ -32,6 +32,10 @@ if (autoCompleteList) {
             },
             preventSubmit: true
         })
+    })
+
+    onDestroy(() => {
+        autoCompleteList = undefined
     })
 }
 

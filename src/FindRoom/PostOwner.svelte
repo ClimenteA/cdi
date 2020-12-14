@@ -6,6 +6,19 @@ export let show_user
 export let camera
 
 
+function makeDate(value, short=true){
+    if (short){
+        return new Intl.DateTimeFormat('ro-RO', {day: 'numeric', month:'short'})
+        .format(value.toDate())
+
+    } else {
+        return new Intl.DateTimeFormat('ro-RO', {day: 'numeric', month:'short', year:'numeric'})
+        .format(value.toDate())
+    }
+}
+
+
+
 async function getUserData() {
     try {
         let user_ref = await db.collection("users").doc(camera.uid).get()
@@ -33,7 +46,7 @@ class="cursor-pointer flex flex-row gap-2 items-center md:mt-0 mt-4 md:self-cent
         class:text-center={show_user} 
         class:text-right={!show_user} 
         class="text-xs text-gray-700">
-            {camera.data}
+            {makeDate(camera.data, false)}
         </span>
     </div>
 
