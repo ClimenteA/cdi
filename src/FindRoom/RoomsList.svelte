@@ -1,7 +1,7 @@
 <script>
 
 import { found_rooms } from "../Stores/rooms-found.js"
-import Room from "./Room.svelte"
+import Room from "../RoomsInterested/Room.svelte"
 
 </script>
 

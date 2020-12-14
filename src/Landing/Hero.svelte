@@ -1,5 +1,6 @@
 <script>
 
+import { fade } from 'svelte/transition'
 import Btn from "../Widgets/Btn/Btn.svelte"
 
 </script>
@@ -8,8 +9,10 @@ import Btn from "../Widgets/Btn/Btn.svelte"
 <header class="flex flex-col-reverse sm:flex-row items-center lg:mt-20 mt-16 mx-auto w-10/12">
 
 	<div>
-		
-		<h1 class="leading-snug lg:text-4xl md:text-2xl my-6 sm:mt-0 text-xl text-blue-900">
+				
+		<h1 
+		transition:fade
+		class="leading-snug lg:text-4xl md:text-2xl my-6 sm:mt-0 text-xl text-blue-900">
 			Gaseste camere <br>
 			de inchiriat pe termen lung
 		</h1>

@@ -29,7 +29,7 @@ fire = firebase
 // Change port if needed in firebase.json
 if (window.location.hostname === "localhost") {
     db.settings({
-        host: "localhost:5002",
+        host: "localhost:5005",
         ssl: false
     })
 }

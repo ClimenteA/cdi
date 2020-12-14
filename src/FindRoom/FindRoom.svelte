@@ -1,7 +1,7 @@
 <script>
 
 
-import { fly } from 'svelte/transition'
+import { fade } from 'svelte/transition'
 
 import { push } from 'svelte-spa-router'   
 import Options from "../Widgets/Options/Options.svelte"
@@ -54,7 +54,7 @@ cerinte: [
     
 }
 
-let all_filters = [].concat(criterii_camera.dotari, criterii_camera.facilitati, criterii_camera.cerinte)
+// let all_filters = [].concat(criterii_camera.dotari, criterii_camera.facilitati, criterii_camera.cerinte)
 
 let dotari = criterii_camera.dotari
 let facilitati = criterii_camera.facilitati
@@ -72,7 +72,8 @@ function getSelected(selectedItems){
     
     return filtered_items
 }
-    
+
+// TODO - find a way to overcome 'array-contains-any' up to 10 items limit
 
 let saving = false
 async function findRoom(event){
@@ -97,7 +98,6 @@ async function findRoom(event){
         cerinte: getSelected(cerinte),   
     }
 
-
     let query = await db.collection("anunturi")
                 .where("localitate", "==", form_data.localitate)
                 .where("judet", "==", form_data.judet)
@@ -119,7 +119,7 @@ async function findRoom(event){
         found_rooms.update(() => query_results)
     }
 
-    console.log($found_rooms)
+    // console.log($found_rooms)
 
     saving = false
 
@@ -153,7 +153,7 @@ $: {
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
     
     <h1 
-        transition:fly="{{ y:-20 }}"
+        transition:fade
         class="border-b-2 py-2 self-center text-sm md:text-base mb-4"
     >
         Cauta o camera
@@ -181,14 +181,15 @@ $: {
     
         </div>
     
-        <div class="mb-6">
+        <!-- <div class="mb-6"> 
             <Options name="Dotari apartament" bind:data={dotari}/>
             <Options name="Facilitati apartament" bind:data={facilitati}/>
             <Options name="Cerinte chiriasi" bind:data={cerinte}/>
+        </div> -->
+
+        <div class="mt-6 mx-auto">
+            <Btn text="CAUTA CAMERA" type="submit"/>
         </div>
-
-
-        <Btn text="CAUTA CAMERA" type="submit"/>
             
     </form>
 

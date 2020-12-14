@@ -4,14 +4,23 @@ export let data
 
 let columns = []
 let values = []
-
 for (const [col, val] of Object.entries(data)) {  
-  if (Array.isArray(val)) {
+  if (['dotari', 'cerinte', 'facilitati'].includes(col)){
     columns.push(col)
     values.push(val)
   }
 }
 
+
+// let columns = []
+// let values = []
+
+// for (const [col, val] of Object.entries(data)) {  
+//   if (Array.isArray(val)) {
+//     columns.push(col)
+//     values.push(val)
+//   }
+// }
 
 // console.log(columns)
 // console.log(values)

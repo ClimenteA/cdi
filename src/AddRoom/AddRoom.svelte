@@ -1,6 +1,6 @@
 <script>
 
-import { fly } from 'svelte/transition'
+import { fade } from 'svelte/transition'
 
 import { push } from 'svelte-spa-router'   
 import Options from "../Widgets/Options/Options.svelte"
@@ -154,7 +154,7 @@ $: {
 <section class="flex flex-col max-w-xl mt-10 mx-auto">
 
     <h1 
-        transition:fly="{{ y:-20 }}"
+        transition:fade
         class="border-b-2 py-2 self-center text-sm md:text-base mb-4"
     >
         Adauga o camera
