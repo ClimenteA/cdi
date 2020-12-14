@@ -9,17 +9,22 @@ async function interestedForUser(){
     
     let query = await db.collection("users").doc($current_user.uid).get()
 
-    let user_posts = []
-    const listingsRefs = query.data().anunturi_interesat 
-    for (let ref of listingsRefs) {
-        let post = await ref.get()
-        let post_data = await post.data() 
-        if (post_data) {
-            user_posts.push({...post_data, listingRef:ref})
+    const listingsIds = await query.data().anunturi_interesat 
+    
+    console.log(listingsIds) //ok
+    
+    let anunturi = []
+    for (let id of listingsIds) {
+        console.log(id) // ok
+        let anunt = await db.collection("anunturi").doc(String(id)).get() // nok
+        let anunt_data = await anunt.data() 
+        if (anunt_data) {
+            anunturi.push({...anunt_data, listingId:id})
         } 
     }
 
-    return user_posts
+    return anunturi
+
 }
 
 

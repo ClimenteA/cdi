@@ -2,13 +2,13 @@
  
 import { logged } from '../Utils/auth.js'
 import RoomsPosted from '../RoomsPosted/RoomsPosted.svelte'   
+import RoomsInterested from '../RoomsInterested/RoomsInterested.svelte'
+
 
 let tab_interested = true
 function toggleTab(){
     tab_interested = !tab_interested
 }
-
-
 
 </script>
 
@@ -38,7 +38,7 @@ function toggleTab(){
     {#if tab_interested}
 
         <section class="mt-4">
-            Anunturi de care esti interesant(a)
+            <RoomsInterested/>
         </section>
 
     {:else}
