@@ -113,6 +113,8 @@ async function saveRoom(event){
         interesati: []
     }
 
+    form_data.filtre = [].concat(form_data.dotari, form_data.facilitati, form_data.cerinte)
+
     let anunt_ref = await db.collection("anunturi").add(form_data)
     let user_ref = await db.collection("users").doc($current_user.uid)
 

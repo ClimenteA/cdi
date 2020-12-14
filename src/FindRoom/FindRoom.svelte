@@ -54,6 +54,7 @@ cerinte: [
     
 }
 
+let all_filters = [].concat(criterii_camera.dotari, criterii_camera.facilitati, criterii_camera.cerinte)
 
 let dotari = criterii_camera.dotari
 let facilitati = criterii_camera.facilitati
@@ -101,12 +102,9 @@ async function findRoom(event){
                 .where("localitate", "==", form_data.localitate)
                 .where("judet", "==", form_data.judet)
                 .where("buget", ">=", form_data.buget)
-                // .where("dotari", "array-contains-any", criterii_camera.dotari)
-                // .where("facilitati", "array-contains-any", criterii_camera.facilitati)
-                // .where("cerinte", "array-contains-any", criterii_camera.cerinte)
+                // .where("filtre", "array-contains-any", all_filters)
                 // .where("liber", ">=", form_data.liber)
                 .get()
-
 
     if (query.empty){
         console.error("Query has no results.")
