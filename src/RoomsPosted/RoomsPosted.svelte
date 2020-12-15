@@ -13,7 +13,7 @@ async function postedByUser(){
     const listingsRefs = query.data().anunturi_postate 
     for (let ref of listingsRefs) {
         let post = await ref.get()
-        let post_data = await post.data() 
+        let post_data = post.data() 
         if (post_data) {
             user_posts.push({...post_data, listingRef:ref})
         } 
