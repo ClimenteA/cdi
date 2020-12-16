@@ -5,10 +5,6 @@ import { current_user } from "../Utils/auth.js"
 
 export let camera
 
-let anunt_ref = db.collection("anunturi").doc(camera.id)
-let user_ref = db.collection("users").doc($current_user.uid)
-
-
 let interesati_len = camera.interesati.length
 
 let interesat = false
@@ -17,6 +13,10 @@ if (camera.interesati.includes($current_user.uid)){
 }
 
 async function toggleInterested(){
+
+    let anunt_ref = db.collection("anunturi").doc(camera.id)
+    let user_ref = db.collection("users").doc($current_user.uid)
+
     try {
 
         interesat = !interesat

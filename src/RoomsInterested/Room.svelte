@@ -1,8 +1,5 @@
 <script>
 
-import { db, fire } from "../Utils/fire.js"
-import { current_user } from "../Utils/auth.js"
-
 import Table from "../Widgets/Table/Table.svelte"
 import Description from "./Description.svelte"
 import PostOwner from "./PostOwner.svelte"
