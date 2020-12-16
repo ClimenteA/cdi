@@ -14,8 +14,6 @@ function toggleMesaje() {
 </script>
 
 
-
-
 <div class="flex md:items-baseline justify-between px-6 border-t-2 mt-2 md:flex-row flex-col">
 
     <span class="flex flex-col-reverse md:flex-row mt-2 text-right">

@@ -22,10 +22,11 @@ async function stergeAnuntul(){
         let user_ref = await db.collection("users").doc($current_user.uid)
 
         await user_ref.update({
-            anunturi_postate: fire.firestore.FieldValue.arrayRemove(camera.listingRef)
+            anunturi_postate: fire.firestore.FieldValue.arrayRemove(camera.id),
+            anunturi_interesat: fire.firestore.FieldValue.arrayRemove(camera.id)
         })
         
-        await camera.listingRef.delete()
+        await db.collection("anunturi").doc(camera.id).delete()
 
         anunt_sters = !anunt_sters
 

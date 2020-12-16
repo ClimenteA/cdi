@@ -8,18 +8,18 @@ import Room from "./Room.svelte"
 async function postedByUser(){
     
     let query = await db.collection("users").doc($current_user.uid).get()
-
-    let user_posts = []
-    const listingsRefs = query.data().anunturi_postate 
-    for (let ref of listingsRefs) {
-        let post = await ref.get()
-        let post_data = post.data() 
-        if (post_data) {
-            user_posts.push({...post_data, listingRef:ref})
+    const listingsIds = query.data().anunturi_postate 
+    
+    let user_rooms = []
+    for (let id of listingsIds) {
+        let room = await db.collection("anunturi").doc(id).get()
+        let room_data = room.data() 
+        if (room_data) {
+            user_rooms.push({...room_data, id})
         } 
     }
 
-    return user_posts
+    return user_rooms
 }
 
 
@@ -40,7 +40,7 @@ async function postedByUser(){
     
     {:else}
         
-        <p class="text-center mt-12">Nu ai postat nici un anunt</p>
+        <p class="text-center mt-12">Nu ai postat nici un anunt.</p>
 
     {/if}
 
