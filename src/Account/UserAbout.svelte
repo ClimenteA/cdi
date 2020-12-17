@@ -14,7 +14,7 @@ async function getUserData() {
     }
 }
  
-let despre_mine
+let despre_mine = "Sectiune necompletata."
 getUserData().then(user_data => {
     despre_mine = user_data.despre_mine
 })

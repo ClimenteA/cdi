@@ -24,7 +24,7 @@ export function login() {
                     {
                         "despre_mine": "Sectiune necompletata.",
                         "anunturi_postate": [],
-                        "anunturi_interesat": [],
+                        "anunturi_interesat": []
                     }
                 )
             }

@@ -2,7 +2,7 @@
 
 // https://github.com/kraaden/autocomplete
 import autocomplete from 'autocompleter'
-import { onMount, onDestroy } from 'svelte'
+import { onMount } from 'svelte'
 
 
 export let name
@@ -14,14 +14,12 @@ export let value = ""
 export let autoCompleteList = undefined
 export let autoCompleteSuffix = ""
 
-
 if (autoCompleteList) {
-    
+
     onMount(() => {
         
-        let input = document.getElementById(id)
         autocomplete({
-            input: input,
+            input: document.getElementById(id),
             fetch: function(text, update) {
                 text = text.toLowerCase()
                 let suggestions = autoCompleteList.filter(n => n.label.toLowerCase().startsWith(text))
@@ -32,12 +30,9 @@ if (autoCompleteList) {
             },
             preventSubmit: true
         })
-    })
-
-    onDestroy(() => {
-        autoCompleteList = undefined
-    })
-}
+    
+    })    
+} 
 
 
 function today() {
