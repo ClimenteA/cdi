@@ -18,8 +18,9 @@ if (autoCompleteList) {
 
     onMount(() => {
         
+        let input = document.getElementById(id) 
         autocomplete({
-            input: document.getElementById(id),
+            input: input,
             fetch: function(text, update) {
                 text = text.toLowerCase()
                 let suggestions = autoCompleteList.filter(n => n.label.toLowerCase().startsWith(text))
