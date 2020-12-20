@@ -54,7 +54,7 @@ function toggleCont(){
         {#if in_cont}
         
             <a on:click={() => {pop();toggleCont()}} class:font-semibold={in_cont} href="#/cont" class="leading-10 px-3 py-4">
-                Contul tau
+                Inapoi
             </a>
 
         {:else}

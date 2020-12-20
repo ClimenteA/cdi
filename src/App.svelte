@@ -62,7 +62,6 @@ const routes = {
 
 </script>
 
-
 <Layout>
     <Router {routes}/>
 </Layout>
