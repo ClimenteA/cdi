@@ -81,13 +81,15 @@ async function saveRoom(event){
 
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
+
+    console.log(form_data)
     
     saving = true
 
     form_data.buget = Number(form_data.buget)
     form_data.liber = fire.firestore.Timestamp.fromDate(new Date(form_data.liber))
     
-    form_data.locatie = form_data.locatie.replace(", zona?", "")
+    form_data.locatie = form_data.locatie_add.replace(", zona?", "")
     let locatie = form_data.locatie.trim().split(",")
 
     form_data.localitate = locatie[0].trim()
