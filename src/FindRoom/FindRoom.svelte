@@ -107,10 +107,10 @@ async function findRoom(event){
                 .get()
 
     if (query.empty){
-        console.error("Query has no results.")
-        console.log(query)
+        // console.error("Query has no results.")
+        // console.log(query)
     } else {
-        console.info("Query has results.")
+        // console.info("Query has results.")
         let query_results = []
         query.forEach(doc => {
             query_results.push({...doc.data(), "id":doc.id})
@@ -123,7 +123,7 @@ async function findRoom(event){
 
     saving = false
 
-    console.log(form_data)
+    // console.log(form_data)
 
 }
 

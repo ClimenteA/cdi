@@ -31,7 +31,7 @@ async function toggleInterested(){
             })
 
             interesati_len += 1
-
+            interesat = true
         }
 
         else {
@@ -45,6 +45,7 @@ async function toggleInterested(){
             })
 
             interesati_len -= 1
+            interesat = false
         }
         
     } catch (error) {
