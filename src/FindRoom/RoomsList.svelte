@@ -15,7 +15,9 @@ import Room from "../RoomsInterested/Room.svelte"
         {/each}
 
     {:else}
-        <p class="text-center text-gray-600 mt-10">Nici un anunt gasit.</p>
+        <p class="text-center text-gray-600 mt-10">
+            Nici un anunt gasit.
+        </p>
     {/if}
 
 </section>

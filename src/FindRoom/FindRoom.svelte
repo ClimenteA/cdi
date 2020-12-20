@@ -11,7 +11,10 @@ import Loader from "../Widgets/Loader/Loader.svelte"
 import RoomsList from "./RoomsList.svelte" 
 
 import { logged } from "../Utils/auth.js"
+
 import { localitati } from "../Stores/kraaden-localitati.js"
+
+
 import { db, fire } from "../Utils/fire.js"
 import { found_rooms } from "../Stores/rooms-found.js"
 
@@ -75,7 +78,8 @@ function getSelected(selectedItems){
 
 // TODO - find a way to overcome 'array-contains-any' up to 10 items limit
 
-let saving = false
+let loading = false
+let has_results = true
 async function findRoom(event){
 
     let form_data = new FormData(event.target)
@@ -109,6 +113,7 @@ async function findRoom(event){
     if (query.empty){
         // console.error("Query has no results.")
         // console.log(query)
+        has_results = false
     } else {
         // console.info("Query has results.")
         let query_results = []
@@ -117,11 +122,13 @@ async function findRoom(event){
         })
 
         found_rooms.update(() => query_results)
+        has_results = true
+
     }
 
     // console.log($found_rooms)
 
-    saving = false
+    loading = false
 
     // console.log(form_data)
 
@@ -131,7 +138,7 @@ let show_btn = true
 
 $: {
 
-    if (saving) {
+    if (loading) {
         show_btn = false
         document.body.style.overflow = "hidden"
     } else {
@@ -147,7 +154,7 @@ $: {
     {push("/cont")}
 {/if}
 
-{#if saving}
+{#if loading}
     <Loader/>
 {/if}
 
@@ -198,5 +205,10 @@ $: {
 </section>
 
 
-
-<RoomsList/>
+{#if has_results}
+    <RoomsList/>
+{:else}
+    <p class="text-center text-gray-600 mt-10">
+        Incearca o cautare noua!
+    </p>
+{/if}

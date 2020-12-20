@@ -62,7 +62,7 @@ async function toggleInterested(){
     <span class="flex flex-col-reverse md:flex-row mt-2 text-right">
         
         <button 
-            on:click={toggleInterested} 
+            on:click|self={toggleInterested} 
             class:bg-blue-500={!interesat}
             class:bg-gray-700={interesat}
             class="focus:outline-none outline-none lg:text-base md:text-sm md:mt-4 mt-1 px-4 py-2 rounded-md self-center table text-white text-xs">

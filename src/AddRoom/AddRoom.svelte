@@ -82,7 +82,7 @@ async function saveRoom(event){
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
 
-    console.log(form_data)
+    // console.log(form_data)
     
     saving = true
 
@@ -164,7 +164,7 @@ $: {
     </h1>
 
     {#if !show_btn}
-        <p class="md:text-lg text-sm text-center mt-12 text-green-500 p-8 bg-white rounded-md">
+        <p class="text-center text-gray-600 mt-10">
             Camera a fost adaugata!
         </p>
     {/if}

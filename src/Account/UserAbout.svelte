@@ -2,7 +2,7 @@
 
 import Box from "../Widgets/Box/Box.svelte"
 import { db } from "../Utils/fire.js"
-import { current_user } from "../Utils/auth.js"
+import { current_user, logout } from "../Utils/auth.js"
 
 
 async function getUserData() {
@@ -16,7 +16,12 @@ async function getUserData() {
  
 let despre_mine = "Sectiune necompletata."
 getUserData().then(user_data => {
-    despre_mine = user_data.despre_mine
+    try {
+        despre_mine = user_data.despre_mine
+    } catch (error) {
+        console.log(error)
+        logout()
+    }
 })
 
 let editable = false
