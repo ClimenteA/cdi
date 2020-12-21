@@ -25,6 +25,7 @@ function toggleUser() {
     show_user = !show_user
 }
 
+let interesat = false
 
 </script>
 
@@ -33,7 +34,7 @@ function toggleUser() {
     
     {#if show_user}
 
-        <PostOwner on:click={toggleUser} bind:show_user {camera}>
+        <PostOwner on:click={toggleUser} bind:show_user bind:interesat {camera}>
             <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
                 <span>Liber de la {makeDate(camera.liber)}</span>
             </div>
@@ -56,7 +57,7 @@ function toggleUser() {
         <Description descriere={camera.descriere} />
         <Table data={camera}/> 
         
-        <Interested {camera}>
+        <Interested {camera} bind:interesat>
             <div class="flex flex-col md:text-sm mt-2 text-center text-gray-700 text-xs">
                 <span>Liber de la {makeDate(camera.liber)}</span>
             </div>

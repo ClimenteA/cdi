@@ -4,10 +4,10 @@ import { db, fire } from "../Utils/fire.js"
 import { current_user } from "../Utils/auth.js"
 
 export let camera
+export let interesat
 
 let interesati_len = camera.interesati.length
 
-let interesat = false
 if (camera.interesati.includes($current_user.uid)){
     interesat = true
 }
@@ -30,7 +30,6 @@ async function toggleInterested(){
                 anunturi_interesat: fire.firestore.FieldValue.arrayUnion(camera.id) 
             })
 
-            interesati_len += 1
             interesat = true
         }
 
@@ -44,7 +43,6 @@ async function toggleInterested(){
                 anunturi_interesat: fire.firestore.FieldValue.arrayRemove(camera.id) 
             })
 
-            interesati_len -= 1
             interesat = false
         }
         

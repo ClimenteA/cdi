@@ -4,7 +4,7 @@ import { db } from "../Utils/fire.js"
 
 export let show_user
 export let camera
-
+export let interesat = false
 
 function makeDate(value, short=true){
     if (short){
@@ -72,7 +72,12 @@ class="cursor-pointer flex flex-row gap-2 items-center md:mt-0 mt-4 md:self-cent
     <div class="flex md:items-baseline justify-between px-6 border-t-2 mt-2 md:flex-row flex-col">
 
         <span class="flex flex-col-reverse md:flex-row mt-2 text-right">
-            <button on:click={() => show_user = !show_user} class="bg-blue-500 focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+            <button 
+            class:bg-blue-500={!interesat}
+            class:bg-gray-700={interesat}
+            on:click={() => show_user = !show_user} 
+            class="focus:outline-none lg:text-base md:text-sm md:mt-4 mt-1 outline-none px-4 py-2 rounded-md self-center table text-white text-xs">
+                
                 <svg class="inline mr-2 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
