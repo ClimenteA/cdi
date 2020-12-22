@@ -18,7 +18,7 @@ export let active =  true
         class:bg-gray-700={!active} 
         class:bg-blue-500={active}
         {type} 
-        class="table px-4 py-2 self-center uppercase focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md text-white">
+        class="table px-4 py-2 self-center uppercase text-xs md:text-sm lg:text-base rounded-md text-white">
         <BtnContent {text} {icon}/>   
     </button>
 
@@ -29,7 +29,7 @@ export let active =  true
         class:bg-gray-700={!active} 
         class:bg-blue-500={active}
         href="{url}"
-        class="table px-4 py-2 self-center uppercase focus:outline-none outline-none text-xs md:text-sm lg:text-base rounded-md text-white">
+        class="table px-4 py-2 self-center uppercase text-xs md:text-sm lg:text-base rounded-md text-white">
         <BtnContent {text} {icon}/>
     </a>
 
