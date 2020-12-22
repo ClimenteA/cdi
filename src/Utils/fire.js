@@ -20,7 +20,11 @@ const firebaseConfig = {
 var db, auth, fire
 window.onload = () => {
 
-firebase.initializeApp(firebaseConfig)   
+try {
+    firebase.initializeApp(firebaseConfig)   
+} catch (error) {
+    
+}
 
 db = firebase.firestore()
 auth = firebase.auth()

@@ -8,6 +8,27 @@ import { current_user } from "../Utils/auth.js"
 export let camera
 
 
+let mailText = "COPIE EMAIL"
+let mailIcon = "copy"
+function copyMail() {
+    copyToClipboard("emailul utilizator")
+    mailText = "EMAIL COPIAT!"
+    mailIcon = undefined
+    setTimeout(() => {
+        mailText = "COPIE EMAIL"
+        mailIcon = "copy"
+    }, 2500)    
+}
+
+
+let show_des = false
+let iconDescription = "chevron-down"
+function showDescription(){
+    show_des = !show_des
+    if (show_des) iconDescription = "chevron-down"
+    else iconDescription = "chevron-up"     
+}
+
 
 </script>
 
@@ -27,8 +48,8 @@ export let camera
     
                 <div class="flex gap-2 items-center">
                     
-                    <Btn  text="COPIE EMAIL" icon="copy"/>
-                    <Btn active={false} text="VEZI DESCRIERE" icon="chevron-down"/>
+                    <Btn on:click={copyMail} text={mailText} icon={mailIcon}/>
+                    <Btn on:click={showDescription} active={false} text="VEZI DESCRIERE" icon={iconDescription}/>
     
                     <button  class="bg-red-500 p-1 rounded-md text-white text-xs">
                         <svg class="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +59,7 @@ export let camera
                 </div>
             </div>
             
-            <p class="border-t-2 border-b-2 mt-2 p-2">Descriere utilizator</p>
+            <p class:hidden={show_des} class="hidden border-t-2 border-b-2 mt-2 p-2">Descriere utilizator</p>
 
         </li>
     </ul>
