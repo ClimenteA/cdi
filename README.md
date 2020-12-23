@@ -22,3 +22,4 @@ Share rooms, save money for trips.
 Live link (demo)
 https://cdi-firebase.web.app/
 
+![gif](https://github.com/ClimenteA/cdi/blob/master/cdi.gif)
