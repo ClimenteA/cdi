@@ -48,7 +48,10 @@ export function login() {
                     {
                         "despre_mine": "Sectiune necompletata.",
                         "anunturi_postate": [],
-                        "anunturi_interesat": []
+                        "anunturi_interesat": [],
+                        "email": result.user.email,
+                        "name": result.user.displayName,
+                        "foto": result.user.photoURL
                     }
                 )
             }
