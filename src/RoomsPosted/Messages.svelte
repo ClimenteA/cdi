@@ -3,6 +3,7 @@
 export let camera
 export let show_interested
 
+let interesati_len = camera.interesati.length
 
 let options = {day: 'numeric', month:'short'}
 let data_liber = new Intl.DateTimeFormat('ro-RO', options).format(camera.liber.toDate())
@@ -40,7 +41,7 @@ function toggleInterested(){
         </button>
         
         <sup class="mt-4 text-gray-700">
-            (0 interesati)
+            ({interesati_len} {interesati_len === 1 ? 'interesat' : 'interesati'})
         </sup>
 
     </span>
