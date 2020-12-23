@@ -18,7 +18,7 @@ function toggleTab(){
     <section class="mt-6">
 
 
-        <button on:click={toggleTab} class="bg-gray-300 text-gray-900 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
+        <button on:click={toggleTab} class="bg-gray-300 focus:outline-none lg:text-base md:text-sm outline-none px-4 py-2 rounded-md self-center table text-xs">
             
             {#if tab_interested}
                 Anunturi de care esti interesant(a)
