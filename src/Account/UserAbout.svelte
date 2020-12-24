@@ -44,12 +44,17 @@ async function updateAbout(despre_mine){
 }
 
 
-let new_email = $current_user.email
+let email = $current_user.email
 
 
-async function updateProfile() {
+async function updateProfile(event) {
+    let form_data = new FormData(event.target)
+    form_data = Object.fromEntries(form_data)
+    let foto = form_data.foto
+    delete form_data.foto
 
-    
+    console.log(form_data, foto)
+
 }
 
 </script>
@@ -57,7 +62,10 @@ async function updateProfile() {
 
 {#if editable}
 
-    <form on:submit|preventDefault={updateProfile} class="flex flex-col items-center max-w-xs mb-16 mt-10 mx-auto">
+    <form 
+        on:submit|preventDefault={updateProfile} 
+        class="flex flex-col items-center max-w-xs mb-16 mt-10 mx-auto"
+    >
 
         <Box 
             label="Despre mine:" 
@@ -69,13 +77,13 @@ async function updateProfile() {
             
         <Box 
             label="Email nou:" 
-            bind:value={new_email} 
-            name="new-email" 
+            value={email} 
+            name="email" 
             type="email"
         />
 
-        <label class="ml-2 md:text-sm text-xs mt-4 mb-4 text-gray-700 overflow-hidden" for="new-foto">Foto Profil
-            <input type="file" id="new-foto">
+        <label class="ml-2 md:text-sm text-xs mt-4 mb-4 text-gray-700 overflow-hidden" for="foto">Foto Profil
+            <input type="file" id="foto" name="foto" accept=".jpg, .jpeg, .png">
         </label>
 
         <div class="flex gap-2 flex-col">

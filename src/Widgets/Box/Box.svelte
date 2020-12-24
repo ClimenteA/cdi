@@ -62,9 +62,9 @@ if (type === "date") {
     </span>
 
     {#if type === "textarea"}
-        <textarea bind:value {placeholder} {name} {id} required spellcheck="false" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="h-16 py-2 mt-1 px-3 rounded-md bg-white text-blue-900 md:text-sm text-xs w-full outline-none"></textarea>
+        <textarea bind:value {placeholder} {name} {id} spellcheck="false" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' class="h-16 py-2 mt-1 px-3 rounded-md bg-white text-blue-900 md:text-sm text-xs w-full outline-none"></textarea>
     {:else}
-        <input bind:value {placeholder} {name} {id} required spellcheck="false" class="h-8 mt-1 px-3 rounded-md bg-white text-blue-900 md:text-sm text-xs w-full outline-none">
+        <input bind:value {placeholder} {name} {id} spellcheck="false" class="h-8 mt-1 px-3 rounded-md bg-white text-blue-900 md:text-sm text-xs w-full outline-none">
     {/if}
 
 </label>
