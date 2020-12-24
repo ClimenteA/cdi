@@ -1,5 +1,6 @@
 <script>
 
+import Btn from "../Widgets/Btn/Btn.svelte"
 import Box from "../Widgets/Box/Box.svelte"
 import { db } from "../Utils/fire.js"
 import { current_user, logout } from "../Utils/auth.js"
@@ -24,9 +25,13 @@ getUserData().then(user_data => {
     }
 })
 
+
 let editable = false
 async function toggleEdit() {
-    if (editable) await updateAbout(despre_mine)
+    if (editable) {
+        await updateAbout(despre_mine)
+        console.log(new_email)
+    }    
     editable = !editable
 } 
 
@@ -38,30 +43,54 @@ async function updateAbout(despre_mine){
     }
 }
 
+
+let new_email = $current_user.email
+
+
+async function updateProfile() {
+
+    
+}
+
 </script>
 
 
-<div class:shadow-md={editable} 
-class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relative rounded-md text-gray-800 text-xs">
+{#if editable}
 
-    <h4 class="mt-2 font-semibold">Despre mine</h4>
-
-    {#if editable}
-
-        <button on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2">
-            <svg class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
-            </svg>   
-        </button>
+    <form on:submit|preventDefault={updateProfile} class="flex flex-col items-center max-w-xs mb-16 mt-10 mx-auto">
 
         <Box 
-        bind:value={despre_mine}
-        name="despre" 
-        type="textarea" 
-        placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"
+            label="Despre mine:" 
+            bind:value={despre_mine}
+            name="despre" 
+            type="textarea" 
+            placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"
+        />
+            
+        <Box 
+            label="Email nou:" 
+            bind:value={new_email} 
+            name="new-email" 
+            type="email"
         />
 
-    {:else}
+        <label class="ml-2 md:text-sm text-xs mt-4 mb-4 text-gray-700 overflow-hidden" for="new-foto">Foto Profil
+            <input type="file" id="new-foto">
+        </label>
+
+        <div class="flex gap-2 flex-col">
+            <Btn text="SALVEAZA" type="submit"/>
+            <Btn on:click={toggleEdit} text="INAPOI" active={false}/>
+        </div>
+
+    </form>
+
+{:else}
+
+    <div class:shadow-md={editable} 
+    class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relative rounded-md text-gray-800 text-xs">
+
+        <h4 class="mt-2 font-semibold">Despre mine</h4>
 
         <button on:click={toggleEdit} class="absolute top-0 right-0 h-4 w-4 mt-2 mr-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -71,10 +100,11 @@ class="bg-white max-w-md mb-6 md:p-8 md:text-sm min-h-32 mt-4 mx-auto p-4 relati
 
         <p>{despre_mine}</p>
 
-    {/if}
+            
+    </div>
 
-</div>
-
+{/if}
+    
 <p class="text-gray-600 text-xs lg:text-sm text-center">
     Stabileste o intalnire video inainte de a te muta.
 </p>
