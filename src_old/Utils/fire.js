@@ -2,6 +2,7 @@ import { readable } from 'svelte/store'
 
 import firebase from "firebase/app"
 import 'firebase/firestore'
+import 'firebase/storage'
 import 'firebase/auth'
 
 
@@ -17,7 +18,7 @@ const firebaseConfig = {
 }
 
 // On load init firebase and set db auth variables
-var db, auth, fire
+var db, auth, fire, bucket
 window.onload = () => {
 
 try {
@@ -28,7 +29,9 @@ try {
 
 db = firebase.firestore()
 auth = firebase.auth()
+bucket = firebase.storage().ref()
 fire = firebase
+
 // Detect if we develop on local 
 // Change port if needed in firebase.json
 if (window.location.hostname === "localhost") {
@@ -48,12 +51,14 @@ if (window.location.hostname === "localhost") {
 db = readable(db)
 auth = readable(auth)
 fire = readable(firebase)
+bucket = readable(bucket)
 
 
 export {
     db,
     auth,
     fire,
+    bucket
 }
 
 console.log("fire.js")

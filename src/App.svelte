@@ -1,67 +1,46 @@
 <script>
-// https://firebase.google.com/docs/samples
-// https://github.com/firebase/quickstart-js
-// https://codelabs.developers.google.com/firebase-emulator#0
-// Rules
-// https://github.com/u12206050/firestore-rules-starter
-// https://github.com/OleksiiBrylin/firestore-rules/blob/master/firestore.rules
 
-// Icons
-// https://tablericons.com/
+import Firebaser from "./Fire/firebaser.js"
 
-// Python frontend testing 
-// https://github.com/assertpy/assertpy
-// https://github.com/microsoft/playwright-pytest#readme
-// https://github.com/microsoft/playwright-python
-
-// Testing with jest and playwright E2E testing
-// https://playwright.dev/
-// https://github.com/playwright-community/expect-playwright
-// https://playwright.tech/blog/using-jest-with-playwright
-
-
-// SPA Router and the main nav footer layout
-import Router from 'svelte-spa-router'
-import Layout from './Layout/Layout.svelte'
-import Test from './Test/Test.svelte'
-
-
-// Footer components and routes
-import Gdpr from './Others/Gdpr.svelte'
-import Cookies from './Others/Cookies.svelte'
-import Terms from './Others/Terms.svelte'
-import Contact from './Others/Contact.svelte'
-
-const footer_routes = {
-    '/politica-de-confidentilitate':Gdpr,
-    '/politica-cookies': Cookies,
-    '/termeni-si-conditii': Terms,
-    '/sugestii-si-reclamatii': Contact
+const firebaseConfig = {
+    apiKey: "AIzaSyA7CZB5SY3BI5bgFBS0sO86l6OlgDN9BmY",
+    authDomain: "cdi-firebase.firebaseapp.com",
+    databaseURL: "https://cdi-firebase.firebaseio.com",
+    projectId: "cdi-firebase",
+    storageBucket: "cdi-firebase.appspot.com",
+    messagingSenderId: "851561307188",
+    appId: "1:851561307188:web:d1c00e1aaf818ee9b8fe61",
+    measurementId: "G-YRBTWP52ZP"
 }
 
-// Main components and routes
-import Landing from './Landing/Landing.svelte'
-import NotFound from './Others/NotFound.svelte'
-import Account from './Account/Account.svelte'
-import AddRoom from './AddRoom/AddRoom.svelte'
-import FindRoom from './FindRoom/FindRoom.svelte'
+const fbs = new Firebaser(firebaseConfig)
 
+async function addSomeData() {
 
-const routes = {
-    "/test": Test,
+    let id = await fbs.add("testCollectionName", {"data": "sample data", "somedata": "another data"})
+    console.log("Added docId", id)
+
+    await fbs.update("testCollectionName", id, {"somedata": "changed data", "addedNewData": "value"})
+    console.log("Updated docId", id)
+
+    let docData = await fbs.find("testCollectionName", id)
+    console.log("Document got by id:", docData)
+
+    let uqid = await fbs.add("testCollectionName", {"unique": "sample data"})
+    console.log("New doc added", uqid)
+
+    let dataFound = await fbs.find("testCollectionName", {"unique": "sample data"}) 
+    console.log("Doc list found from object: ", dataFound)
     
-    "/": Landing,
-    "/cont": Account,
-    "/adauga-camera": AddRoom,
-    "/camere-libere": FindRoom,
+    await fbs.delete("testCollectionName", uqid)
+    console.log("Deleted docId", uqid)
 
-    ...footer_routes,
-    "*": NotFound
 }
+
+
+addSomeData()
 
 
 </script>
 
-<Layout>
-    <Router {routes}/>
-</Layout>
+

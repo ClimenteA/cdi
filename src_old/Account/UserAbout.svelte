@@ -2,8 +2,12 @@
 
 import Btn from "../Widgets/Btn/Btn.svelte"
 import Box from "../Widgets/Box/Box.svelte"
-import { db } from "../Utils/fire.js"
+import { db, bucket } from "../Utils/fire.js"
 import { current_user, logout } from "../Utils/auth.js"
+
+
+console.log($current_user)
+
 
 
 async function getUserData() {
@@ -27,31 +31,39 @@ getUserData().then(user_data => {
 
 
 let editable = false
-async function toggleEdit() {
-    if (editable) {
-        await updateAbout(despre_mine)
-        console.log(new_email)
-    }    
+async function toggleEdit() {    
     editable = !editable
 } 
-
-async function updateAbout(despre_mine){
-    try {
-        await db.collection("users").doc($current_user.uid).update({despre_mine})
-    } catch (error) {
-        console.error("Error updating about me section: ", error)
-    }
-}
 
 
 let email = $current_user.email
 
-
+let updateProfileError = false
 async function updateProfile(event) {
     let form_data = new FormData(event.target)
     form_data = Object.fromEntries(form_data)
+    form_data.displayName = $current_user.displayName
     let foto = form_data.foto
     delete form_data.foto
+
+    try {
+
+        if (foto.size > 0) { // this is not evaluated? why?
+            let snapshot   = await bucket.child(`/profileImages/${$current_user.uid}/${foto.name}`).put(foto)
+            let fotourl    = await snapshot.ref.getDownloadURL()
+            form_data.photoUrl = fotourl
+        }        
+
+        await db.collection("users").doc($current_user.uid).update(form_data)
+
+        toggleEdit()
+
+    } catch (error) {
+        updateProfileError = true
+        console.error("Error updating about me section: ", error)
+        toggleEdit() // Temporary 
+
+    }
 
     console.log(form_data, foto)
 
@@ -70,7 +82,7 @@ async function updateProfile(event) {
         <Box 
             label="Despre mine:" 
             bind:value={despre_mine}
-            name="despre" 
+            name="despre_mine" 
             type="textarea" 
             placeholder="Scrie o scurta descriere. Ex: Nu ascult muzica la maxim. Nu fumez. Nu am animale de companie etc"
         />
@@ -90,6 +102,12 @@ async function updateProfile(event) {
             <Btn text="SALVEAZA" type="submit"/>
             <Btn on:click={toggleEdit} text="INAPOI" active={false}/>
         </div>
+
+        {#if updateProfileError}
+            <p class="text-sm text-red-500">
+                Toate campurile trebuie completate.
+            </p>
+        {/if}
 
     </form>
 

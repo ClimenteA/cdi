@@ -8,9 +8,7 @@ import UserListings from "./UserListings.svelte"
 import UserDeleteLogout from "./UserDeleteLogout.svelte"
 import FacebookLogin from "./FacebookLogin.svelte"
 
-
 </script>
-
 
 {#if $logged}
     <UserHeader/>

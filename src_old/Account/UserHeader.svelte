@@ -2,6 +2,8 @@
 
 import { current_user } from "../Utils/auth.js"
 
+console.log("Current user: ", $current_user)
+
 </script>
 
 
