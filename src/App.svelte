@@ -101,9 +101,13 @@ fbs.AUTH.onAuthStateChanged(user => {
 </button>
 
 
-<button on:click={fbs.logout} class="bg-blue-600 p-2 text-base text-white">
+<button on:click={fbs.logoutUser} class="bg-blue-600 p-2 text-base text-white">
     Logout
 </button>
 
+
+<button on:click={fbs.deleteUser} class="bg-red-600 p-2 text-base text-white">
+    Delete account
+</button>
 
 

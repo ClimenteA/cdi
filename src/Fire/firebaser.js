@@ -21,34 +21,21 @@ export default class Firebaser {
             this.DB.settings({ host: `localhost:${emulatorPort}`, ssl: false })
         }
 
-    }
-
-    facebookLogin() {
-        let provider = new firebase.auth.FacebookAuthProvider()
-        return firebase.auth().signInWithPopup(provider)
-    }
-
-    googleLogin() {
-        let provider = new firebase.auth.GoogleAuthProvider()
-        return firebase.auth().signInWithPopup(provider)
-    }
-
-    login() {
-        // TODO login with email and password
-    }
-
-    register() {
-        // TODO register with email and password
-    }
-
-    logout() {
-        return firebase.auth().signOut()
-    }
-
-    deleteUser() {
+        // Ugly, bind is required in order to call methods in the class
+        this.add = this.add.bind(this)
+        this.update = this.update.bind(this)
+        this.get = this.get.bind(this)
+        this.find = this.find.bind(this)
+        this.delete = this.delete.bind(this)
+        this.facebookLogin = this.facebookLogin.bind(this)
+        this.googleLogin = this.googleLogin.bind(this)
+        this.logoutUser = this.logoutUser.bind(this)
+        this.deleteUser = this.deleteUser.bind(this)
+        this.registerUser = this.registerUser.bind(this)
 
     }
 
+    // DB
 
     async add(collectionName, objData){
         if ("_id" in objData) {
@@ -126,6 +113,54 @@ export default class Firebaser {
             deleted_ids.push(doc._id)
         }
         return deleted_ids
+    }
+
+
+    // AUTH
+
+    async registerUser(user) {
+
+        let user_data = await this.get("users", user.uid)
+
+        // Adds to users collection name and email if uid not found in users collection
+        if (user_data === undefined) {
+            await this.add("users", {
+                _id: user.uid,
+                name: user.displayName,
+                email: user.email
+            })
+        }
+
+        return user.uid
+    }
+
+
+    async facebookLogin() {
+        let provider = new firebase.auth.FacebookAuthProvider()
+        const res = await firebase.auth().signInWithPopup(provider)
+        return this.registerUser(res.user)
+    }
+
+
+    async googleLogin() {
+        let provider = new firebase.auth.GoogleAuthProvider()
+        const res = await firebase.auth().signInWithPopup(provider)
+        return this.registerUser(res.user)
+    }
+
+
+    logoutUser() {
+        return firebase.auth().signOut()
+    }
+
+    deleteUser() {
+        try {
+            firebase.auth().currentUser.delete()
+            return true
+        } catch (error) {
+            console.error(error)
+            return false
+        }
     }
 }
 
