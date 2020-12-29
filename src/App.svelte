@@ -17,6 +17,8 @@ const fbs = new Firebaser(firebaseConfig)
 
 async function addSomeData() {
 
+    // FIRESTORE
+
     // Add a new document to a collection with a auto-generated ID
     let generated_id = await fbs.add("collection_name", {"field_1": "value_1", "field_2": "value_2"})
     console.log("Auto-generated ID: ", generated_id)
@@ -51,16 +53,57 @@ async function addSomeData() {
     let deleted_ids = await fbs.delete("collection_name", {"field_2": "value_2_updated"})
     console.log("Deleted doc IDs:", deleted_ids)
 
-    
+
     // Delete a document from a collection with a specified ID
     let deleted_id = await fbs.delete("collection_name", generated_id)
     console.log("Deleted doc ID:", deleted_id)
 
+
+    // AUTHENTIFICATION
+
+    // fbs.login("facebook")
+
+    // Check if user is logged in
+    // let logged = fbs.logged()
+    // console.log("User auth status:", logged)
+
+    // // Logout user
+    // fbs.logout()
+
+
+
 }
 
-addSomeData()
+// addSomeData()
+ 
+
+
+let logged
+fbs.AUTH.onAuthStateChanged(user => {
+    if (user) logged = true
+    else logged = false 
+})
+
 
 
 </script>
+
+
+{#if logged}
+    <p>Logged in</p>
+{:else}
+    <p>Logged out</p>
+{/if}
+
+
+<button on:click={fbs.facebookLogin} class="bg-blue-600 p-2 text-base text-white">
+    Login
+</button>
+
+
+<button on:click={fbs.logout} class="bg-blue-600 p-2 text-base text-white">
+    Logout
+</button>
+
 
 

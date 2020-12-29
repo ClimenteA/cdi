@@ -20,7 +20,35 @@ export default class Firebaser {
         if (location.hostname === "localhost") {
             this.DB.settings({ host: `localhost:${emulatorPort}`, ssl: false })
         }
+
     }
+
+    facebookLogin() {
+        let provider = new firebase.auth.FacebookAuthProvider()
+        return firebase.auth().signInWithPopup(provider)
+    }
+
+    googleLogin() {
+        let provider = new firebase.auth.GoogleAuthProvider()
+        return firebase.auth().signInWithPopup(provider)
+    }
+
+    login() {
+        // TODO login with email and password
+    }
+
+    register() {
+        // TODO register with email and password
+    }
+
+    logout() {
+        return firebase.auth().signOut()
+    }
+
+    deleteUser() {
+
+    }
+
 
     async add(collectionName, objData){
         if ("_id" in objData) {
@@ -38,7 +66,7 @@ export default class Firebaser {
             await this.DB.collection(collectionName).doc(objDataOld._id).update(objDataOld)
             return objDataOld._id
         } else {
-            if (objDataNew === undefined) throw("No '_id' or object to compare specified!")
+            if (objDataNew === undefined) throw("No '_id' or  new object specified!")
             let docList = await this.find(collectionName, objDataOld)
             let updated_ids = []
             for (let doc of docList) {
