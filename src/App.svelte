@@ -17,26 +17,46 @@ const fbs = new Firebaser(firebaseConfig)
 
 async function addSomeData() {
 
-    let id = await fbs.add("testCollectionName", {"data": "sample data", "somedata": "another data"})
-    console.log("Added docId", id)
+    // Add a new document to a collection with a auto-generated ID
+    let generated_id = await fbs.add("collection_name", {"field_1": "value_1", "field_2": "value_2"})
+    console.log("Auto-generated ID: ", generated_id)
 
-    await fbs.update("testCollectionName", id, {"somedata": "changed data", "addedNewData": "value"})
-    console.log("Updated docId", id)
-
-    let docData = await fbs.find("testCollectionName", id)
-    console.log("Document got by id:", docData)
-
-    let uqid = await fbs.add("testCollectionName", {"unique": "sample data"})
-    console.log("New doc added", uqid)
-
-    let dataFound = await fbs.find("testCollectionName", {"unique": "sample data"}) 
-    console.log("Doc list found from object: ", dataFound)
     
-    await fbs.delete("testCollectionName", uqid)
-    console.log("Deleted docId", uqid)
+    // Add a new document to a collection with a custom ID
+    let custom_id = await fbs.add("collection_name", {"_id": "my_unique_id", "field_1": "value_1", "field_2": "value_2"})
+    console.log("Custom ID: ", custom_id)
+
+
+    // Update documents from a collection without specifing the ID.  
+    let updated_ids = await fbs.update("collection_name", {"field_1": "value_1"}, {"field_1": "value_1_updated"})
+    console.log("Updated IDs list:", updated_ids)
+
+
+    // Update a document from a collection by specified ID
+    let updated_id = await fbs.update("collection_name", {"_id": custom_id, "field_2": "value_2_updated"})
+    console.log("Updated ID:", updated_id)
+
+
+    // Find documents in a collection without specifing the ID 
+    let docList = await fbs.find("collection_name", {"field_2": "value_2_updated"})
+    console.log("Found docs:", docList)
+
+
+    // Find a document in a collection based on document ID
+    let doc = await fbs.find("collection_name", custom_id)
+    console.log("Found doc:", doc)
+
+
+    // Delete a document from a collection without specifing the ID
+    let deleted_ids = await fbs.delete("collection_name", {"field_2": "value_2_updated"})
+    console.log("Deleted doc IDs:", deleted_ids)
+
+    
+    // Delete a document from a collection with a specified ID
+    let deleted_id = await fbs.delete("collection_name", generated_id)
+    console.log("Deleted doc ID:", deleted_id)
 
 }
-
 
 addSomeData()
 
