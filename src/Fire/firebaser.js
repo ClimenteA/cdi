@@ -21,7 +21,7 @@ export default class Firebaser {
             this.DB.settings({ host: `localhost:${emulatorPort}`, ssl: false })
         }
 
-        // Ugly, bind is required in order to call methods in the class
+        // Ugly, bind is required in order to call methods in the class (without this I get weird errors)
         this.add = this.add.bind(this)
         this.update = this.update.bind(this)
         this.get = this.get.bind(this)
@@ -32,6 +32,8 @@ export default class Firebaser {
         this.logoutUser = this.logoutUser.bind(this)
         this.deleteUser = this.deleteUser.bind(this)
         this.registerUser = this.registerUser.bind(this)
+        this.uploadFile = this.uploadFile.bind(this)
+        this.deleteFile = this.deleteFile.bind(this)
 
     }
 
@@ -70,6 +72,8 @@ export default class Firebaser {
     }
 
     async find(collectionName, objDataOrId, comparison="=="){
+        
+        // TODO add pagination using generators 
 
         if (typeof(objDataOrId) === typeof('string')) {
             return this.get(collectionName, objDataOrId)
@@ -184,8 +188,3 @@ export default class Firebaser {
 
 }
 
-
-
-// uploading files
-
-// deleting files
