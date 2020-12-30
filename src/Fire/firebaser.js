@@ -14,7 +14,7 @@ export default class Firebaser {
         this.FBS = firebase
         this.DB = firebase.firestore()
         this.AUTH = firebase.auth()
-        this.BUCKET = firebase.storage()
+        this.STORE = firebase.storage()
         this.query_operators = ["<", "<=", "==", ">", ">=", "!=", "array-contains", "array-contains-any", "in", "not-in"]
 
         if (location.hostname === "localhost") {
@@ -153,20 +153,38 @@ export default class Firebaser {
         return firebase.auth().signOut()
     }
 
-    deleteUser() {
-        try {
-            firebase.auth().currentUser.delete()
-            return true
-        } catch (error) {
-            console.error(error)
-            return false
+
+    async deleteUser() {
+        await this.delete("users", firebase.auth().currentUser.uid)  
+        return firebase.auth().currentUser.delete()
+    }
+
+
+    // FILES
+
+    async uploadFile(fileObj, folder=undefined, fileName=undefined, generateID=true){
+
+        let prefix = ""
+        if (generateID) {
+            prefix = Math.random().toString(36).substring(2,15) + "_"
+        }
+
+        let path = `/${folder ? folder : "files"}/${fileName ? prefix + fileName: prefix + fileObj.name}` 
+
+        if (Number(fileObj.size) > 0) {
+            let snapshot = await firebase.storage().ref().child(path).put(fileObj)
+            return {path, downloadURL: await snapshot.ref.getDownloadURL()}    
         }
     }
+
+
+    async deleteFile(path){
+        return firebase.storage().ref().child(path).delete()
+    }
+
 }
 
 
-
-// authentification
 
 // uploading files
 

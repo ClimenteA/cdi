@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 const fbs = new Firebaser(firebaseConfig)
 
-async function addSomeData() {
+async function playWithFirestore() {
 
     // FIRESTORE
 
@@ -59,23 +59,37 @@ async function addSomeData() {
     console.log("Deleted doc ID:", deleted_id)
 
 
-    // AUTHENTIFICATION
-
-    // fbs.login("facebook")
-
-    // Check if user is logged in
-    // let logged = fbs.logged()
-    // console.log("User auth status:", logged)
-
-    // // Logout user
-    // fbs.logout()
+}
 
 
+playWithFirestore()
+ 
+
+async function uploadFile(event) {
+    let form_data = new FormData(event.target)
+    form_data = Object.fromEntries(form_data)
+
+    let downloadData1 = await fbs.uploadFile(form_data.afile)
+    console.log("Data:", downloadData1)
+
+    let downloadData2 = await fbs.uploadFile(form_data.afile, "NewFolder")
+    console.log("Data folder specified:", downloadData2)
+    
+    let downloadData3 = await fbs.uploadFile(form_data.afile, undefined, "MyfileName.pdf")
+    console.log("Data fileName specified:", downloadData3)
+
+    let downloadData4 = await fbs.uploadFile(form_data.afile, "NewFolder", "MyfileName.pdf", false)
+    console.log("Data folder, filename speficied, generateID disabled:", downloadData4)
+    
+    await fbs.deleteFile(downloadData1.path)
+    await fbs.deleteFile(downloadData2.path)
+    await fbs.deleteFile(downloadData3.path)
+    await fbs.deleteFile(downloadData4.path)
+    console.log("Files 1,2,3,4 deleted:", downloadData1.path, downloadData2.path, downloadData3.path, downloadData4.path)
 
 }
 
-// addSomeData()
- 
+
 
 
 let logged
@@ -85,29 +99,51 @@ fbs.AUTH.onAuthStateChanged(user => {
 })
 
 
-
 </script>
 
 
-{#if logged}
-    <p>Logged in</p>
-{:else}
-    <p>Logged out</p>
-{/if}
+<h1 class="text-xl mb-4">AUTH</h1>
+
+<section class="flex items-center gap-4">
+
+    {#if logged}
+        <p class="p-4 bg-white text-lg text-blue-800 font-semibold">Logged in</p>
+    {:else}
+        <p class="p-4 bg-white text-lg text-yellow-800 font-semibold">Logged out</p>
+    {/if}
 
 
-<button on:click={fbs.facebookLogin} class="bg-blue-600 p-2 text-base text-white">
-    Login
-</button>
+    <button on:click={fbs.facebookLogin} class="bg-blue-600 p-2 text-base text-white">
+        Login
+    </button>
+
+    <button on:click={fbs.logoutUser} class="bg-yellow-800 p-2 text-base text-white">
+        Logout
+    </button>
+
+    <button on:click={fbs.deleteUser} class="bg-red-600 p-2 text-base text-white">
+        Delete account
+    </button>
+
+</section>
 
 
-<button on:click={fbs.logoutUser} class="bg-blue-600 p-2 text-base text-white">
-    Logout
-</button>
 
 
-<button on:click={fbs.deleteUser} class="bg-red-600 p-2 text-base text-white">
-    Delete account
-</button>
+<h1 class="text-xl mt-10 mb-4">STORAGE</h1>
 
+<section class="flex items-center gap-4">
 
+    <form on:submit|preventDefault={uploadFile} class="flex flex-col gap-4">
+        
+        <label for="afile">
+            <input type="file" name="afile" id="afile">
+        </label>
+
+        <button type="submit" class="bg-blue-600 p-2 text-base text-white">
+            Upload
+        </button>
+
+    </form>
+
+</section>
