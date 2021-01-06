@@ -90,8 +90,6 @@ async function uploadFile(event) {
 }
 
 
-
-
 let logged
 fbs.AUTH.onAuthStateChanged(user => {
     if (user) logged = true
